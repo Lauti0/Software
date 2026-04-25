@@ -1,4 +1,4 @@
-﻿using BE662JS;
+﻿using Servicios662JS;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -35,35 +35,12 @@ namespace DAL662JS
                     Apellido662JS = row["Apellido662JS"].ToString(),
                     Email662JS = row["Email662JS"].ToString(),
                     Rol662JS=row["Rol662JS"].ToString(),
-                    Bloqueado662JS = Convert.ToBoolean(row["Bloqueado662JS"]),
-                    IntentosFallidos662JS = Convert.ToInt32(row["IntentosFallidos662JS"])
+                    Bloqueado662JS = Convert.ToBoolean(row["Bloqueado662JS"]),                    
                 };
             }
 
             return null;
-        }
-        public void IncrementarIntentos662JS(string username)
-        {
-            string query = @"UPDATE Usuario662JS 
-                     SET IntentosFallidos662JS = IntentosFallidos662JS + 1 
-                     WHERE Username662JS = @Username662JS";
-
-            SqlCommand cmd = new SqlCommand(query);
-            cmd.Parameters.AddWithValue("@Username662JS", username);
-
-            Acceso662JS.GetInstance662JS().Escribir662JS(cmd);
-        }
-        public void ResetearIntentos662JS(string username)
-        {
-            string query = @"UPDATE Usuario662JS 
-                     SET IntentosFallidos662JS = 0 
-                     WHERE Username662JS = @Username662JS";
-
-            SqlCommand cmd = new SqlCommand(query);
-            cmd.Parameters.AddWithValue("@Username662JS", username);
-
-            Acceso662JS.GetInstance662JS().Escribir662JS(cmd);
-        }
+        }        
         public void BloquearUsuario662JS(string username)
         {
             string query = @"UPDATE Usuario662JS 
@@ -75,22 +52,7 @@ namespace DAL662JS
 
             Acceso662JS.GetInstance662JS().Escribir662JS(cmd);
         }
-        public int ObtenerIntentos662JS(string username)
-        {
-            string query = @"SELECT IntentosFallidos662JS 
-                     FROM Usuario662JS 
-                     WHERE Username662JS = @Username662JS";
-
-            SqlCommand cmd = new SqlCommand(query);
-            cmd.Parameters.AddWithValue("@Username662JS", username);
-
-            DataTable dt = Acceso662JS.GetInstance662JS().Leer662JS(cmd);
-
-            if (dt.Rows.Count == 1)
-                return Convert.ToInt32(dt.Rows[0]["IntentosFallidos662JS"]);
-
-            return 0;
-        }
+        
         public void CambiarPassword662JS(string username, string passwordHash)
         {
             string query = @"UPDATE Usuario662JS 
@@ -106,7 +68,7 @@ namespace DAL662JS
         public void DesbloquearUsuario662JS(string username)
         {
             string query = @"UPDATE Usuario662JS 
-                     SET Bloqueado662JS = 0, IntentosFallidos662JS = 0
+                     SET Bloqueado662JS = 0
                      WHERE Username662JS = @Username662JS";
 
             SqlCommand cmd = new SqlCommand(query);
@@ -117,8 +79,8 @@ namespace DAL662JS
         public void InsertarUsuario662JS(string username, string passwordHash, int dni, string apellido, string nombre, string rol, string email)
         {
             string query = @"INSERT INTO Usuario662JS 
-                     (Username662JS, Password662JS, DNI662JS, Apellido662JS, Nombre662JS, Rol662JS, Email662JS, Bloqueado662JS, IntentosFallidos662JS, Activo662JS)
-                     VALUES (@Username662JS, @Password662JS, @DNI662JS, @Apellido662JS, @Nombre662JS, @Rol662JS, @Email662JS, 0, 0, 1)";
+                     (Username662JS, Password662JS, DNI662JS, Apellido662JS, Nombre662JS, Rol662JS, Email662JS, Bloqueado662JS, Activo662JS)
+                     VALUES (@Username662JS, @Password662JS, @DNI662JS, @Apellido662JS, @Nombre662JS, @Rol662JS, @Email662JS, 0, 1)";
             SqlCommand cmd = new SqlCommand(query);
             cmd.Parameters.AddWithValue("@Username662JS", username);
             cmd.Parameters.AddWithValue("@Password662JS", passwordHash);
@@ -196,18 +158,31 @@ namespace DAL662JS
             return Convert.ToInt32(dt.Rows[0][0]) > 0;
         }
 
-        public void ModificarUsuario662JS(string username, string dni, string apellido)
+        public void ModificarUsuario662JS(int dni, string email, string rol)
         {
             string query = @"UPDATE Usuario662JS
-                     SET DNI662JS = @DNI662JS,
-                         Apellido662JS = @Apellido662JS
+                     SET Email662JS = @Email662JS,
+                         Rol662JS = @Rol662JS
                      WHERE DNI662JS = @DNI662JS";
 
             SqlCommand cmd = new SqlCommand(query);
 
-            cmd.Parameters.AddWithValue("@Username662JS", username);
-            cmd.Parameters.AddWithValue("@DNI662JS", int.Parse(dni));
-            cmd.Parameters.AddWithValue("@Apellido662JS", apellido);
+            cmd.Parameters.AddWithValue("@DNI662JS", dni);
+            cmd.Parameters.AddWithValue("@Email662JS", email);
+            cmd.Parameters.AddWithValue("@Rol662JS", rol);
+
+            Acceso662JS.GetInstance662JS().Escribir662JS(cmd);
+        }
+        public void CambiarEstado662JS(int dni, bool activo)
+        {
+            string query = @"UPDATE Usuario662JS
+                     SET Activo662JS = @Activo662JS
+                     WHERE DNI662JS = @DNI662JS";
+
+            SqlCommand cmd = new SqlCommand(query);
+
+            cmd.Parameters.AddWithValue("@Activo662JS", activo);
+            cmd.Parameters.AddWithValue("@DNI662JS", dni);
 
             Acceso662JS.GetInstance662JS().Escribir662JS(cmd);
         }

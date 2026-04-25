@@ -1,6 +1,5 @@
-﻿using BE662JS;
-using DAL662JS;
-using Seguridad662JS;
+﻿using DAL662JS;
+using Servicios662JS;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -15,7 +14,7 @@ namespace BLL662JS
     public class BLLUsuario662JS
     {
         DALUsuario662JS dal = new DALUsuario662JS();
-
+        
         public BEUsuario662JS Login662JS(string user, string pass)
         {
 
@@ -31,13 +30,11 @@ namespace BLL662JS
             if (usuario.Bloqueado662JS)
                 throw new Exception("Usuario bloqueado");
 
-            string hash = Seguridad662JS.Seguridad662JS.Hash662JS(pass);
+            string hash = Servicios662JS.Crypto662JS.Hash662JS(pass);
 
             if (usuario.Password662JS != hash)
             {
-                dal.IncrementarIntentos662JS(user);
-
-                int intentos = dal.ObtenerIntentos662JS(user);
+                int intentos = SessionManager662JS.IncrementarIntentos_22MS(user);
 
                 if (intentos >= 3)
                 {
@@ -48,7 +45,7 @@ namespace BLL662JS
                 throw new Exception($"Contraseña incorrecta. Intentos: {intentos}");
             }
 
-            dal.ResetearIntentos662JS(user);
+            SessionManager662JS.ResetearIntentos_22MS(user);
 
             return usuario;
         }
@@ -56,12 +53,12 @@ namespace BLL662JS
         {
             var usuario = dal.ObtenerUsuario662JS(user);
 
-            string hashActual = Seguridad662JS.Seguridad662JS.Hash662JS(passActual);
+            string hashActual = Servicios662JS.Crypto662JS.Hash662JS(passActual);
 
             if (usuario.Password662JS != hashActual)
                 throw new Exception("Contraseña actual incorrecta");
 
-            string hashNueva = Seguridad662JS.Seguridad662JS.Hash662JS(nuevaPass);
+            string hashNueva = Servicios662JS.Crypto662JS.Hash662JS(nuevaPass);
 
             dal.CambiarPassword662JS(user, hashNueva);
         }
@@ -69,34 +66,19 @@ namespace BLL662JS
         {
             dal.DesbloquearUsuario662JS(user);
         }
-        public void InsertarUsuario662JS(string username, string apellido, string nombre, string dni, string rol, string email)
-        {
-            if (string.IsNullOrWhiteSpace(username))
-                throw new Exception("El username es obligatorio");
-
-            if (string.IsNullOrWhiteSpace(dni))
-                throw new Exception("El DNI es obligatorio");
-
-            if (string.IsNullOrWhiteSpace(apellido))
-                throw new Exception("El apellido es obligatorio");
-            if (string.IsNullOrWhiteSpace(rol))
-                throw new Exception("El rol es obligatorio");
-
+        public void InsertarUsuario662JS(string apellido, string nombre, string dni, string rol, string email)
+        {                        
+            string username = nombre + dni;
             string passwordPlano = dni + apellido;
-            string passwordHash = Seguridad662JS.Seguridad662JS.Hash662JS(passwordPlano);            
+            string passwordHash = Servicios662JS.Crypto662JS.Hash662JS(passwordPlano);            
             if (dal.ExisteUsuario662JS(username))
                 throw new Exception("El usuario ya existe");
                                  
             dal.InsertarUsuario662JS(username, passwordHash, int.Parse(dni), apellido, nombre, rol, email);
         }
-        public void ModificarUsuario662JS(string username, string dni, string apellido)
-        {
-            if (string.IsNullOrWhiteSpace(username))
-                throw new Exception("Usuario inválido");
-
-            DALUsuario662JS dal = new DALUsuario662JS();
-
-            dal.ModificarUsuario662JS(username, dni, apellido);
+        public void ModificarUsuario662JS(string dni, string email, string rol)
+        {            
+            dal.ModificarUsuario662JS(int.Parse(dni), email, rol);
         }
         public DataTable ObtenerUsuariosFiltrados662JS(string dni, string apellido, string nombre, 
             string email, string rol, string login, bool activos, bool todos)
@@ -106,6 +88,24 @@ namespace BLL662JS
             return dal.ObtenerUsuariosFiltrados662JS(
                 dni, apellido, nombre, email, rol, login, activos, todos
             );
+        }
+
+        public void CambiarEstado662JS(int dni, bool activo)
+        {
+            dal.CambiarEstado662JS(dni, activo);
+        }
+        public void CambiarPassword662JS(string user, string actual, string nueva, string confirmar)
+        {
+            BEUsuario662JS usuario = dal.ObtenerUsuario662JS(user);
+
+            string hashActual = Servicios662JS.Crypto662JS.Hash662JS(actual);
+
+            if (usuario.Password662JS != hashActual)
+                throw new Exception("La contraseña actual es incorrecta");
+
+            string hashNueva = Servicios662JS.Crypto662JS.Hash662JS(nueva);
+
+            dal.CambiarPassword662JS(user, hashNueva);
         }
     }
 }

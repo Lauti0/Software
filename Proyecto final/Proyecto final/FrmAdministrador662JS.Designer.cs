@@ -61,7 +61,7 @@
             this.dgvUsuarios662JS.Name = "dgvUsuarios662JS";
             this.dgvUsuarios662JS.RowHeadersWidth = 51;
             this.dgvUsuarios662JS.RowTemplate.Height = 24;
-            this.dgvUsuarios662JS.Size = new System.Drawing.Size(804, 221);
+            this.dgvUsuarios662JS.Size = new System.Drawing.Size(1177, 249);
             this.dgvUsuarios662JS.TabIndex = 0;
             this.dgvUsuarios662JS.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dgvUsuarios662JS_RowPrePaint);
             // 
@@ -194,6 +194,7 @@
             this.btnActDesact.TabIndex = 15;
             this.btnActDesact.Text = "Act/Desact";
             this.btnActDesact.UseVisualStyleBackColor = true;
+            this.btnActDesact.Click += new System.EventHandler(this.btnActDesact_Click);
             // 
             // btnSalir
             // 
@@ -203,6 +204,7 @@
             this.btnSalir.TabIndex = 16;
             this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // label1
             // 
@@ -262,7 +264,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(923, 558);
+            this.ClientSize = new System.Drawing.Size(1222, 655);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);

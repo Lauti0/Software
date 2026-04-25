@@ -52,6 +52,12 @@
     <Compile Include="FrmAdministrador662JS.Designer.cs">
       <DependentUpon>FrmAdministrador662JS.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmCambiarPassword662JS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCambiarPassword662JS.Designer.cs">
+      <DependentUpon>FrmCambiarPassword662JS.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmPrincipal662JS.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,6 +74,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FrmAdministrador662JS.resx">
       <DependentUpon>FrmAdministrador662JS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCambiarPassword662JS.resx">
+      <DependentUpon>FrmCambiarPassword662JS.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmInicioSesion662JS.resx">
       <DependentUpon>FrmInicioSesion662JS.cs</DependentUpon>
@@ -106,9 +115,9 @@
       <Project>{83559288-e642-41d5-a987-c48863fe0474}</Project>
       <Name>BLL662JS</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Seguridad662JS\Seguridad662JS.csproj">
+    <ProjectReference Include="..\Seguridad662JS\Servicios662JS.csproj">
       <Project>{46ee396b-4d89-47cd-b797-2a7b961c914f}</Project>
-      <Name>Seguridad662JS</Name>
+      <Name>Servicios662JS</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

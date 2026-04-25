@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BE662JS
+namespace Servicios662JS
 {
     public class SessionManager662JS
     {
@@ -12,8 +12,23 @@ namespace BE662JS
         private static SessionManager662JS _session662JS;
 
         public BEUsuario662JS Usuario662JS { get; private set; }
-        public DateTime FechaInicio662JS { get; private set; }
+        private static Dictionary<string, int> intentos_22MS = new Dictionary<string, int>();
+        
+        public static int IncrementarIntentos_22MS(string user)
+        {
+            if (!intentos_22MS.ContainsKey(user))
+                intentos_22MS[user] = 0;
 
+            intentos_22MS[user]++;
+
+            return intentos_22MS[user];
+        }
+
+        public static void ResetearIntentos_22MS(string user)
+        {
+            if (intentos_22MS.ContainsKey(user))
+                intentos_22MS[user] = 0;
+        }
         public static SessionManager662JS GetInstance662JS()
         {
             return _session662JS;
@@ -35,8 +50,7 @@ namespace BE662JS
                 {
                     _session662JS = new SessionManager662JS
                     {
-                        Usuario662JS = usuario,
-                        FechaInicio662JS = DateTime.Now
+                        Usuario662JS = usuario,                        
                     };
                 }
                 else

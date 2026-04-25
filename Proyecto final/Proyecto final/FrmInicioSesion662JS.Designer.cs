@@ -38,18 +38,16 @@
             // 
             // txtUsuario662JS
             // 
-            this.txtUsuario662JS.Location = new System.Drawing.Point(322, 129);
-            this.txtUsuario662JS.Multiline = true;
+            this.txtUsuario662JS.Location = new System.Drawing.Point(322, 136);
             this.txtUsuario662JS.Name = "txtUsuario662JS";
-            this.txtUsuario662JS.Size = new System.Drawing.Size(264, 44);
+            this.txtUsuario662JS.Size = new System.Drawing.Size(264, 22);
             this.txtUsuario662JS.TabIndex = 0;
             // 
             // txtContraseña662JS
             // 
-            this.txtContraseña662JS.Location = new System.Drawing.Point(322, 199);
-            this.txtContraseña662JS.Multiline = true;
+            this.txtContraseña662JS.Location = new System.Drawing.Point(322, 206);
             this.txtContraseña662JS.Name = "txtContraseña662JS";
-            this.txtContraseña662JS.Size = new System.Drawing.Size(264, 44);
+            this.txtContraseña662JS.Size = new System.Drawing.Size(264, 22);
             this.txtContraseña662JS.TabIndex = 1;
             // 
             // label1
@@ -92,7 +90,7 @@
             this.btnCrearUsuario.TabIndex = 5;
             this.btnCrearUsuario.Text = "Crear usuario";
             this.btnCrearUsuario.UseVisualStyleBackColor = true;
-            this.btnCrearUsuario.Click += new System.EventHandler(this.btnCrearUsuario_Click);
+        
             // 
             // FrmInicioSesion662JS
             // 

@@ -53,9 +53,9 @@
       <Project>{c32a8520-b008-4cf9-a3a0-ce6852f330d2}</Project>
       <Name>DAL662JS</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Seguridad662JS\Seguridad662JS.csproj">
+    <ProjectReference Include="..\Seguridad662JS\Servicios662JS.csproj">
       <Project>{46ee396b-4d89-47cd-b797-2a7b961c914f}</Project>
-      <Name>Seguridad662JS</Name>
+      <Name>Servicios662JS</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -41,9 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Crypto662JS.cs" />
+    <Compile Include="BEUsuario662JS.cs" />
+    <Compile Include="Bitacora_22MS.cs" />
+    <Compile Include="Eliminar.cs" />
     <Compile Include="SessionManager662JS.cs" />
-    <Compile Include="Seguridad662JS.cs" />
+    <Compile Include="Crypto662JS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

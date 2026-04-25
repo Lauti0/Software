@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace Proyecto_final
 {
@@ -23,7 +24,8 @@ namespace Proyecto_final
             Consulta,
             Alta,
             Modificar,
-            Desbloquear
+            Desbloquear,
+            ActivarDesactivar
         }
         private Modo662JS modoActual662JS = Modo662JS.Consulta;
         private void CambiarModo662JS(Modo662JS modo)
@@ -58,6 +60,10 @@ namespace Proyecto_final
                     }
                     lblMensaje.Text = "Modo Desbloquear";
                     break;
+
+                case Modo662JS.ActivarDesactivar:
+                    lblMensaje.Text = "Modo Activar / Desactivar";
+                    break;
             }
         }
         private void ConfigurarBotones662JS(Modo662JS modo)
@@ -73,19 +79,25 @@ namespace Proyecto_final
         }
         private void ConfigurarCampos662JS(Modo662JS modo)
         {
-            bool habilitar = (modo == Modo662JS.Alta || modo == Modo662JS.Modificar);
+            
+            HabilitarCampos662JS(false);
 
-            HabilitarCampos662JS(habilitar);
-            txtDNI.Enabled = (modo == Modo662JS.Alta);
             if (modo == Modo662JS.Alta)
+            {                
+                HabilitarCampos662JS(true);
                 LimpiarCampos662JS();
+            }
+            else if (modo == Modo662JS.Modificar)
+            {                
+                txtEmail.Enabled = true;
+                txtRol.Enabled = true;                
+                txtDNI.Enabled = false;
+            }
         }
 
         private void LimpiarCampos662JS()
         {
-            txtApellido.Text=txtNombre.Text=txtDNI.Text=txtEmail.Text=txtLogin.Text=txtRol.Text="";
-            chkActivos662JS.Checked = true;
-            chkTodos662JS.Checked = false;
+            txtApellido.Text=txtNombre.Text=txtDNI.Text=txtEmail.Text=txtLogin.Text=txtRol.Text="";            
         }
 
         private void InicializarCampos662JS()
@@ -94,12 +106,14 @@ namespace Proyecto_final
             {
                 txtDNI, txtNombre, txtApellido, txtEmail, txtRol, txtLogin
             };
+
         }
 
         private void HabilitarCampos662JS(bool habilitar)
         {
             foreach (var c in campos662JS)
-                c.Enabled = habilitar;
+                c.Enabled = habilitar;  
+            txtLogin.Enabled = false;
         }
         private void btnAplicar_Click(object sender, EventArgs e)
         {
@@ -126,13 +140,20 @@ namespace Proyecto_final
                         break;
 
                     case Modo662JS.Alta:
-                        if (string.IsNullOrWhiteSpace(txtLogin.Text))
-                        {
-                            MessageBox.Show("El usuario es obligatorio");
-                            return;
-                        }
-                        bll.InsertarUsuario662JS(
-                            txtLogin.Text,
+                        if (string.IsNullOrWhiteSpace(txtDNI.Text))
+                            throw new Exception("El DNI es obligatorio");
+
+                        if (string.IsNullOrWhiteSpace(txtApellido.Text))
+                            throw new Exception("El apellido es obligatorio");
+                        if (string.IsNullOrWhiteSpace(txtRol.Text))
+                            throw new Exception("El rol es obligatorio");
+                        if (string.IsNullOrWhiteSpace(txtEmail.Text))
+                            throw new Exception("El email es obligatorio");
+                        if (string.IsNullOrWhiteSpace(txtRol.Text))
+                            throw new Exception("El rol es obligatorio");
+                        if (!txtEmail.Text.Contains("@"))
+                            throw new Exception("Email inválido");
+                        bll.InsertarUsuario662JS(                            
                             txtApellido.Text, 
                             txtNombre.Text,
                             txtDNI.Text,
@@ -144,15 +165,21 @@ namespace Proyecto_final
                         break;
 
                     case Modo662JS.Modificar:
-                        if (string.IsNullOrWhiteSpace(txtLogin.Text))
-                        {
-                            MessageBox.Show("El usuario es obligatorio");
-                            return;
-                        }
+                        if (string.IsNullOrWhiteSpace(txtDNI.Text))
+                            throw new Exception("DNI inválido");
+
+                        if (string.IsNullOrWhiteSpace(txtEmail.Text))
+                            throw new Exception("Email obligatorio");
+
+                        if (string.IsNullOrWhiteSpace(txtRol.Text))
+                            throw new Exception("Rol obligatorio");
+
+                        if (!txtEmail.Text.Contains("@"))
+                            throw new Exception("Email inválido");
                         bll.ModificarUsuario662JS(
-                            txtLogin.Text,
                             txtDNI.Text,
-                            txtApellido.Text
+                            txtEmail.Text,
+                            txtRol.Text
                         );
 
                         MessageBox.Show("Usuario modificado");
@@ -166,6 +193,19 @@ namespace Proyecto_final
                         bll.Desbloquear662JS(username);
 
                         MessageBox.Show("Usuario desbloqueado");
+                        break;
+
+                    case Modo662JS.ActivarDesactivar:
+
+                        var rowAct = dgvUsuarios662JS.SelectedRows[0];
+
+                        int dni = Convert.ToInt32(rowAct.Cells["DNI662JS"].Value);
+                        bool activo = Convert.ToBoolean(rowAct.Cells["Activo662JS"].Value);
+
+                        bll.CambiarEstado662JS(dni, !activo);
+
+                        MessageBox.Show(activo ? "Usuario desactivado" : "Usuario activado");
+
                         break;
                 }
                 CambiarModo662JS(Modo662JS.Consulta);
@@ -199,6 +239,12 @@ namespace Proyecto_final
         private void CargarUsuarios662JS(DataTable tabla)
         {
             dgvUsuarios662JS.DataSource = tabla;
+            if (dgvUsuarios662JS.Columns.Contains("Password662JS"))
+            {
+                dgvUsuarios662JS.Columns["Password662JS"].Visible = false;
+            }
+            dgvUsuarios662JS.AllowUserToResizeColumns = false;
+            dgvUsuarios662JS.AllowUserToResizeRows = false;
 
             dgvUsuarios662JS.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvUsuarios662JS.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -221,7 +267,7 @@ namespace Proyecto_final
             if (row.Cells["Activo662JS"].Value != DBNull.Value &&
                 Convert.ToBoolean(row.Cells["Activo662JS"].Value) == false)
             {
-                row.DefaultCellStyle.BackColor = Color.Red;
+                row.DefaultCellStyle.BackColor = Color.FromArgb(255, 106, 106);
             }
         }
 
@@ -258,6 +304,22 @@ namespace Proyecto_final
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             CambiarModo662JS(Modo662JS.Consulta);
+        }
+
+        private void btnActDesact_Click(object sender, EventArgs e)
+        {
+            if (dgvUsuarios662JS.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Seleccione un usuario");
+                return;
+            }
+
+            CambiarModo662JS(Modo662JS.ActivarDesactivar);
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
