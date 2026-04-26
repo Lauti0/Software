@@ -109,6 +109,7 @@
             this.Controls.Add(this.txtActual);
             this.Name = "FrmCambiarPassword662JS";
             this.Text = "FrmCambiarPassword662JS";
+            this.Load += new System.EventHandler(this.FrmCambiarPassword662JS_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

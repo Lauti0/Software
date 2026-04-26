@@ -30,7 +30,7 @@ namespace BLL662JS
             if (usuario.Bloqueado662JS)
                 throw new Exception("Usuario bloqueado");
 
-            string hash = Servicios662JS.Crypto662JS.Hash662JS(pass);
+            string hash = Crypto662JS.Hash662JS(pass);
 
             if (usuario.Password662JS != hash)
             {
@@ -53,12 +53,12 @@ namespace BLL662JS
         {
             var usuario = dal.ObtenerUsuario662JS(user);
 
-            string hashActual = Servicios662JS.Crypto662JS.Hash662JS(passActual);
+            string hashActual = Crypto662JS.Hash662JS(passActual);
 
             if (usuario.Password662JS != hashActual)
                 throw new Exception("Contraseña actual incorrecta");
 
-            string hashNueva = Servicios662JS.Crypto662JS.Hash662JS(nuevaPass);
+            string hashNueva = Crypto662JS.Hash662JS(nuevaPass);
 
             dal.CambiarPassword662JS(user, hashNueva);
         }
@@ -70,7 +70,7 @@ namespace BLL662JS
         {                        
             string username = nombre + dni;
             string passwordPlano = dni + apellido;
-            string passwordHash = Servicios662JS.Crypto662JS.Hash662JS(passwordPlano);            
+            string passwordHash = Crypto662JS.Hash662JS(passwordPlano);            
             if (dal.ExisteUsuario662JS(username))
                 throw new Exception("El usuario ya existe");
                                  
@@ -98,12 +98,12 @@ namespace BLL662JS
         {
             BEUsuario662JS usuario = dal.ObtenerUsuario662JS(user);
 
-            string hashActual = Servicios662JS.Crypto662JS.Hash662JS(actual);
+            string hashActual = Crypto662JS.Hash662JS(actual);
 
             if (usuario.Password662JS != hashActual)
                 throw new Exception("La contraseña actual es incorrecta");
 
-            string hashNueva = Servicios662JS.Crypto662JS.Hash662JS(nueva);
+            string hashNueva = Crypto662JS.Hash662JS(nueva);
 
             dal.CambiarPassword662JS(user, hashNueva);
         }

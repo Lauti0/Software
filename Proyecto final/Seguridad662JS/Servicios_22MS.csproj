@@ -49,9 +49,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BE662JS\BE662JS.csproj">
+    <ProjectReference Include="..\BE662JS\BE_22MS.csproj">
       <Project>{55424b5b-6ae2-422a-ae48-55bdfbe7837d}</Project>
-      <Name>BE662JS</Name>
+      <Name>BE_22MS</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

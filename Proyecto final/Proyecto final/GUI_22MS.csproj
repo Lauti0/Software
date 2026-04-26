@@ -107,17 +107,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BE662JS\BE662JS.csproj">
+    <ProjectReference Include="..\BE662JS\BE_22MS.csproj">
       <Project>{55424b5b-6ae2-422a-ae48-55bdfbe7837d}</Project>
-      <Name>BE662JS</Name>
+      <Name>BE_22MS</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BLL662JS\BLL662JS.csproj">
+    <ProjectReference Include="..\BLL662JS\BLL_22MS.csproj">
       <Project>{83559288-e642-41d5-a987-c48863fe0474}</Project>
-      <Name>BLL662JS</Name>
+      <Name>BLL_22MS</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Seguridad662JS\Servicios662JS.csproj">
+    <ProjectReference Include="..\Seguridad662JS\Servicios_22MS.csproj">
       <Project>{46ee396b-4d89-47cd-b797-2a7b961c914f}</Project>
-      <Name>Servicios662JS</Name>
+      <Name>Servicios_22MS</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

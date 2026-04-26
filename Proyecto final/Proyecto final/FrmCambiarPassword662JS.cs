@@ -62,5 +62,10 @@ namespace Proyecto_final
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void FrmCambiarPassword662JS_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
