@@ -1,0 +1,6 @@
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\BE662JS\bin\Debug\BE662JS.dll
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\BE662JS\bin\Debug\BE662JS.pdb
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\BE662JS\obj\Debug\BE_22MS.csproj.AssemblyReference.cache
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\BE662JS\obj\Debug\BE_22MS.csproj.CoreCompileInputs.cache
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\BE662JS\obj\Debug\BE662JS.dll
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\BE662JS\obj\Debug\BE662JS.pdb

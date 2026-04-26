@@ -27,7 +27,7 @@ namespace Servicios662JS
     }
     public class Bitacora_22MS
     {
-        private BEUsuario662JS usuario;
+        private UsuarioServicios662JS usuario;
 
         private DateTime _fecha;
 
@@ -52,7 +52,7 @@ namespace Servicios662JS
             set { _fecha = value; }
         }
 
-        public BEUsuario662JS Usuario
+        public UsuarioServicios662JS Usuario
         {
             get { return usuario; }
             set { usuario = value; }

@@ -11,7 +11,7 @@ namespace Servicios662JS
         private static readonly object _lock662JS = new object();
         private static SessionManager662JS _session662JS;
 
-        public BEUsuario662JS Usuario662JS { get; private set; }
+        public UsuarioServicios662JS Usuario662JS { get; private set; }
         private static Dictionary<string, int> intentos_22MS = new Dictionary<string, int>();
         
         public static int IncrementarIntentos_22MS(string user)
@@ -39,7 +39,7 @@ namespace Servicios662JS
             return _session662JS != null;
         }
 
-        public static void Login662JS(BEUsuario662JS usuario)
+        public static void Login662JS(UsuarioServicios662JS usuario)
         {
             if (usuario == null)
                 throw new Exception("Usuario inválido");

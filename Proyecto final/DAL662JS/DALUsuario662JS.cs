@@ -11,7 +11,7 @@ namespace DAL662JS
 {
     public class DALUsuario662JS
     {
-        public BEUsuario662JS ObtenerUsuario662JS(string username)
+        public UsuarioServicios662JS ObtenerUsuario662JS(string username)
         {
             string query = @"SELECT * FROM Usuario662JS 
                      WHERE Username662JS = @Username662JS";
@@ -25,7 +25,7 @@ namespace DAL662JS
             {
                 var row = dt.Rows[0];
 
-                return new BEUsuario662JS
+                return new UsuarioServicios662JS
                 {
                     IdUsuario662JS = Convert.ToInt32(row["IdUsuario662JS"]),
                     DNI662JS = Convert.ToInt32(row["DNI662JS"]),

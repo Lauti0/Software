@@ -12,10 +12,15 @@ namespace Proyecto_final
 {
     public partial class FrmInicioSesion662JS : Form
     {
+        private bool isPasswordHidden = true;
         public FrmInicioSesion662JS()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
+            txtContraseña662JS.UseSystemPasswordChar = true; 
+            btnOcultarContraseña.Text = "👁"; 
         }
+
         private void btnIniciarSesion662JS_Click(object sender, EventArgs e)
         {
             
@@ -43,6 +48,13 @@ namespace Proyecto_final
         private void FrmInicioSesion662JS_Load(object sender, EventArgs e)
         {
            
+        }
+
+        private void btnOcultarContraseña_Click(object sender, EventArgs e)
+        {
+            isPasswordHidden = !isPasswordHidden;
+            txtContraseña662JS.UseSystemPasswordChar = isPasswordHidden;
+            btnOcultarContraseña.Text = isPasswordHidden ? "👁" : "🔒";
         }
 
         //private void btnCrearUsuario_Click(object sender, EventArgs e)

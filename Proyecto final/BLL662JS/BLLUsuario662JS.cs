@@ -15,7 +15,7 @@ namespace BLL662JS
     {
         DALUsuario662JS dal = new DALUsuario662JS();
         
-        public BEUsuario662JS Login662JS(string user, string pass)
+        public UsuarioServicios662JS Login662JS(string user, string pass)
         {
 
             if (string.IsNullOrWhiteSpace(user) || string.IsNullOrWhiteSpace(pass))
@@ -96,7 +96,7 @@ namespace BLL662JS
         }
         public void CambiarPassword662JS(string user, string actual, string nueva, string confirmar)
         {
-            BEUsuario662JS usuario = dal.ObtenerUsuario662JS(user);
+            UsuarioServicios662JS usuario = dal.ObtenerUsuario662JS(user);
 
             string hashActual = Crypto662JS.Hash662JS(actual);
 

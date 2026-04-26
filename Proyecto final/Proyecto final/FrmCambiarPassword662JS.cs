@@ -29,7 +29,7 @@ namespace Proyecto_final
                     return;
                 }
 
-                BEUsuario662JS usuario = SessionManager662JS.GetInstance662JS().Usuario662JS;
+                UsuarioServicios662JS usuario = SessionManager662JS.GetInstance662JS().Usuario662JS;
 
                 BLLUsuario662JS bll = new BLLUsuario662JS();
                 if (string.IsNullOrWhiteSpace(txtActual.Text) ||

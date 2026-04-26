@@ -28,7 +28,7 @@ namespace Proyecto_final
                 return; 
             }
 
-            BEUsuario662JS usuario = SessionManager662JS.GetInstance662JS().Usuario662JS;
+            UsuarioServicios662JS usuario = SessionManager662JS.GetInstance662JS().Usuario662JS;
 
             if (usuario.Rol662JS != "Admin")
             {
@@ -62,7 +62,7 @@ namespace Proyecto_final
             }
 
             SessionManager662JS session = SessionManager662JS.GetInstance662JS();
-            BEUsuario662JS usuario = session.Usuario662JS;
+            UsuarioServicios662JS usuario = session.Usuario662JS;
 
             if (usuario.Rol662JS != "Admin")
             {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Servicios662JS
 {
-    public class BEUsuario662JS
+    public class UsuarioServicios662JS
     {
         public int IdUsuario662JS {  get; set; }
         public int DNI662JS {  get; set; }

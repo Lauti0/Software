@@ -34,6 +34,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnIniciarSesion662JS = new System.Windows.Forms.Button();
             this.btnCrearUsuario = new System.Windows.Forms.Button();
+            this.btnOcultarContraseña = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtUsuario662JS
@@ -90,13 +91,23 @@
             this.btnCrearUsuario.TabIndex = 5;
             this.btnCrearUsuario.Text = "Crear usuario";
             this.btnCrearUsuario.UseVisualStyleBackColor = true;
-        
+            // 
+            // btnOcultarContraseña
+            // 
+            this.btnOcultarContraseña.Location = new System.Drawing.Point(621, 206);
+            this.btnOcultarContraseña.Name = "btnOcultarContraseña";
+            this.btnOcultarContraseña.Size = new System.Drawing.Size(59, 22);
+            this.btnOcultarContraseña.TabIndex = 6;
+            this.btnOcultarContraseña.Text = "button1";
+            this.btnOcultarContraseña.UseVisualStyleBackColor = true;
+            this.btnOcultarContraseña.Click += new System.EventHandler(this.btnOcultarContraseña_Click);
             // 
             // FrmInicioSesion662JS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnOcultarContraseña);
             this.Controls.Add(this.btnCrearUsuario);
             this.Controls.Add(this.btnIniciarSesion662JS);
             this.Controls.Add(this.label2);
@@ -119,6 +130,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnIniciarSesion662JS;
         private System.Windows.Forms.Button btnCrearUsuario;
+        private System.Windows.Forms.Button btnOcultarContraseña;
     }
 }
 
