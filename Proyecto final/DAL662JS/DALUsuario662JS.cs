@@ -145,13 +145,14 @@ namespace DAL662JS
 
             return Acceso662JS.GetInstance662JS().Leer662JS(cmd);
         }
-        public bool ExisteUsuario662JS(string username)
+        public bool ExisteUsuario662JS(string username, int dni)
         {
             string query = @"SELECT COUNT(*) FROM Usuario662JS
-                     WHERE Username662JS = @Username662JS";
+                     WHERE Username662JS = @Username662JS or DNI662JS = @DNI662JS";
 
             SqlCommand cmd = new SqlCommand(query);
             cmd.Parameters.AddWithValue("@Username662JS", username);
+            cmd.Parameters.AddWithValue("@DNI662JS", dni);
 
             DataTable dt = Acceso662JS.GetInstance662JS().Leer662JS(cmd);
 
@@ -185,6 +186,22 @@ namespace DAL662JS
             cmd.Parameters.AddWithValue("@DNI662JS", dni);
 
             Acceso662JS.GetInstance662JS().Escribir662JS(cmd);
+        }
+        public bool EstaBloqueado662JS(string username)
+        {
+            string query = @"SELECT Bloqueado662JS 
+                     FROM Usuario662JS 
+                     WHERE Username662JS = @Username662JS";
+
+            SqlCommand cmd = new SqlCommand(query);
+            cmd.Parameters.AddWithValue("@Username662JS", username);
+
+            DataTable dt = Acceso662JS.GetInstance662JS().Leer662JS(cmd);
+
+            if (dt.Rows.Count == 0)
+                throw new Exception("Usuario inexistente");
+
+            return Convert.ToBoolean(dt.Rows[0]["Bloqueado662JS"]);
         }
     }
 }

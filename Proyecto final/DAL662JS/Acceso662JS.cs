@@ -35,31 +35,47 @@ namespace DAL662JS
     
         public DataTable Leer662JS(SqlCommand cmd)
         {
-            using (SqlConnection conexion = new SqlConnection(_cadenaConexion))
+            try
             {
-                cmd.Connection = conexion;
-                conexion.Open();
-
-                DataTable tabla = new DataTable();
-                using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                using (SqlConnection conexion = new SqlConnection(_cadenaConexion))
                 {
-                    adapter.Fill(tabla);
-                }
+                    cmd.Connection = conexion;
+                    conexion.Open();
 
-                return tabla;
+                    DataTable tabla = new DataTable();
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                    {
+                        adapter.Fill(tabla);
+                    }
+
+                    return tabla;
+                }
             }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al ejecutar comando SQL: " + ex.Message);
+            }
+            
         }
 
       
         public int Escribir662JS(SqlCommand cmd)
         {
-            using (SqlConnection conexion = new SqlConnection(_cadenaConexion))
+            try
             {
-                cmd.Connection = conexion;
-                conexion.Open();
+                using (SqlConnection conexion = new SqlConnection(_cadenaConexion))
+                {
+                    cmd.Connection = conexion;
+                    conexion.Open();
 
-                return cmd.ExecuteNonQuery();
+                    return cmd.ExecuteNonQuery();
+                }
             }
+            catch(SqlException ex) 
+            {
+                throw new Exception("Error al ejecutar comando SQL: " + ex.Message);
+            }
+            
         }
 
         public bool VerificarConexion662JS()

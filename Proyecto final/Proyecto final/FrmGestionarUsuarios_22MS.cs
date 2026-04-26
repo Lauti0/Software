@@ -1,4 +1,5 @@
 ﻿using BLL662JS;
+using Servicios662JS;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,9 +13,9 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace Proyecto_final
 {
-    public partial class FrmAdministrador662JS : Form
+    public partial class FrmGestionarUsuarios_22MS : Form
     {
-        public FrmAdministrador662JS()
+        public FrmGestionarUsuarios_22MS()
         {
             InitializeComponent();
         }
@@ -73,6 +74,7 @@ namespace Proyecto_final
             btnCrear.Enabled = esConsulta;
             btnModificar.Enabled = esConsulta;
             btnDesbloquear.Enabled = esConsulta;
+            btnActDesact.Enabled = esConsulta;
 
             btnAplicar.Enabled = true;
             btnCancelar.Enabled = !esConsulta;
@@ -145,8 +147,8 @@ namespace Proyecto_final
 
                         if (string.IsNullOrWhiteSpace(txtApellido.Text))
                             throw new Exception("El apellido es obligatorio");
-                        if (string.IsNullOrWhiteSpace(txtRol.Text))
-                            throw new Exception("El rol es obligatorio");
+                        if (string.IsNullOrWhiteSpace(txtNombre.Text))
+                            throw new Exception("El nombre es obligatorio");
                         if (string.IsNullOrWhiteSpace(txtEmail.Text))
                             throw new Exception("El email es obligatorio");
                         if (string.IsNullOrWhiteSpace(txtRol.Text))
@@ -187,8 +189,9 @@ namespace Proyecto_final
 
                     case Modo662JS.Desbloquear:
 
-                        string username = dgvUsuarios662JS.SelectedRows[0]
-                            .Cells["Username662JS"].Value.ToString();
+                        var rowDesb = dgvUsuarios662JS.SelectedRows[0];
+                        int dniDesb = Convert.ToInt32(rowDesb.Cells["DNI662JS"].Value);
+                        string username = rowDesb.Cells["Username662JS"].Value.ToString();                        
 
                         bll.Desbloquear662JS(username);
 
@@ -200,8 +203,7 @@ namespace Proyecto_final
                         var rowAct = dgvUsuarios662JS.SelectedRows[0];
 
                         int dni = Convert.ToInt32(rowAct.Cells["DNI662JS"].Value);
-                        bool activo = Convert.ToBoolean(rowAct.Cells["Activo662JS"].Value);
-
+                        bool activo = Convert.ToBoolean(rowAct.Cells["Activo662JS"].Value);                        
                         bll.CambiarEstado662JS(dni, !activo);
 
                         MessageBox.Show(activo ? "Usuario desactivado" : "Usuario activado");
@@ -245,10 +247,12 @@ namespace Proyecto_final
             }
             dgvUsuarios662JS.AllowUserToResizeColumns = false;
             dgvUsuarios662JS.AllowUserToResizeRows = false;
+            dgvUsuarios662JS.AllowUserToAddRows = false;
 
             dgvUsuarios662JS.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvUsuarios662JS.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvUsuarios662JS.ReadOnly = true;
+            dgvUsuarios662JS.ClearSelection();//para que no empiece con una fila seleccionada
         }
 
         private void FrmAdministrador662JS_Load(object sender, EventArgs e)
@@ -258,6 +262,9 @@ namespace Proyecto_final
             InicializarCampos662JS();
             btnAplicar.PerformClick();
             CambiarModo662JS(Modo662JS.Consulta);
+            btnModificar.Enabled = false;
+            btnDesbloquear.Enabled = false;
+            btnActDesact.Enabled = false;
         }
 
         private void dgvUsuarios662JS_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
@@ -284,7 +291,7 @@ namespace Proyecto_final
                 return;
             }
 
-            var row = dgvUsuarios662JS.SelectedRows[0];
+            var row = dgvUsuarios662JS.SelectedRows[0];            
 
             txtLogin.Text = row.Cells["Username662JS"].Value.ToString();
             txtDNI.Text = row.Cells["DNI662JS"].Value.ToString();
@@ -298,6 +305,11 @@ namespace Proyecto_final
 
         private void btnDesbloquear_Click(object sender, EventArgs e)
         {
+            if (dgvUsuarios662JS.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Seleccione un usuario");
+                return;
+            }
             CambiarModo662JS(Modo662JS.Desbloquear);
         }
 
@@ -313,13 +325,55 @@ namespace Proyecto_final
                 MessageBox.Show("Seleccione un usuario");
                 return;
             }
+            var row = dgvUsuarios662JS.SelectedRows[0];
 
+            txtLogin.Text = row.Cells["Username662JS"].Value.ToString();
+            txtDNI.Text = row.Cells["DNI662JS"].Value.ToString();
+            txtApellido.Text = row.Cells["Apellido662JS"].Value.ToString();
+            txtNombre.Text = row.Cells["Nombre662JS"].Value.ToString();
+            txtEmail.Text = row.Cells["Email662JS"].Value.ToString();
+            txtRol.Text = row.Cells["Rol662JS"].Value.ToString();
             CambiarModo662JS(Modo662JS.ActivarDesactivar);
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void dgvUsuarios662JS_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvUsuarios662JS.SelectedRows.Count == 0)
+            {
+                btnModificar.Enabled = false;
+                btnDesbloquear.Enabled = false;
+                btnActDesact.Enabled = false;
+                return;
+            }
+
+            var row = dgvUsuarios662JS.SelectedRows[0];
+           
+            if (row.IsNewRow)//para evitar error al seleccionar la fila de "nueva fila" que aparece al final
+            {
+                btnModificar.Enabled = false;
+                btnDesbloquear.Enabled = false;
+                btnActDesact.Enabled = false;
+                return;
+            }
+
+            var usuarioLogueado = SessionManager662JS.GetInstance662JS().Usuario662JS;
+            int dni = Convert.ToInt32(row.Cells["DNI662JS"].Value);
+
+            bool esMismoUsuario = usuarioLogueado.DNI662JS == dni;
+
+            btnModificar.Enabled = !esMismoUsuario;
+            btnDesbloquear.Enabled = !esMismoUsuario;
+            btnActDesact.Enabled = !esMismoUsuario;
+            
+            bool bloqueado = Convert.ToBoolean(row.Cells["Bloqueado662JS"].Value);//si el usuario está bloqueado, habilito
+                                                                           //el botón de desbloquear, sino lo deshabilito
+
+            btnDesbloquear.Enabled = bloqueado;
         }
     }
 }

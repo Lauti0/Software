@@ -46,11 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FrmAdministrador662JS.cs">
+    <Compile Include="FrmGestionarUsuarios_22MS.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmAdministrador662JS.Designer.cs">
-      <DependentUpon>FrmAdministrador662JS.cs</DependentUpon>
+    <Compile Include="FrmGestionarUsuarios_22MS.Designer.cs">
+      <DependentUpon>FrmGestionarUsuarios_22MS.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmCambiarPassword662JS.cs">
       <SubType>Form</SubType>
@@ -58,11 +58,11 @@
     <Compile Include="FrmCambiarPassword662JS.Designer.cs">
       <DependentUpon>FrmCambiarPassword662JS.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmPrincipal662JS.cs">
+    <Compile Include="FrmMenuPrincipal_22MS.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmPrincipal662JS.Designer.cs">
-      <DependentUpon>FrmPrincipal662JS.cs</DependentUpon>
+    <Compile Include="FrmMenuPrincipal_22MS.Designer.cs">
+      <DependentUpon>FrmMenuPrincipal_22MS.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmInicioSesion662JS.cs">
       <SubType>Form</SubType>
@@ -72,8 +72,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FrmAdministrador662JS.resx">
-      <DependentUpon>FrmAdministrador662JS.cs</DependentUpon>
+    <EmbeddedResource Include="FrmGestionarUsuarios_22MS.resx">
+      <DependentUpon>FrmGestionarUsuarios_22MS.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmCambiarPassword662JS.resx">
       <DependentUpon>FrmCambiarPassword662JS.cs</DependentUpon>
@@ -81,8 +81,8 @@
     <EmbeddedResource Include="FrmInicioSesion662JS.resx">
       <DependentUpon>FrmInicioSesion662JS.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmPrincipal662JS.resx">
-      <DependentUpon>FrmPrincipal662JS.cs</DependentUpon>
+    <EmbeddedResource Include="FrmMenuPrincipal_22MS.resx">
+      <DependentUpon>FrmMenuPrincipal_22MS.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

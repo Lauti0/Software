@@ -1,6 +1,6 @@
 ﻿namespace Proyecto_final
 {
-    partial class FrmPrincipal662JS
+    partial class FrmMenuPrincipal_22MS
     {
         /// <summary>
         /// Required designer variable.
@@ -144,7 +144,7 @@
             this.ayudaToolStripMenuItem.Size = new System.Drawing.Size(65, 24);
             this.ayudaToolStripMenuItem.Text = "Ayuda";
             // 
-            // FrmPrincipal662JS
+            // FrmMenuPrincipal_22MS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -152,8 +152,8 @@
             this.ClientSize = new System.Drawing.Size(1053, 563);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "FrmPrincipal662JS";
-            this.Text = "FrmPrincipal";
+            this.Name = "FrmMenuPrincipal_22MS";
+            this.Text = "FrmMenuPrincipal_22MS";
             this.Load += new System.EventHandler(this.FrmPrincipal662JS_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

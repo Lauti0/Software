@@ -1,6 +1,6 @@
 ﻿namespace Proyecto_final
 {
-    partial class FrmAdministrador662JS
+    partial class FrmGestionarUsuarios_22MS
     {
         /// <summary>
         /// Required designer variable.
@@ -64,6 +64,7 @@
             this.dgvUsuarios662JS.Size = new System.Drawing.Size(1177, 249);
             this.dgvUsuarios662JS.TabIndex = 0;
             this.dgvUsuarios662JS.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dgvUsuarios662JS_RowPrePaint);
+            this.dgvUsuarios662JS.SelectionChanged += new System.EventHandler(this.dgvUsuarios662JS_SelectionChanged);
             // 
             // chkActivos662JS
             // 
@@ -260,7 +261,7 @@
             this.label6.TabIndex = 22;
             this.label6.Text = "Username";
             // 
-            // FrmAdministrador662JS
+            // FrmGestionarUsuarios_22MS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -288,8 +289,8 @@
             this.Controls.Add(this.chkTodos662JS);
             this.Controls.Add(this.chkActivos662JS);
             this.Controls.Add(this.dgvUsuarios662JS);
-            this.Name = "FrmAdministrador662JS";
-            this.Text = "FrmAdministrador662JS";
+            this.Name = "FrmGestionarUsuarios_22MS";
+            this.Text = "FrmGestionarUsuarios_22MS";
             this.Load += new System.EventHandler(this.FrmAdministrador662JS_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios662JS)).EndInit();
             this.ResumeLayout(false);

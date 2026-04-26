@@ -36,7 +36,7 @@ namespace Proyecto_final
                 Servicios662JS.SessionManager662JS.Login662JS(usuario);
 
                 MessageBox.Show("Login correcto");
-                new FrmPrincipal662JS().Show();                
+                new FrmMenuPrincipal_22MS().Show();                
                 this.Hide();
             }
             catch (Exception ex)

@@ -64,6 +64,14 @@ namespace BLL662JS
         }
         public void Desbloquear662JS(string user)
         {
+            if (string.IsNullOrWhiteSpace(user))
+                throw new Exception("Usuario inválido");
+
+            bool bloqueado = dal.EstaBloqueado662JS(user);
+
+            if (!bloqueado)
+                throw new Exception("El usuario no está bloqueado");
+
             dal.DesbloquearUsuario662JS(user);
         }
         public void InsertarUsuario662JS(string apellido, string nombre, string dni, string rol, string email)
@@ -71,7 +79,7 @@ namespace BLL662JS
             string username = nombre + dni;
             string passwordPlano = dni + apellido;
             string passwordHash = Crypto662JS.Hash662JS(passwordPlano);            
-            if (dal.ExisteUsuario662JS(username))
+            if (dal.ExisteUsuario662JS(username, int.Parse(dni)))
                 throw new Exception("El usuario ya existe");
                                  
             dal.InsertarUsuario662JS(username, passwordHash, int.Parse(dni), apellido, nombre, rol, email);

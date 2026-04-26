@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace Proyecto_final
 {
-    public partial class FrmPrincipal662JS : Form
+    public partial class FrmMenuPrincipal_22MS : Form
     {
-        public FrmPrincipal662JS()
+        public FrmMenuPrincipal_22MS()
         {
             InitializeComponent();
         }        
@@ -70,7 +70,7 @@ namespace Proyecto_final
                 return;
             }
 
-            new FrmAdministrador662JS().Show();
+            new FrmGestionarUsuarios_22MS().Show();
         }
 
         private void iniciarSesiónToolStripMenuItem_Click(object sender, EventArgs e)
