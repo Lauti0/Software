@@ -257,6 +257,7 @@ namespace Proyecto_final
 
         private void FrmAdministrador662JS_Load(object sender, EventArgs e)
         {
+            this.StartPosition = FormStartPosition.CenterScreen;
             chkActivos662JS.Checked = true;
             chkTodos662JS.Checked = false;
             InicializarCampos662JS();

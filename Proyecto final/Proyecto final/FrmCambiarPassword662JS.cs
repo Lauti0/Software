@@ -65,7 +65,7 @@ namespace Proyecto_final
 
         private void FrmCambiarPassword662JS_Load(object sender, EventArgs e)
         {
-
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
     }
 }

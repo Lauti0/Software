@@ -20,6 +20,7 @@ namespace Proyecto_final
 
         private void FrmPrincipal662JS_Load(object sender, EventArgs e)
         {
+            this.StartPosition = FormStartPosition.CenterScreen;
             if (!SessionManager662JS.IsLogged662JS())
             {
                 MessageBox.Show("Debe iniciar sesión");
