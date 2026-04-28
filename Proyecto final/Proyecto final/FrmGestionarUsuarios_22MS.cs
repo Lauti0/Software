@@ -122,7 +122,8 @@ namespace Proyecto_final
             try
             {
                 BLLUsuario662JS bll = new BLLUsuario662JS();
-
+                string pregunta;
+                DialogResult resultado;
                 switch (modoActual662JS)
                 {
                     case Modo662JS.Consulta:
@@ -178,24 +179,39 @@ namespace Proyecto_final
 
                         if (!txtEmail.Text.Contains("@"))
                             throw new Exception("Email inválido");
-                        bll.ModificarUsuario662JS(
-                            txtDNI.Text,
-                            txtEmail.Text,
-                            txtRol.Text
-                        );
-
-                        MessageBox.Show("Usuario modificado");
+                        pregunta = $"¿Está seguro que desea modificar al usuario {txtLogin.Text}?";
+                        resultado = MessageBox.Show(pregunta, "Confirmar cambios",
+                                                 MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if(resultado == DialogResult.Yes)
+                        {
+                            bll.ModificarUsuario662JS(txtDNI.Text, txtEmail.Text, txtRol.Text);
+                            MessageBox.Show("Usuario modificado");
+                        }
+                        else
+                        {
+                            return;
+                        }
                         break;
 
                     case Modo662JS.Desbloquear:
 
                         var rowDesb = dgvUsuarios662JS.SelectedRows[0];
                         int dniDesb = Convert.ToInt32(rowDesb.Cells["DNI662JS"].Value);
-                        string username = rowDesb.Cells["Username662JS"].Value.ToString();                        
+                        string username = rowDesb.Cells["Username662JS"].Value.ToString();
+                        pregunta = $"¿Está seguro que desea desbloquear al usuario {username}?";
 
-                        bll.Desbloquear662JS(username);
+                        resultado = MessageBox.Show(pregunta, "Confirmar desbloqueo",
+                                                 MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                        MessageBox.Show("Usuario desbloqueado");
+                        if (resultado == DialogResult.Yes)
+                        {
+                            bll.Desbloquear662JS(username);
+                            MessageBox.Show("Usuario desbloqueado");
+                        }
+                        else
+                        {
+                            return;
+                        }                        
                         break;
 
                     case Modo662JS.ActivarDesactivar:
@@ -203,10 +219,24 @@ namespace Proyecto_final
                         var rowAct = dgvUsuarios662JS.SelectedRows[0];
 
                         int dni = Convert.ToInt32(rowAct.Cells["DNI662JS"].Value);
-                        bool activo = Convert.ToBoolean(rowAct.Cells["Activo662JS"].Value);                        
-                        bll.CambiarEstado662JS(dni, !activo);
-
-                        MessageBox.Show(activo ? "Usuario desactivado" : "Usuario activado");
+                        bool activo = Convert.ToBoolean(rowAct.Cells["Activo662JS"].Value);
+                        string nombreUsuario = rowAct.Cells["Nombre662JS"].Value.ToString();
+                      
+                        string accion = activo ? "desactivar" : "activar";
+                        pregunta = $"¿Está seguro que desea {accion} al usuario {nombreUsuario}?";
+         
+                        resultado = MessageBox.Show(pregunta, "Confirmar Cambio de Estado",
+                                                 MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                
+                        if (resultado == DialogResult.Yes)
+                        {
+                            bll.CambiarEstado662JS(dni, !activo);
+                            MessageBox.Show(activo ? "Usuario desactivado" : "Usuario activado");
+                        }
+                        else
+                        {                          
+                            return;
+                        }
 
                         break;
                 }
