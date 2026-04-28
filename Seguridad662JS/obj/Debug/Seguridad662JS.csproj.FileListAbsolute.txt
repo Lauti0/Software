@@ -1,0 +1,9 @@
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\Seguridad662JS\bin\Debug\Seguridad662JS.dll
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\Seguridad662JS\bin\Debug\Seguridad662JS.pdb
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\Seguridad662JS\bin\Debug\BE662JS.dll
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\Seguridad662JS\bin\Debug\BE662JS.pdb
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\Seguridad662JS\obj\Debug\Seguridad662JS.csproj.AssemblyReference.cache
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\Seguridad662JS\obj\Debug\Seguridad662JS.csproj.CoreCompileInputs.cache
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\Seguridad662JS\obj\Debug\Segurida.536C963D.Up2Date
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\Seguridad662JS\obj\Debug\Seguridad662JS.dll
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\Seguridad662JS\obj\Debug\Seguridad662JS.pdb

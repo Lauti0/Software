@@ -1,0 +1,43 @@
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\Proyecto final\bin\Debug\Proyecto final.exe.config
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\Proyecto final\bin\Debug\Proyecto final.exe
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\Proyecto final\bin\Debug\Proyecto final.pdb
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\Proyecto final\bin\Debug\BE662JS.dll
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\Proyecto final\bin\Debug\BLL662JS.dll
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\Proyecto final\bin\Debug\Seguridad662JS.dll
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\Proyecto final\bin\Debug\DAL662JS.dll
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\Proyecto final\bin\Debug\BE662JS.pdb
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\Proyecto final\bin\Debug\BLL662JS.pdb
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\Proyecto final\bin\Debug\Seguridad662JS.pdb
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\Proyecto final\bin\Debug\DAL662JS.pdb
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\Proyecto final\obj\Debug\GUI662JS.csproj.AssemblyReference.cache
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\Proyecto final\obj\Debug\Proyecto_final.FrmInicioSesion662JS.resources
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\Proyecto final\obj\Debug\Proyecto_final.FrmPrincipal662JS.resources
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\Proyecto final\obj\Debug\Proyecto_final.Properties.Resources.resources
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\Proyecto final\obj\Debug\GUI662JS.csproj.GenerateResource.cache
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\Proyecto final\obj\Debug\GUI662JS.csproj.CoreCompileInputs.cache
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\Proyecto final\obj\Debug\GUI662JS.csproj.Up2Date
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\Proyecto final\obj\Debug\Proyecto final.exe
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\Proyecto final\obj\Debug\Proyecto final.pdb
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\Proyecto final\obj\Debug\Proyecto_final.FrmAdministrador662JS.resources
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\Proyecto final\bin\Debug\Proyecto final.exe.config
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\Proyecto final\bin\Debug\Proyecto final.exe
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\Proyecto final\bin\Debug\Proyecto final.pdb
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\Proyecto final\bin\Debug\BE662JS.dll
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\Proyecto final\bin\Debug\BLL662JS.dll
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\Proyecto final\bin\Debug\Seguridad662JS.dll
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\Proyecto final\bin\Debug\DAL662JS.dll
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\Proyecto final\bin\Debug\BE662JS.pdb
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\Proyecto final\bin\Debug\BLL662JS.pdb
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\Proyecto final\bin\Debug\Seguridad662JS.pdb
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\Proyecto final\bin\Debug\DAL662JS.pdb
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\Proyecto final\obj\Debug\GUI662JS.csproj.AssemblyReference.cache
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\Proyecto final\obj\Debug\Proyecto_final.FrmAdministrador662JS.resources
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\Proyecto final\obj\Debug\Proyecto_final.FrmInicioSesion662JS.resources
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\Proyecto final\obj\Debug\Proyecto_final.FrmPrincipal662JS.resources
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\Proyecto final\obj\Debug\Proyecto_final.Properties.Resources.resources
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\Proyecto final\obj\Debug\GUI662JS.csproj.GenerateResource.cache
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\Proyecto final\obj\Debug\GUI662JS.csproj.CoreCompileInputs.cache
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\Proyecto final\obj\Debug\GUI662JS.csproj.Up2Date
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\Proyecto final\obj\Debug\Proyecto final.exe
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\Proyecto final\obj\Debug\Proyecto final.pdb
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\Proyecto final\obj\Debug\Proyecto_final.FrmCambiarPassword662JS.resources

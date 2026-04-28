@@ -1,0 +1,9 @@
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\Seguridad662JS\bin\Debug\Seguridad662JS.dll
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\Seguridad662JS\bin\Debug\Seguridad662JS.pdb
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\Seguridad662JS\bin\Debug\BE662JS.dll
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\Seguridad662JS\bin\Debug\BE662JS.pdb
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\Seguridad662JS\obj\Debug\Servicios_22MS.csproj.AssemblyReference.cache
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\Seguridad662JS\obj\Debug\Servicios_22MS.csproj.CoreCompileInputs.cache
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\Seguridad662JS\obj\Debug\Servicio.26BC6B6B.Up2Date
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\Seguridad662JS\obj\Debug\Seguridad662JS.dll
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\Seguridad662JS\obj\Debug\Seguridad662JS.pdb
