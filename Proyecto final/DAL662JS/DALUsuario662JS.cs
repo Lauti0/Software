@@ -35,7 +35,7 @@ namespace DAL662JS
                     Apellido662JS = row["Apellido662JS"].ToString(),
                     Email662JS = row["Email662JS"].ToString(),
                     Rol662JS=row["Rol662JS"].ToString(),
-                    Bloqueado662JS = Convert.ToBoolean(row["Bloqueado662JS"]),                    
+                    //Bloqueado662JS = Convert.ToBoolean(row["Bloqueado662JS"]),                    
                 };
             }
 
@@ -93,7 +93,7 @@ namespace DAL662JS
         }
 
         public DataTable ObtenerUsuariosFiltrados662JS(string dni, string apellido, string nombre, 
-            string email, string rol, string login, bool activos, bool todos)
+            string email, string rol, string login, bool activos)
         {
             string query = @"SELECT * FROM Usuario662JS WHERE 1=1";
 
@@ -134,13 +134,10 @@ namespace DAL662JS
                 query += " AND Username662JS LIKE @Username662JS";
                 cmd.Parameters.AddWithValue("@Username662JS", "%" + login + "%");
             }
-           
-            if (activos && !todos)
+
+            if (activos)
                 query += " AND Activo662JS = 1";
-
-            if (todos)
-                query += ""; // trae todo
-
+            else query += "";
             cmd.CommandText = query;
 
             return Acceso662JS.GetInstance662JS().Leer662JS(cmd);
@@ -203,5 +200,23 @@ namespace DAL662JS
 
             return Convert.ToBoolean(dt.Rows[0]["Bloqueado662JS"]);
         }
+        public bool EstaActivo662JS(string username)
+        {
+            string query = @"SELECT Activo662JS 
+                     FROM Usuario662JS 
+                     WHERE Username662JS = @Username662JS";
+
+            SqlCommand cmd = new SqlCommand(query);
+            cmd.Parameters.AddWithValue("@Username662JS", username);
+
+            DataTable dt = Acceso662JS.GetInstance662JS().Leer662JS(cmd);
+
+            if (dt.Rows.Count == 0)
+                throw new Exception("Usuario inexistente");
+
+            return Convert.ToBoolean(dt.Rows[0]["Activo662JS"]);
+        }
+
+
     }
 }

@@ -14,7 +14,9 @@ namespace BLL662JS
     public class BLLUsuario662JS
     {
         DALUsuario662JS dal = new DALUsuario662JS();
-        
+        //5bebc86242f338e945178b35361b13128ae41dbc1e3f3e2d1f3b076e4e031a17
+        private static Dictionary<string, int> intentos_22MS = new Dictionary<string, int>(); 
+        private static Dictionary<string, DateTime> ultimoIntento_22MS = new Dictionary<string, DateTime>();
         public UsuarioServicios662JS Login662JS(string user, string pass)
         {
 
@@ -26,26 +28,27 @@ namespace BLL662JS
 
             if (usuario == null)
                 throw new Exception("Usuario inexistente");
-
-            if (usuario.Bloqueado662JS)
-                throw new Exception("Usuario bloqueado");
+            if (dal.EstaBloqueado662JS(usuario.Username662JS))
+                throw new Exception("Usuario bloqueado. Intente más tarde");    
+            if(!dal.EstaActivo662JS(usuario.Username662JS))
+                throw new Exception("Usuario inactivo. Contacte al administrador");
 
             string hash = Crypto662JS.Hash662JS(pass);
 
             if (usuario.Password662JS != hash)
             {
-                int intentos = SessionManager662JS.IncrementarIntentos_22MS(user);
+                int intentos = IncrementarIntentos_22MS(user);
 
                 if (intentos >= 3)
                 {
                     dal.BloquearUsuario662JS(user);
-                    throw new Exception("Usuario bloqueado por intentos fallidos");
+                    throw new Exception("Demasiados intentos. Intente nuevamente en 2 horas");
                 }
 
                 throw new Exception($"Contraseña incorrecta. Intentos: {intentos}");
             }
 
-            SessionManager662JS.ResetearIntentos_22MS(user);
+            ResetearIntentos_22MS(user);
 
             return usuario;
         }
@@ -89,31 +92,52 @@ namespace BLL662JS
             dal.ModificarUsuario662JS(int.Parse(dni), email, rol);
         }
         public DataTable ObtenerUsuariosFiltrados662JS(string dni, string apellido, string nombre, 
-            string email, string rol, string login, bool activos, bool todos)
+            string email, string rol, string login, bool activos)
         {
             DALUsuario662JS dal = new DALUsuario662JS();
 
             return dal.ObtenerUsuariosFiltrados662JS(
-                dni, apellido, nombre, email, rol, login, activos, todos
+                dni, apellido, nombre, email, rol, login, activos
             );
         }
 
         public void CambiarEstado662JS(int dni, bool activo)
         {
             dal.CambiarEstado662JS(dni, activo);
+        }        
+        public static int IncrementarIntentos_22MS(string user)
+        {            
+            if (!intentos_22MS.ContainsKey(user))
+            {
+                intentos_22MS[user] = 0;
+            }            
+            if (ultimoIntento_22MS.ContainsKey(user))
+            {
+                DateTime ultimo = ultimoIntento_22MS[user];
+
+                if ((DateTime.Now - ultimo).TotalHours >= 2)
+                {                    
+                    intentos_22MS[user] = 0;
+                }
+            }
+
+            intentos_22MS[user]++;
+
+            ultimoIntento_22MS[user] = DateTime.Now;
+
+            return intentos_22MS[user];
         }
-        public void CambiarPassword662JS(string user, string actual, string nueva, string confirmar)
+        public static void ResetearIntentos_22MS(string user)
         {
-            UsuarioServicios662JS usuario = dal.ObtenerUsuario662JS(user);
+            if (intentos_22MS.ContainsKey(user))
+                intentos_22MS[user] = 0;
 
-            string hashActual = Crypto662JS.Hash662JS(actual);
-
-            if (usuario.Password662JS != hashActual)
-                throw new Exception("La contraseña actual es incorrecta");
-
-            string hashNueva = Crypto662JS.Hash662JS(nueva);
-
-            dal.CambiarPassword662JS(user, hashNueva);
+            if (ultimoIntento_22MS.ContainsKey(user))
+                ultimoIntento_22MS.Remove(user); 
+        }
+        public void Logout_662JS()
+        {
+            SessionManager662JS.Logout662JS();
         }
     }
 }

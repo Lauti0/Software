@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.dgvUsuarios662JS = new System.Windows.Forms.DataGridView();
-            this.chkActivos662JS = new System.Windows.Forms.CheckBox();
-            this.chkTodos662JS = new System.Windows.Forms.CheckBox();
             this.txtDNI = new System.Windows.Forms.TextBox();
             this.txtApellido = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
@@ -51,7 +49,11 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.rbActivos662JS = new System.Windows.Forms.RadioButton();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rbTodos662JS = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios662JS)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvUsuarios662JS
@@ -65,26 +67,6 @@
             this.dgvUsuarios662JS.TabIndex = 0;
             this.dgvUsuarios662JS.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dgvUsuarios662JS_RowPrePaint);
             this.dgvUsuarios662JS.SelectionChanged += new System.EventHandler(this.dgvUsuarios662JS_SelectionChanged);
-            // 
-            // chkActivos662JS
-            // 
-            this.chkActivos662JS.AutoSize = true;
-            this.chkActivos662JS.Location = new System.Drawing.Point(30, 34);
-            this.chkActivos662JS.Name = "chkActivos662JS";
-            this.chkActivos662JS.Size = new System.Drawing.Size(73, 20);
-            this.chkActivos662JS.TabIndex = 1;
-            this.chkActivos662JS.Text = "Activos";
-            this.chkActivos662JS.UseVisualStyleBackColor = true;
-            // 
-            // chkTodos662JS
-            // 
-            this.chkTodos662JS.AutoSize = true;
-            this.chkTodos662JS.Location = new System.Drawing.Point(30, 76);
-            this.chkTodos662JS.Name = "chkTodos662JS";
-            this.chkTodos662JS.Size = new System.Drawing.Size(69, 20);
-            this.chkTodos662JS.TabIndex = 2;
-            this.chkTodos662JS.Text = "Todos";
-            this.chkTodos662JS.UseVisualStyleBackColor = true;
             // 
             // txtDNI
             // 
@@ -261,11 +243,45 @@
             this.label6.TabIndex = 22;
             this.label6.Text = "Username";
             // 
+            // rbActivos662JS
+            // 
+            this.rbActivos662JS.AutoSize = true;
+            this.rbActivos662JS.Location = new System.Drawing.Point(6, 32);
+            this.rbActivos662JS.Name = "rbActivos662JS";
+            this.rbActivos662JS.Size = new System.Drawing.Size(72, 20);
+            this.rbActivos662JS.TabIndex = 23;
+            this.rbActivos662JS.TabStop = true;
+            this.rbActivos662JS.Text = "Activos";
+            this.rbActivos662JS.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.rbTodos662JS);
+            this.groupBox1.Controls.Add(this.rbActivos662JS);
+            this.groupBox1.Location = new System.Drawing.Point(30, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(200, 99);
+            this.groupBox1.TabIndex = 24;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Filtros";
+            // 
+            // rbTodos662JS
+            // 
+            this.rbTodos662JS.AutoSize = true;
+            this.rbTodos662JS.Location = new System.Drawing.Point(6, 70);
+            this.rbTodos662JS.Name = "rbTodos662JS";
+            this.rbTodos662JS.Size = new System.Drawing.Size(68, 20);
+            this.rbTodos662JS.TabIndex = 24;
+            this.rbTodos662JS.TabStop = true;
+            this.rbTodos662JS.Text = "Todos";
+            this.rbTodos662JS.UseVisualStyleBackColor = true;
+            // 
             // FrmGestionarUsuarios_22MS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1222, 655);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -286,13 +302,13 @@
             this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.txtApellido);
             this.Controls.Add(this.txtDNI);
-            this.Controls.Add(this.chkTodos662JS);
-            this.Controls.Add(this.chkActivos662JS);
             this.Controls.Add(this.dgvUsuarios662JS);
             this.Name = "FrmGestionarUsuarios_22MS";
             this.Text = "FrmGestionarUsuarios_22MS";
             this.Load += new System.EventHandler(this.FrmAdministrador662JS_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios662JS)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -301,8 +317,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dgvUsuarios662JS;
-        private System.Windows.Forms.CheckBox chkActivos662JS;
-        private System.Windows.Forms.CheckBox chkTodos662JS;
         private System.Windows.Forms.TextBox txtDNI;
         private System.Windows.Forms.TextBox txtApellido;
         private System.Windows.Forms.TextBox txtNombre;
@@ -323,5 +337,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.RadioButton rbActivos662JS;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton rbTodos662JS;
     }
 }

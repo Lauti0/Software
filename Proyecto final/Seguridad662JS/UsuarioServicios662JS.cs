@@ -14,10 +14,12 @@ namespace Servicios662JS
         public string Password662JS { get; set; }        
         public string Nombre662JS { get; set; }
         public string Apellido662JS { get; set; }
-        public bool Bloqueado662JS { get; set; }
-        public int IntentosFallidos662JS { get; set; }
+        //public bool Bloqueado662JS { get; set; }
+        //public int IntentosFallidos662JS { get; set; }
         public string Email662JS { get; set; }
         public string Rol662JS { get; set; }
+        //public DateTime UltimoIntento662JS { get; set; }
+
 
     }
 }

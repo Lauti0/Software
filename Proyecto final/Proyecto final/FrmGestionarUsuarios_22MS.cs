@@ -135,8 +135,8 @@ namespace Proyecto_final
                             txtEmail.Text,
                             txtRol.Text,
                             txtLogin.Text,
-                            chkActivos662JS.Checked,
-                            chkTodos662JS.Checked
+                            rbActivos662JS.Checked
+                           // rbTodos662JS.Checked
                         );
 
                         CargarUsuarios662JS(tabla);
@@ -261,8 +261,7 @@ namespace Proyecto_final
                 txtEmail.Text,
                 txtRol.Text,
                 txtLogin.Text,
-                chkActivos662JS.Checked,
-                chkTodos662JS.Checked
+                rbActivos662JS.Checked               
             );
 
             CargarUsuarios662JS(tabla);
@@ -288,8 +287,7 @@ namespace Proyecto_final
         private void FrmAdministrador662JS_Load(object sender, EventArgs e)
         {
             this.StartPosition = FormStartPosition.CenterScreen;
-            chkActivos662JS.Checked = true;
-            chkTodos662JS.Checked = false;
+            rbActivos662JS.Checked = true;            
             InicializarCampos662JS();
             btnAplicar.PerformClick();
             CambiarModo662JS(Modo662JS.Consulta);

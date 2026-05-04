@@ -33,7 +33,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnIniciarSesion662JS = new System.Windows.Forms.Button();
-            this.btnCrearUsuario = new System.Windows.Forms.Button();
             this.btnOcultarContraseña = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -82,16 +81,6 @@
             this.btnIniciarSesion662JS.UseVisualStyleBackColor = true;
             this.btnIniciarSesion662JS.Click += new System.EventHandler(this.btnIniciarSesion662JS_Click);
             // 
-            // btnCrearUsuario
-            // 
-            this.btnCrearUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCrearUsuario.Location = new System.Drawing.Point(322, 338);
-            this.btnCrearUsuario.Name = "btnCrearUsuario";
-            this.btnCrearUsuario.Size = new System.Drawing.Size(264, 41);
-            this.btnCrearUsuario.TabIndex = 5;
-            this.btnCrearUsuario.Text = "Crear usuario";
-            this.btnCrearUsuario.UseVisualStyleBackColor = true;
-            // 
             // btnOcultarContraseña
             // 
             this.btnOcultarContraseña.Location = new System.Drawing.Point(621, 206);
@@ -108,7 +97,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.btnOcultarContraseña);
-            this.Controls.Add(this.btnCrearUsuario);
             this.Controls.Add(this.btnIniciarSesion662JS);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -129,7 +117,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnIniciarSesion662JS;
-        private System.Windows.Forms.Button btnCrearUsuario;
         private System.Windows.Forms.Button btnOcultarContraseña;
     }
 }

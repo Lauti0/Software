@@ -8,7 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Servicios662JS;
 namespace Proyecto_final
+    
 {
     public partial class FrmInicioSesion662JS : Form
     {
@@ -30,10 +32,7 @@ namespace Proyecto_final
 
                 var usuario = bll.Login662JS(txtUsuario662JS.Text, txtContraseña662JS.Text);
 
-                if (Servicios662JS.SessionManager662JS.IsLogged662JS())
-                    Servicios662JS.SessionManager662JS.Logout662JS();
-
-                Servicios662JS.SessionManager662JS.Login662JS(usuario);
+                SessionManager662JS.Login662JS(usuario);
 
                 MessageBox.Show("Login correcto");
                 new FrmMenuPrincipal_22MS().Show();                

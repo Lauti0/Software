@@ -23,7 +23,7 @@ namespace Proyecto_final
         {
             try
             {
-                if (!SessionManager662JS.IsLogged662JS())
+                if (SessionManager662JS.GetInstance662JS() == null)
                 {
                     MessageBox.Show("Debe iniciar sesión");
                     return;
@@ -36,7 +36,7 @@ namespace Proyecto_final
                 string.IsNullOrWhiteSpace(txtNueva.Text) ||
                 string.IsNullOrWhiteSpace(txtConfirmar.Text))
                     throw new Exception("Debe completar todos los campos");
-
+                
                 if (txtNueva.Text != txtConfirmar.Text)
                     throw new Exception("Las contraseñas no coinciden");
 
@@ -50,8 +50,7 @@ namespace Proyecto_final
                 bll.CambiarPassword662JS(
                     usuario.Username662JS,
                     txtActual.Text,
-                    txtNueva.Text,
-                    txtConfirmar.Text
+                    txtNueva.Text
                 );
 
                 MessageBox.Show("Contraseña actualizada correctamente");

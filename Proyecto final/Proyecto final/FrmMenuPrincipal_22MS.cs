@@ -1,4 +1,5 @@
-﻿using Servicios662JS;
+﻿using BLL662JS;
+using Servicios662JS;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,7 +22,7 @@ namespace Proyecto_final
         private void FrmPrincipal662JS_Load(object sender, EventArgs e)
         {
             this.StartPosition = FormStartPosition.CenterScreen;
-            if (!SessionManager662JS.IsLogged662JS())
+            if (SessionManager662JS.GetInstance662JS() == null)
             {
                 MessageBox.Show("Debe iniciar sesión");
                 new FrmInicioSesion662JS().Show();
@@ -39,9 +40,14 @@ namespace Proyecto_final
 
         private void cerrarSesiónToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            DialogResult resultado = MessageBox.Show("¿Está seguro que desea cerrar sesión?", "Confirmar", MessageBoxButtons.YesNo);
+            if (resultado == DialogResult.No)
+                return;
+
             try
             {
-                SessionManager662JS.Logout662JS();
+                BLLUsuario662JS bll = new BLLUsuario662JS();                
+                bll.Logout_662JS();
 
                 MessageBox.Show("Sesión cerrada");
 
@@ -56,7 +62,7 @@ namespace Proyecto_final
 
         private void gestionarUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!SessionManager662JS.IsLogged662JS())
+            if (SessionManager662JS.GetInstance662JS() == null)
             {
                 MessageBox.Show("Debe iniciar sesión");
                 return;
@@ -76,19 +82,13 @@ namespace Proyecto_final
 
         private void iniciarSesiónToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (SessionManager662JS.IsLogged662JS())
-            {
-                MessageBox.Show("El usuario ya esta logeado");                
-            }
-            else
-            {
-                new FrmInicioSesion662JS().Show();
-            }
+            new FrmInicioSesion662JS().Show();
+            this.Hide();
         }
 
         private void cambiarContraseñaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!SessionManager662JS.IsLogged662JS())
+            if (SessionManager662JS.GetInstance662JS() == null)
             {
                 MessageBox.Show("Debe iniciar sesión");
                 return;

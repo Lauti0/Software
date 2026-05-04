@@ -12,32 +12,17 @@ namespace Servicios662JS
         private static SessionManager662JS _session662JS;
 
         public UsuarioServicios662JS Usuario662JS { get; private set; }
-        private static Dictionary<string, int> intentos_22MS = new Dictionary<string, int>();
+
         
-        public static int IncrementarIntentos_22MS(string user)
-        {
-            if (!intentos_22MS.ContainsKey(user))
-                intentos_22MS[user] = 0;
-
-            intentos_22MS[user]++;
-
-            return intentos_22MS[user];
-        }
-
-        public static void ResetearIntentos_22MS(string user)
-        {
-            if (intentos_22MS.ContainsKey(user))
-                intentos_22MS[user] = 0;
-        }
         public static SessionManager662JS GetInstance662JS()
         {
             return _session662JS;
         }
 
-        public static bool IsLogged662JS()
-        {
-            return _session662JS != null;
-        }
+        //public static bool IsLogged662JS()
+        //{
+        //    return _session662JS != null;
+        //}
 
         public static void Login662JS(UsuarioServicios662JS usuario)
         {
@@ -46,17 +31,19 @@ namespace Servicios662JS
 
             lock (_lock662JS)
             {
-                if (_session662JS == null)
+                if (_session662JS != null)
                 {
-                    _session662JS = new SessionManager662JS
-                    {
-                        Usuario662JS = usuario,                        
-                    };
+                    if (_session662JS.Usuario662JS.Username662JS == usuario.Username662JS)
+                        throw new Exception("Ya hay una instancia de ese usuario logueada");
+                    else
+                        throw new Exception("Ya hay una sesión iniciada. Debe cerrar sesión primero");
                 }
-                else
+
+                _session662JS = new SessionManager662JS
                 {
-                    throw new Exception("Sesión ya iniciada");
-                }
+                    Usuario662JS = usuario,
+                    //FechaInicio662JS = DateTime.Now
+                };
             }
         }
 
