@@ -16,7 +16,7 @@ namespace Proyecto_final
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmInicioSesion662JS());
+            Application.Run(new FrmInicioSesion_22MS());
         }
     }
 }

@@ -52,11 +52,11 @@
     <Compile Include="FrmGestionarUsuarios_22MS.Designer.cs">
       <DependentUpon>FrmGestionarUsuarios_22MS.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmCambiarPassword662JS.cs">
+    <Compile Include="FrmCambiarPassword_22MS.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmCambiarPassword662JS.Designer.cs">
-      <DependentUpon>FrmCambiarPassword662JS.cs</DependentUpon>
+    <Compile Include="FrmCambiarPassword_22MS.Designer.cs">
+      <DependentUpon>FrmCambiarPassword_22MS.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmMenuPrincipal_22MS.cs">
       <SubType>Form</SubType>
@@ -64,22 +64,22 @@
     <Compile Include="FrmMenuPrincipal_22MS.Designer.cs">
       <DependentUpon>FrmMenuPrincipal_22MS.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmInicioSesion662JS.cs">
+    <Compile Include="FrmInicioSesion_22MS.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmInicioSesion662JS.Designer.cs">
-      <DependentUpon>FrmInicioSesion662JS.cs</DependentUpon>
+    <Compile Include="FrmInicioSesion_22MS.Designer.cs">
+      <DependentUpon>FrmInicioSesion_22MS.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FrmGestionarUsuarios_22MS.resx">
       <DependentUpon>FrmGestionarUsuarios_22MS.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmCambiarPassword662JS.resx">
-      <DependentUpon>FrmCambiarPassword662JS.cs</DependentUpon>
+    <EmbeddedResource Include="FrmCambiarPassword_22MS.resx">
+      <DependentUpon>FrmCambiarPassword_22MS.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmInicioSesion662JS.resx">
-      <DependentUpon>FrmInicioSesion662JS.cs</DependentUpon>
+    <EmbeddedResource Include="FrmInicioSesion_22MS.resx">
+      <DependentUpon>FrmInicioSesion_22MS.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmMenuPrincipal_22MS.resx">
       <DependentUpon>FrmMenuPrincipal_22MS.cs</DependentUpon>

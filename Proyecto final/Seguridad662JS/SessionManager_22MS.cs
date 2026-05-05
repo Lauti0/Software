@@ -4,19 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Servicios662JS
+namespace Servicios_22MS
 {
-    public class SessionManager662JS
+    public class SessionManager_22MS
     {
-        private static readonly object _lock662JS = new object();
-        private static SessionManager662JS _session662JS;
+        private static readonly object _lock_22MS = new object();
+        private static SessionManager_22MS _session_22MS;
 
-        public UsuarioServicios662JS Usuario662JS { get; private set; }
+        public UsuarioServicios_22MS Usuario_22MS { get; private set; }
 
         
-        public static SessionManager662JS GetInstance662JS()
+        public static SessionManager_22MS GetInstance_22MS()
         {
-            return _session662JS;
+            return _session_22MS;
         }
 
         //public static bool IsLogged662JS()
@@ -24,36 +24,36 @@ namespace Servicios662JS
         //    return _session662JS != null;
         //}
 
-        public static void Login662JS(UsuarioServicios662JS usuario)
+        public static void Login_22MS(UsuarioServicios_22MS usuario)
         {
             if (usuario == null)
                 throw new Exception("Usuario inválido");
 
-            lock (_lock662JS)
+            lock (_lock_22MS)
             {
-                if (_session662JS != null)
+                if (_session_22MS != null)
                 {
-                    if (_session662JS.Usuario662JS.Username662JS == usuario.Username662JS)
+                    if (_session_22MS.Usuario_22MS.Username_22MS == usuario.Username_22MS)
                         throw new Exception("Ya hay una instancia de ese usuario logueada");
                     else
                         throw new Exception("Ya hay una sesión iniciada. Debe cerrar sesión primero");
                 }
 
-                _session662JS = new SessionManager662JS
+                _session_22MS = new SessionManager_22MS
                 {
-                    Usuario662JS = usuario,
+                    Usuario_22MS = usuario,
                     //FechaInicio662JS = DateTime.Now
                 };
             }
         }
 
-        public static void Logout662JS()
+        public static void Logout_22MS()
         {
-            lock (_lock662JS)
+            lock (_lock_22MS)
             {
-                if (_session662JS != null)
+                if (_session_22MS != null)
                 {
-                    _session662JS = null;
+                    _session_22MS = null;
                 }
                 else
                 {

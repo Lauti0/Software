@@ -7,33 +7,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL662JS
+namespace DAL_22MS
 {
-    public class Acceso662JS
+    public class Acceso_22MS
     {
-        private static Acceso662JS _instance;
+        private static Acceso_22MS _instance;
         private static readonly object _lock = new object();
 
         private readonly string _cadenaConexion =
             ConfigurationManager.ConnectionStrings["MiConexionSQL"].ConnectionString;
 
-        private Acceso662JS() { }
+        private Acceso_22MS() { }
 
-        public static Acceso662JS GetInstance662JS()
+        public static Acceso_22MS GetInstance_22MS()
         {
             if (_instance == null)
             {
                 lock (_lock)
                 {
                     if (_instance == null)
-                        _instance = new Acceso662JS();
+                        _instance = new Acceso_22MS();
                 }
             }
             return _instance;
         }
 
     
-        public DataTable Leer662JS(SqlCommand cmd)
+        public DataTable Leer_22MS(SqlCommand cmd)
         {
             try
             {
@@ -59,7 +59,7 @@ namespace DAL662JS
         }
 
       
-        public int Escribir662JS(SqlCommand cmd)
+        public int Escribir_22MS(SqlCommand cmd)
         {
             try
             {
@@ -78,7 +78,7 @@ namespace DAL662JS
             
         }
 
-        public bool VerificarConexion662JS()
+        public bool VerificarConexion_22MS()
         {
             try
             {

@@ -154,7 +154,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FrmMenuPrincipal_22MS";
             this.Text = "FrmMenuPrincipal_22MS";
-            this.Load += new System.EventHandler(this.FrmPrincipal662JS_Load);
+            this.Load += new System.EventHandler(this.FrmPrincipal_22MS_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

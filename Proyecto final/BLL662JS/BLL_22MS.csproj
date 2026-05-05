@@ -7,8 +7,8 @@
     <ProjectGuid>{83559288-E642-41D5-A987-C48863FE0474}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BLL662JS</RootNamespace>
-    <AssemblyName>BLL662JS</AssemblyName>
+    <RootNamespace>BLL_22MS</RootNamespace>
+    <AssemblyName>BLL_22MS</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BLLUsuario662JS.cs" />
+    <Compile Include="BLLUsuario_22MS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -5,11 +5,11 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Servicios662JS
-{
-    public class Crypto662JS
+namespace Servicios_22MS 
+{ 
+    public class Crypto_22MS
     {
-        public static string Hash662JS(string input)
+        public static string Hash_22MS(string input)
         {
             using (SHA256 sha = SHA256.Create())
             {

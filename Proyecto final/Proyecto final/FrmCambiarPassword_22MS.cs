@@ -1,5 +1,5 @@
-﻿using BLL662JS;
-using Servicios662JS;
+﻿using BLL_22MS;
+using Servicios_22MS;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,9 +12,9 @@ using System.Windows.Forms;
 
 namespace Proyecto_final
 {
-    public partial class FrmCambiarPassword662JS : Form
+    public partial class FrmCambiarPassword_22MS : Form
     {
-        public FrmCambiarPassword662JS()
+        public FrmCambiarPassword_22MS()
         {
             InitializeComponent();
         }
@@ -23,15 +23,15 @@ namespace Proyecto_final
         {
             try
             {
-                if (SessionManager662JS.GetInstance662JS() == null)
+                if (SessionManager_22MS.GetInstance_22MS() == null)
                 {
                     MessageBox.Show("Debe iniciar sesión");
                     return;
                 }
 
-                UsuarioServicios662JS usuario = SessionManager662JS.GetInstance662JS().Usuario662JS;
+                UsuarioServicios_22MS usuario = SessionManager_22MS.GetInstance_22MS().Usuario_22MS;
 
-                BLLUsuario662JS bll = new BLLUsuario662JS();
+                BLLUsuario_22MS bll = new BLLUsuario_22MS();
                 if (string.IsNullOrWhiteSpace(txtActual.Text) ||
                 string.IsNullOrWhiteSpace(txtNueva.Text) ||
                 string.IsNullOrWhiteSpace(txtConfirmar.Text))
@@ -47,8 +47,8 @@ namespace Proyecto_final
                 if (!txtNueva.Text.Any(char.IsUpper) || !txtNueva.Text.Any(char.IsDigit))
                     throw new Exception("Debe tener al menos una mayúscula y un número");
 
-                bll.CambiarPassword662JS(
-                    usuario.Username662JS,
+                bll.CambiarPassword_22MS(
+                    usuario.Username_22MS,
                     txtActual.Text,
                     txtNueva.Text
                 );
@@ -62,7 +62,7 @@ namespace Proyecto_final
             }
         }
 
-        private void FrmCambiarPassword662JS_Load(object sender, EventArgs e)
+        private void FrmCambiarPassword_22MS_Load(object sender, EventArgs e)
         {
             this.StartPosition = FormStartPosition.CenterScreen;
         }

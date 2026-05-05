@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Servicios662JS
+namespace Servicios_22MS
 {
     public enum Modulo_22MS
     {
@@ -27,7 +27,7 @@ namespace Servicios662JS
     }
     public class Bitacora_22MS
     {
-        private UsuarioServicios662JS usuario;
+        private UsuarioServicios_22MS usuario;
 
         private DateTime _fecha;
 
@@ -52,7 +52,7 @@ namespace Servicios662JS
             set { _fecha = value; }
         }
 
-        public UsuarioServicios662JS Usuario
+        public UsuarioServicios_22MS Usuario
         {
             get { return usuario; }
             set { usuario = value; }

@@ -1,6 +1,6 @@
 ﻿namespace Proyecto_final
 {
-    partial class FrmCambiarPassword662JS
+    partial class FrmCambiarPassword_22MS
     {
         /// <summary>
         /// Required designer variable.
@@ -95,7 +95,7 @@
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
-            // FrmCambiarPassword662JS
+            // FrmCambiarPassword_22MS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -107,9 +107,9 @@
             this.Controls.Add(this.txtConfirmar);
             this.Controls.Add(this.txtNueva);
             this.Controls.Add(this.txtActual);
-            this.Name = "FrmCambiarPassword662JS";
-            this.Text = "FrmCambiarPassword662JS";
-            this.Load += new System.EventHandler(this.FrmCambiarPassword662JS_Load);
+            this.Name = "FrmCambiarPassword_22MS";
+            this.Text = "FrmCambiarPassword_22MS";
+            this.Load += new System.EventHandler(this.FrmCambiarPassword_22MS_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

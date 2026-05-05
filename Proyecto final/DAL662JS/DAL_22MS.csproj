@@ -7,8 +7,8 @@
     <ProjectGuid>{C32A8520-B008-4CF9-A3A0-CE6852F330D2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DAL662JS</RootNamespace>
-    <AssemblyName>DAL662JS</AssemblyName>
+    <RootNamespace>DAL_22MS</RootNamespace>
+    <AssemblyName>DAL_22MS</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -42,8 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Acceso662JS.cs" />
-    <Compile Include="DALUsuario662JS.cs" />
+    <Compile Include="Acceso_22MS.cs" />
+    <Compile Include="DALUsuario_22MS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

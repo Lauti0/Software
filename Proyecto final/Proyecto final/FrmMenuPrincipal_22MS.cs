@@ -1,5 +1,5 @@
-﻿using BLL662JS;
-using Servicios662JS;
+﻿using BLL_22MS;
+using Servicios_22MS;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,20 +19,20 @@ namespace Proyecto_final
             InitializeComponent();
         }        
 
-        private void FrmPrincipal662JS_Load(object sender, EventArgs e)
+        private void FrmPrincipal_22MS_Load(object sender, EventArgs e)
         {
             this.StartPosition = FormStartPosition.CenterScreen;
-            if (SessionManager662JS.GetInstance662JS() == null)
+            if (SessionManager_22MS.GetInstance_22MS() == null)
             {
                 MessageBox.Show("Debe iniciar sesión");
-                new FrmInicioSesion662JS().Show();
+                new FrmInicioSesion_22MS().Show();
                 this.Close();
                 return; 
             }
 
-            UsuarioServicios662JS usuario = SessionManager662JS.GetInstance662JS().Usuario662JS;
+            UsuarioServicios_22MS usuario = SessionManager_22MS.GetInstance_22MS().Usuario_22MS;
 
-            if (usuario.Rol662JS != "Admin")
+            if (usuario.Rol_22MS != "Admin")
             {
                 gestionarUsuarioToolStripMenuItem.Visible = false;
             }
@@ -46,12 +46,12 @@ namespace Proyecto_final
 
             try
             {
-                BLLUsuario662JS bll = new BLLUsuario662JS();                
-                bll.Logout_662JS();
+                BLLUsuario_22MS bll = new BLLUsuario_22MS();                
+                bll.Logout_22MS();
 
                 MessageBox.Show("Sesión cerrada");
 
-                new FrmInicioSesion662JS().Show();
+                new FrmInicioSesion_22MS().Show();
                 this.Close();
             }
             catch (Exception ex)
@@ -62,16 +62,16 @@ namespace Proyecto_final
 
         private void gestionarUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (SessionManager662JS.GetInstance662JS() == null)
+            if (SessionManager_22MS.GetInstance_22MS() == null)
             {
                 MessageBox.Show("Debe iniciar sesión");
                 return;
             }
 
-            SessionManager662JS session = SessionManager662JS.GetInstance662JS();
-            UsuarioServicios662JS usuario = session.Usuario662JS;
+            SessionManager_22MS session = SessionManager_22MS.GetInstance_22MS();
+            UsuarioServicios_22MS usuario = session.Usuario_22MS;
 
-            if (usuario.Rol662JS != "Admin")
+            if (usuario.Rol_22MS != "Admin")
             {
                 MessageBox.Show("No tiene permisos para acceder");
                 return;
@@ -82,19 +82,19 @@ namespace Proyecto_final
 
         private void iniciarSesiónToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new FrmInicioSesion662JS().Show();
+            new FrmInicioSesion_22MS().Show();
             this.Hide();
         }
 
         private void cambiarContraseñaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (SessionManager662JS.GetInstance662JS() == null)
+            if (SessionManager_22MS.GetInstance_22MS() == null)
             {
                 MessageBox.Show("Debe iniciar sesión");
                 return;
             }
 
-            new FrmCambiarPassword662JS().ShowDialog();
+            new FrmCambiarPassword_22MS().ShowDialog();
         }
     }
 }
