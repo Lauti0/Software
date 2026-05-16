@@ -15,6 +15,7 @@ namespace Proyecto_final
     public partial class FrmInicioSesion_22MS : Form
     {
         private bool isPasswordHidden = true;
+        FrmMenuPrincipal_22MS menuPrincipal_22MS = new FrmMenuPrincipal_22MS();
         public FrmInicioSesion_22MS()
         {
             InitializeComponent();
@@ -35,12 +36,14 @@ namespace Proyecto_final
                 SessionManager_22MS.Login_22MS(usuario);
 
                 MessageBox.Show("Login correcto");
-                new FrmMenuPrincipal_22MS().Show();                
+                menuPrincipal_22MS.Show();                
                 this.Hide();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                this.Close();
+                menuPrincipal_22MS.Show();
             }
         }
 
