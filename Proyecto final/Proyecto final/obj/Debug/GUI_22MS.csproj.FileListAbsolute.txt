@@ -87,3 +87,7 @@ C:\Users\hpnot\Documents\Proyecto final Joaquín Sassaroli\Proyecto final\Proyec
 C:\Users\hpnot\Documents\Proyecto final Joaquín Sassaroli\Proyecto final\Proyecto final\bin\Debug\Servicios_22MS.dll
 C:\Users\hpnot\Documents\Proyecto final Joaquín Sassaroli\Proyecto final\Proyecto final\bin\Debug\Servicios_22MS.pdb
 C:\Users\hpnot\Documents\Proyecto final Joaquín Sassaroli\Proyecto final\Proyecto final\obj\Debug\Proyecto_final.FrmBitacoraEventos_22MS.resources
+C:\Users\hpnot\Documents\Proyecto final Joaquín Sassaroli\Proyecto final\Proyecto final\bin\Debug\BouncyCastle.Cryptography.dll
+C:\Users\hpnot\Documents\Proyecto final Joaquín Sassaroli\Proyecto final\Proyecto final\bin\Debug\itextsharp.dll
+C:\Users\hpnot\Documents\Proyecto final Joaquín Sassaroli\Proyecto final\Proyecto final\bin\Debug\BouncyCastle.Cryptography.xml
+C:\Users\hpnot\Documents\Proyecto final Joaquín Sassaroli\Proyecto final\Proyecto final\bin\Debug\itextsharp.xml

@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BLL_22MS;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.IO;
 
 namespace Proyecto_final
 {
@@ -164,6 +167,72 @@ namespace Proyecto_final
         private void btnSalir_22MS_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnImprimir_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SaveFileDialog save = new SaveFileDialog();
+
+                save.Filter = "PDF (*.pdf)|*.pdf";
+                save.FileName = "BitacoraEventos.pdf";
+
+                if (save.ShowDialog() == DialogResult.OK)
+                {
+                    ExportarPDF_22MS(save.FileName);
+
+                    MessageBox.Show("PDF generado correctamente");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void ExportarPDF_22MS(string ruta)
+        {
+            Document doc = new Document(PageSize.A4, 10, 10, 10, 10);
+
+            PdfWriter.GetInstance(doc, new FileStream(ruta, FileMode.Create));
+
+            doc.Open();
+
+            Paragraph titulo = new Paragraph("BITACORA DE EVENTOS");
+            titulo.Alignment = Element.ALIGN_CENTER;
+
+            doc.Add(titulo);
+            doc.Add(new Paragraph(" "));
+
+            PdfPTable tabla = new PdfPTable(dataGridViewEventos_22MS.Columns.Count);
+
+            tabla.WidthPercentage = 100;
+
+            
+            foreach (DataGridViewColumn columna in dataGridViewEventos_22MS.Columns)
+            {
+                PdfPCell cell = new PdfPCell(
+                    new Phrase(columna.HeaderText));
+
+                tabla.AddCell(cell);
+            }
+
+            
+            foreach (DataGridViewRow row in dataGridViewEventos_22MS.Rows)
+            {
+                if (!row.IsNewRow)
+                {
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        tabla.AddCell(
+                            cell.Value?.ToString() ?? "");
+                    }
+                }
+            }
+
+            doc.Add(tabla);
+
+            doc.Close();
         }
     }
 }

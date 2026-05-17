@@ -22,3 +22,8 @@ C:\Users\hpnot\Documents\Proyecto final Joaquín Sassaroli\Proyecto final\BE662J
 C:\Users\hpnot\Documents\Proyecto final Joaquín Sassaroli\Proyecto final\BE662JS\obj\Debug\BE_22MS.csproj.CoreCompileInputs.cache
 C:\Users\hpnot\Documents\Proyecto final Joaquín Sassaroli\Proyecto final\BE662JS\obj\Debug\BE_22MS.dll
 C:\Users\hpnot\Documents\Proyecto final Joaquín Sassaroli\Proyecto final\BE662JS\obj\Debug\BE_22MS.pdb
+C:\Users\hpnot\Documents\Proyecto final Joaquín Sassaroli\Proyecto final\BE662JS\bin\Debug\BouncyCastle.Cryptography.dll
+C:\Users\hpnot\Documents\Proyecto final Joaquín Sassaroli\Proyecto final\BE662JS\bin\Debug\itextsharp.dll
+C:\Users\hpnot\Documents\Proyecto final Joaquín Sassaroli\Proyecto final\BE662JS\bin\Debug\BouncyCastle.Cryptography.xml
+C:\Users\hpnot\Documents\Proyecto final Joaquín Sassaroli\Proyecto final\BE662JS\bin\Debug\itextsharp.xml
+C:\Users\hpnot\Documents\Proyecto final Joaquín Sassaroli\Proyecto final\BE662JS\obj\Debug\BE_22MS.csproj.Up2Date
