@@ -217,6 +217,31 @@ namespace DAL_22MS
             return Convert.ToBoolean(dt.Rows[0]["Activo_22MS"]);
         }
 
+        public DataTable ObtenerUsuarios_22MS()
+        {
+            string query = @"SELECT Username_22MS
+                            FROM Usuario_22MS
+                            ORDER BY Username_22MS";
+            SqlCommand cmd = new SqlCommand(query);
+            return Acceso_22MS.GetInstance_22MS().Leer_22MS(cmd);
+        }
 
+        public DataTable ObtenerUsuarioPorLogin_22MS(string login)
+        {
+            string query = @"
+                        SELECT 
+                            Nombre_22MS,
+                            Apellido_22MS
+                        FROM Usuario_22MS
+                        WHERE Username_22MS = @Login";
+
+            SqlCommand cmd = new SqlCommand(query);
+
+            cmd.Parameters.AddWithValue("@Login", login);
+
+            return Acceso_22MS
+                .GetInstance_22MS()
+                .Leer_22MS(cmd);
+        }
     }
 }

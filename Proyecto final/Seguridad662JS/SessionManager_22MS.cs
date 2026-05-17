@@ -15,7 +15,7 @@ namespace Servicios_22MS
 
         
         public static SessionManager_22MS GetInstance_22MS()
-        {
+        {            
             return _session_22MS;
         }
 

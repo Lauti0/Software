@@ -18,6 +18,7 @@ namespace Proyecto_final
         public FrmGestionarUsuarios_22MS()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
         private List<Control> campos_22MS;
         enum Modo_22MS
@@ -122,6 +123,8 @@ namespace Proyecto_final
             try
             {
                 BLLUsuario_22MS bll = new BLLUsuario_22MS();
+                BLLBitacoraEvento_22MS bitacora = new BLLBitacoraEvento_22MS();
+                UsuarioServicios_22MS usuario = SessionManager_22MS.GetInstance_22MS().Usuario_22MS;
                 string pregunta;
                 DialogResult resultado;
                 switch (modoActual_22MS)
@@ -145,7 +148,6 @@ namespace Proyecto_final
                     case Modo_22MS.Alta:
                         if (string.IsNullOrWhiteSpace(txtDNI.Text))
                             throw new Exception("El DNI es obligatorio");
-
                         if (string.IsNullOrWhiteSpace(txtApellido.Text))
                             throw new Exception("El apellido es obligatorio");
                         if (string.IsNullOrWhiteSpace(txtNombre.Text))
@@ -165,6 +167,12 @@ namespace Proyecto_final
                         );
 
                         MessageBox.Show("Usuario creado");
+                        bitacora.RegistrarEvento_22MS(
+                            usuario.Username_22MS,
+                            "Usuarios",
+                            "Alta usuario",
+                            2
+                        );
                         break;
 
                     case Modo_22MS.Modificar:
@@ -186,6 +194,12 @@ namespace Proyecto_final
                         {
                             bll.ModificarUsuario_22MS(txtDNI.Text, txtEmail.Text, txtRol.Text);
                             MessageBox.Show("Usuario modificado");
+                            bitacora.RegistrarEvento_22MS(
+                            usuario.Username_22MS,
+                            "Usuarios",
+                            "Modificar usuario",
+                            3
+                        );
                         }
                         else
                         {
@@ -207,6 +221,12 @@ namespace Proyecto_final
                         {
                             bll.Desbloquear_22MS(username);
                             MessageBox.Show("Usuario desbloqueado");
+                            bitacora.RegistrarEvento_22MS(
+                            usuario.Username_22MS,
+                            "Usuarios",
+                            "Desbloquear usuario",
+                            3
+                        );
                         }
                         else
                         {
@@ -232,6 +252,12 @@ namespace Proyecto_final
                         {
                             bll.CambiarEstado_22MS(dni, !activo);
                             MessageBox.Show(activo ? "Usuario desactivado" : "Usuario activado");
+                            bitacora.RegistrarEvento_22MS(
+                            usuario.Username_22MS,
+                            "Usuarios",
+                            activo ? "Usuario desactivado" : "Usuario activado",
+                            3
+                        );
                         }
                         else
                         {                          
@@ -286,7 +312,6 @@ namespace Proyecto_final
 
         private void FrmAdministrador_22MS_Load(object sender, EventArgs e)
         {
-            this.StartPosition = FormStartPosition.CenterScreen;
             rbActivos_22MS.Checked = true;
             InicializarCampos_22MS();
             btnAplicar.PerformClick();

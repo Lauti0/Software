@@ -15,7 +15,7 @@ namespace Proyecto_final
     public partial class FrmInicioSesion_22MS : Form
     {
         private bool isPasswordHidden = true;
-        FrmMenuPrincipal_22MS menuPrincipal_22MS = new FrmMenuPrincipal_22MS();
+        private bool cerrarSinConfirmar_22MS = false;
         public FrmInicioSesion_22MS()
         {
             InitializeComponent();
@@ -26,24 +26,67 @@ namespace Proyecto_final
 
         private void btnIniciarSesion_22MS_Click(object sender, EventArgs e)
         {
-            
+            BLLBitacoraEvento_22MS bitacora = new BLLBitacoraEvento_22MS();
             try
             {
                 BLLUsuario_22MS bll = new BLLUsuario_22MS();
 
-                var usuario = bll.Login_22MS(txtUsuario_22MS.Text, txtContraseña_22MS.Text);
+                var usuario = bll.Login_22MS(
+                    txtUsuario_22MS.Text,
+                    txtContraseña_22MS.Text
+                );
 
+                if (SessionManager_22MS.GetInstance_22MS()!=null)
+                {
+                    UsuarioServicios_22MS user= SessionManager_22MS.GetInstance_22MS().Usuario_22MS;
+                    if (user.Username_22MS == usuario.Username_22MS && user.Password_22MS==usuario.Password_22MS)
+                    {
+                        MessageBox.Show("Ya hay una instancia de ese usuario logueada. Cierre la sesion de ese usuario para continuar");
+                        bitacora.RegistrarEvento_22MS(
+                            usuario.Username_22MS,
+                            "Seguridad",
+                            "Intento loguearse con mismo usuario sin cerrar sesion",
+                            2
+                        );
+                        FrmMenuPrincipal_22MS menu = new FrmMenuPrincipal_22MS();
+                        menu.Show();
+
+                        cerrarSinConfirmar_22MS = true;
+                        this.Close();
+                        return;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ya hay una instancia de usuario logueada. Cierre la sesion de ese usuario para continuar");
+                        bitacora.RegistrarEvento_22MS(
+                            usuario.Username_22MS,
+                            "Seguridad",
+                            "Intento loguearse con otro usuario sin cerrar sesion",
+                            2
+                        );
+                        return;
+                    }
+
+                }
+                
                 SessionManager_22MS.Login_22MS(usuario);
 
                 MessageBox.Show("Login correcto");
-                menuPrincipal_22MS.Show();                
+                bitacora.RegistrarEvento_22MS(
+                    usuario.Username_22MS,
+                    "Usuarios",
+                    "Login",
+                    1
+                );
+                FrmMenuPrincipal_22MS menuPrincipal = new FrmMenuPrincipal_22MS();
+                menuPrincipal.Show();
+
                 this.Hide();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                this.Close();
-                menuPrincipal_22MS.Show();
+
             }
         }
 
@@ -57,6 +100,30 @@ namespace Proyecto_final
             isPasswordHidden = !isPasswordHidden;
             txtContraseña_22MS.UseSystemPasswordChar = isPasswordHidden;
             btnOcultarContraseña.Text = isPasswordHidden ? "👁" : "🔒";
+        }       
+
+        private void FrmInicioSesion_22MS_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (cerrarSinConfirmar_22MS)
+                return;
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                DialogResult resultado = MessageBox.Show(
+                    "¿Está seguro de que desea salir de la aplicación?",
+                    "Confirmar salida",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question
+                );
+
+                if (resultado == DialogResult.No)
+                {
+                    e.Cancel = true; 
+                }
+                else
+                {                    
+                    Environment.Exit(0);
+                }
+            }
         }
 
         //private void btnCrearUsuario_Click(object sender, EventArgs e)

@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FrmBitacoraEventos_22MS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmBitacoraEventos_22MS.Designer.cs">
+      <DependentUpon>FrmBitacoraEventos_22MS.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmGestionarUsuarios_22MS.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,6 +78,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FrmBitacoraEventos_22MS.resx">
+      <DependentUpon>FrmBitacoraEventos_22MS.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmGestionarUsuarios_22MS.resx">
       <DependentUpon>FrmGestionarUsuarios_22MS.cs</DependentUpon>
     </EmbeddedResource>

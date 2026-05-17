@@ -64,3 +64,26 @@ C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO A�
 C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Nuevas variables\Proyecto final\Proyecto final\obj\Debug\GUI_22MS.csproj.Up2Date
 C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Nuevas variables\Proyecto final\Proyecto final\obj\Debug\Proyecto final.exe
 C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Nuevas variables\Proyecto final\Proyecto final\obj\Debug\Proyecto final.pdb
+C:\Users\hpnot\Documents\Proyecto final Joaquín Sassaroli\Proyecto final\Proyecto final\bin\Debug\Proyecto final.exe.config
+C:\Users\hpnot\Documents\Proyecto final Joaquín Sassaroli\Proyecto final\Proyecto final\bin\Debug\Proyecto final.exe
+C:\Users\hpnot\Documents\Proyecto final Joaquín Sassaroli\Proyecto final\Proyecto final\bin\Debug\Proyecto final.pdb
+C:\Users\hpnot\Documents\Proyecto final Joaquín Sassaroli\Proyecto final\Proyecto final\bin\Debug\BE_22MS.dll
+C:\Users\hpnot\Documents\Proyecto final Joaquín Sassaroli\Proyecto final\Proyecto final\bin\Debug\BLL_22MS.dll
+C:\Users\hpnot\Documents\Proyecto final Joaquín Sassaroli\Proyecto final\Proyecto final\bin\Debug\DAL_22MS.dll
+C:\Users\hpnot\Documents\Proyecto final Joaquín Sassaroli\Proyecto final\Proyecto final\bin\Debug\BE_22MS.pdb
+C:\Users\hpnot\Documents\Proyecto final Joaquín Sassaroli\Proyecto final\Proyecto final\bin\Debug\BLL_22MS.pdb
+C:\Users\hpnot\Documents\Proyecto final Joaquín Sassaroli\Proyecto final\Proyecto final\bin\Debug\DAL_22MS.pdb
+C:\Users\hpnot\Documents\Proyecto final Joaquín Sassaroli\Proyecto final\Proyecto final\obj\Debug\GUI_22MS.csproj.AssemblyReference.cache
+C:\Users\hpnot\Documents\Proyecto final Joaquín Sassaroli\Proyecto final\Proyecto final\obj\Debug\Proyecto_final.FrmGestionarUsuarios_22MS.resources
+C:\Users\hpnot\Documents\Proyecto final Joaquín Sassaroli\Proyecto final\Proyecto final\obj\Debug\Proyecto_final.FrmCambiarPassword_22MS.resources
+C:\Users\hpnot\Documents\Proyecto final Joaquín Sassaroli\Proyecto final\Proyecto final\obj\Debug\Proyecto_final.FrmInicioSesion_22MS.resources
+C:\Users\hpnot\Documents\Proyecto final Joaquín Sassaroli\Proyecto final\Proyecto final\obj\Debug\Proyecto_final.FrmMenuPrincipal_22MS.resources
+C:\Users\hpnot\Documents\Proyecto final Joaquín Sassaroli\Proyecto final\Proyecto final\obj\Debug\Proyecto_final.Properties.Resources.resources
+C:\Users\hpnot\Documents\Proyecto final Joaquín Sassaroli\Proyecto final\Proyecto final\obj\Debug\GUI_22MS.csproj.GenerateResource.cache
+C:\Users\hpnot\Documents\Proyecto final Joaquín Sassaroli\Proyecto final\Proyecto final\obj\Debug\GUI_22MS.csproj.CoreCompileInputs.cache
+C:\Users\hpnot\Documents\Proyecto final Joaquín Sassaroli\Proyecto final\Proyecto final\obj\Debug\GUI_22MS.csproj.Up2Date
+C:\Users\hpnot\Documents\Proyecto final Joaquín Sassaroli\Proyecto final\Proyecto final\obj\Debug\Proyecto final.exe
+C:\Users\hpnot\Documents\Proyecto final Joaquín Sassaroli\Proyecto final\Proyecto final\obj\Debug\Proyecto final.pdb
+C:\Users\hpnot\Documents\Proyecto final Joaquín Sassaroli\Proyecto final\Proyecto final\bin\Debug\Servicios_22MS.dll
+C:\Users\hpnot\Documents\Proyecto final Joaquín Sassaroli\Proyecto final\Proyecto final\bin\Debug\Servicios_22MS.pdb
+C:\Users\hpnot\Documents\Proyecto final Joaquín Sassaroli\Proyecto final\Proyecto final\obj\Debug\Proyecto_final.FrmBitacoraEventos_22MS.resources

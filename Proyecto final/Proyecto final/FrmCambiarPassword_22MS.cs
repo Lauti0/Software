@@ -17,6 +17,8 @@ namespace Proyecto_final
         public FrmCambiarPassword_22MS()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
+
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -32,20 +34,33 @@ namespace Proyecto_final
                 UsuarioServicios_22MS usuario = SessionManager_22MS.GetInstance_22MS().Usuario_22MS;
 
                 BLLUsuario_22MS bll = new BLLUsuario_22MS();
+                BLLBitacoraEvento_22MS bitacora = new BLLBitacoraEvento_22MS();
                 if (string.IsNullOrWhiteSpace(txtActual.Text) ||
                 string.IsNullOrWhiteSpace(txtNueva.Text) ||
                 string.IsNullOrWhiteSpace(txtConfirmar.Text))
                     throw new Exception("Debe completar todos los campos");
-                
-                if (txtNueva.Text != txtConfirmar.Text)
-                    throw new Exception("Las contraseñas no coinciden");
 
+                if (txtNueva.Text != txtConfirmar.Text)
+                {
+                    bitacora.RegistrarEvento_22MS(usuario.Username_22MS, "Seguridad", "Intenta cambiar contraseña", 2);
+                    throw new Exception("Las contraseñas no coinciden");
+                }
+                    
                 if (txtNueva.Text.Length < 6)
+                {
+                    bitacora.RegistrarEvento_22MS(usuario.Username_22MS, "Seguridad", "Intenta cambiar contraseña", 2);
                     throw new Exception("La contraseña debe tener al menos 6 caracteres");
+                }
                 if (txtActual.Text == txtNueva.Text)
+                {
+                    bitacora.RegistrarEvento_22MS(usuario.Username_22MS, "Seguridad", "Intenta cambiar contraseña", 2);
                     throw new Exception("La nueva contraseña no puede ser igual a la actual");
+                }                    
                 if (!txtNueva.Text.Any(char.IsUpper) || !txtNueva.Text.Any(char.IsDigit))
+                {
+                    bitacora.RegistrarEvento_22MS(usuario.Username_22MS, "Seguridad", "Intenta cambiar contraseña", 2);
                     throw new Exception("Debe tener al menos una mayúscula y un número");
+                }                
 
                 bll.CambiarPassword_22MS(
                     usuario.Username_22MS,
@@ -54,6 +69,7 @@ namespace Proyecto_final
                 );
 
                 MessageBox.Show("Contraseña actualizada correctamente");
+                bitacora.RegistrarEvento_22MS(usuario.Username_22MS, "Seguridad", "Cambio de contraseña", 2);
                 this.Close();
             }
             catch (Exception ex)
@@ -64,7 +80,6 @@ namespace Proyecto_final
 
         private void FrmCambiarPassword_22MS_Load(object sender, EventArgs e)
         {
-            this.StartPosition = FormStartPosition.CenterScreen;
         }
     }
 }
