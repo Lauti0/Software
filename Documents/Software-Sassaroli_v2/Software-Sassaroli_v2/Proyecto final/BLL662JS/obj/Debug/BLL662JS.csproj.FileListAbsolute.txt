@@ -1,0 +1,26 @@
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\BLL662JS\bin\Debug\BLL662JS.dll
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\BLL662JS\bin\Debug\BLL662JS.pdb
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\BLL662JS\bin\Debug\BE662JS.dll
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\BLL662JS\bin\Debug\DAL662JS.dll
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\BLL662JS\bin\Debug\Seguridad662JS.dll
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\BLL662JS\bin\Debug\BE662JS.pdb
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\BLL662JS\bin\Debug\DAL662JS.pdb
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\BLL662JS\bin\Debug\Seguridad662JS.pdb
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\BLL662JS\obj\Debug\BLL662JS.csproj.AssemblyReference.cache
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\BLL662JS\obj\Debug\BLL662JS.csproj.CoreCompileInputs.cache
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\BLL662JS\obj\Debug\BLL662JS.csproj.Up2Date
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\BLL662JS\obj\Debug\BLL662JS.dll
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\Practica codigo\Proyecto final\BLL662JS\obj\Debug\BLL662JS.pdb
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\BLL662JS\bin\Debug\BLL662JS.dll
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\BLL662JS\bin\Debug\BLL662JS.pdb
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\BLL662JS\bin\Debug\BE662JS.dll
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\BLL662JS\bin\Debug\DAL662JS.dll
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\BLL662JS\bin\Debug\Seguridad662JS.dll
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\BLL662JS\bin\Debug\BE662JS.pdb
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\BLL662JS\bin\Debug\DAL662JS.pdb
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\BLL662JS\bin\Debug\Seguridad662JS.pdb
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\BLL662JS\obj\Debug\BLL662JS.csproj.AssemblyReference.cache
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\BLL662JS\obj\Debug\BLL662JS.csproj.CoreCompileInputs.cache
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\BLL662JS\obj\Debug\BLL662JS.csproj.Up2Date
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\BLL662JS\obj\Debug\BLL662JS.dll
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\BLL662JS\obj\Debug\BLL662JS.pdb

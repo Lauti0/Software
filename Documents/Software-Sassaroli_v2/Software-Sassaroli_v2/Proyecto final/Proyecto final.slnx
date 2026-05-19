@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="BE662JS/BE_22MS.csproj" Id="55424b5b-6ae2-422a-ae48-55bdfbe7837d" />
+  <Project Path="BLL662JS/BLL_22MS.csproj" Id="83559288-e642-41d5-a987-c48863fe0474" />
+  <Project Path="DAL662JS/DAL_22MS.csproj" Id="c32a8520-b008-4cf9-a3a0-ce6852f330d2" />
+  <Project Path="Proyecto final/GUI_22MS.csproj" Id="d11daa32-66a6-4b99-99d9-6c714cb02a6b" />
+  <Project Path="Seguridad662JS/Servicios_22MS.csproj" Id="46ee396b-4d89-47cd-b797-2a7b961c914f" />
+</Solution>
