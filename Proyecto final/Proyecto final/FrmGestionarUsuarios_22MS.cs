@@ -93,21 +93,22 @@ namespace Proyecto_final
             else if (modo == Modo_22MS.Modificar)
             {                
                 txtEmail.Enabled = true;
-                txtRol.Enabled = true;                
+                cmbRol.Enabled = true;                
                 txtDNI.Enabled = false;
             }
         }
 
         private void LimpiarCampos_22MS()
         {
-            txtApellido.Text=txtNombre.Text=txtDNI.Text=txtEmail.Text=txtLogin.Text=txtRol.Text="";            
+            txtApellido.Text=txtNombre.Text=txtDNI.Text=txtEmail.Text=txtLogin.Text="";
+            cmbRol.SelectedIndex = -1;
         }
 
         private void InicializarCampos_22MS()
         {
             campos_22MS = new List<Control>
             {
-                txtDNI, txtNombre, txtApellido, txtEmail, txtRol, txtLogin
+                txtDNI, txtNombre, txtApellido, txtEmail, cmbRol, txtLogin
             };
 
         }
@@ -130,13 +131,16 @@ namespace Proyecto_final
                 switch (modoActual_22MS)
                 {
                     case Modo_22MS.Consulta:
+                        int? idRol = null;
 
+                        if (cmbRol.SelectedIndex != -1)
+                            idRol = Convert.ToInt32(cmbRol.SelectedValue);
                         DataTable tabla = bll.ObtenerUsuariosFiltrados_22MS(
                             txtDNI.Text,
                             txtApellido.Text,
                             txtNombre.Text,
                             txtEmail.Text,
-                            txtRol.Text,
+                            idRol,
                             txtLogin.Text,
                             rbActivos_22MS.Checked
                            // rbTodos662JS.Checked
@@ -154,15 +158,17 @@ namespace Proyecto_final
                             throw new Exception("El nombre es obligatorio");
                         if (string.IsNullOrWhiteSpace(txtEmail.Text))
                             throw new Exception("El email es obligatorio");
-                        if (string.IsNullOrWhiteSpace(txtRol.Text))
+                        if (cmbRol.SelectedItem==null)
                             throw new Exception("El rol es obligatorio");
                         if (!txtEmail.Text.Contains("@"))
                             throw new Exception("Email inválido");
+                        if(txtDNI.Text.Length <8)
+                            throw new Exception("DNI inválido");
                         bll.InsertarUsuario_22MS(                            
                             txtApellido.Text, 
                             txtNombre.Text,
                             txtDNI.Text,
-                            txtRol.Text,
+                            Convert.ToInt32(cmbRol.SelectedValue),
                             txtEmail.Text   
                         );
 
@@ -182,7 +188,7 @@ namespace Proyecto_final
                         if (string.IsNullOrWhiteSpace(txtEmail.Text))
                             throw new Exception("Email obligatorio");
 
-                        if (string.IsNullOrWhiteSpace(txtRol.Text))
+                        if (cmbRol.SelectedItem==null)
                             throw new Exception("Rol obligatorio");
 
                         if (!txtEmail.Text.Contains("@"))
@@ -192,7 +198,7 @@ namespace Proyecto_final
                                                  MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         if(resultado == DialogResult.Yes)
                         {
-                            bll.ModificarUsuario_22MS(txtDNI.Text, txtEmail.Text, txtRol.Text);
+                            bll.ModificarUsuario_22MS(txtDNI.Text, txtEmail.Text, Convert.ToInt32(cmbRol.SelectedValue));
                             MessageBox.Show("Usuario modificado");
                             bitacora.RegistrarEvento_22MS(
                             usuario.Username_22MS,
@@ -212,6 +218,7 @@ namespace Proyecto_final
                         var rowDesb = dgvUsuarios_22MS.SelectedRows[0];
                         int dniDesb = Convert.ToInt32(rowDesb.Cells["DNI_22MS"].Value);
                         string username = rowDesb.Cells["Username_22MS"].Value.ToString();
+                        string apellido = rowDesb.Cells["Apellido_22MS"].Value.ToString();
                         pregunta = $"¿Está seguro que desea desbloquear al usuario {username}?";
 
                         resultado = MessageBox.Show(pregunta, "Confirmar desbloqueo",
@@ -219,7 +226,7 @@ namespace Proyecto_final
 
                         if (resultado == DialogResult.Yes)
                         {
-                            bll.Desbloquear_22MS(username);
+                            bll.Desbloquear_22MS(username, apellido, dniDesb);
                             MessageBox.Show("Usuario desbloqueado");
                             bitacora.RegistrarEvento_22MS(
                             usuario.Username_22MS,
@@ -280,14 +287,19 @@ namespace Proyecto_final
         {
             BLLUsuario_22MS bll = new BLLUsuario_22MS();
 
+            int? idRol = null;
+
+            if (cmbRol.SelectedIndex != -1)
+                idRol = Convert.ToInt32(cmbRol.SelectedValue);
+
             DataTable tabla = bll.ObtenerUsuariosFiltrados_22MS(
                 txtDNI.Text,
                 txtApellido.Text,
                 txtNombre.Text,
                 txtEmail.Text,
-                txtRol.Text,
+                idRol,
                 txtLogin.Text,
-                rbActivos_22MS.Checked               
+                rbActivos_22MS.Checked
             );
 
             CargarUsuarios_22MS(tabla);
@@ -314,11 +326,28 @@ namespace Proyecto_final
         {
             rbActivos_22MS.Checked = true;
             InicializarCampos_22MS();
-            btnAplicar.PerformClick();
+            CargarRoles_22MS();
             CambiarModo_22MS(Modo_22MS.Consulta);
+            btnAplicar.PerformClick();
             btnModificar.Enabled = false;
             btnDesbloquear.Enabled = false;
             btnActDesact.Enabled = false;
+        }
+
+        private void CargarRoles_22MS()
+        {
+            BLLRol_22MS bllRol = new BLLRol_22MS();
+
+            cmbRol.DataSource =
+                bllRol.ObtenerRoles_22MS();
+
+            cmbRol.DisplayMember =
+                "NombreRol_22MS";
+
+            cmbRol.ValueMember =
+                "IdRol_22MS";
+
+            cmbRol.SelectedIndex = -1;
         }
 
         private void dgvUsuarios_22MS_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
@@ -352,7 +381,7 @@ namespace Proyecto_final
             txtApellido.Text = row.Cells["Apellido_22MS"].Value.ToString();
             txtNombre.Text = row.Cells["Nombre_22MS"].Value.ToString();
             txtEmail.Text = row.Cells["Email_22MS"].Value.ToString();
-            txtRol.Text = row.Cells["Rol_22MS"].Value.ToString();
+            cmbRol.SelectedValue =row.Cells["IdRol_22MS"].Value;
 
             CambiarModo_22MS(Modo_22MS.Modificar);
         }
@@ -386,7 +415,7 @@ namespace Proyecto_final
             txtApellido.Text = row.Cells["Apellido_22MS"].Value.ToString();
             txtNombre.Text = row.Cells["Nombre_22MS"].Value.ToString();
             txtEmail.Text = row.Cells["Email_22MS"].Value.ToString();
-            txtRol.Text = row.Cells["Rol_22MS"].Value.ToString();
+            cmbRol.SelectedValue =row.Cells["IdRol_22MS"].Value;
             CambiarModo_22MS(Modo_22MS.ActivarDesactivar);
         }
 

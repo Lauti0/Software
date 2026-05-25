@@ -32,9 +32,10 @@ namespace Proyecto_final
 
             UsuarioServicios_22MS usuario = SessionManager_22MS.GetInstance_22MS().Usuario_22MS;
 
-            if (usuario.Rol_22MS != "Admin")
+            if (usuario.Rol_22MS.IdRol_22MS!=1)
             {
                 gestionarUsuarioToolStripMenuItem.Visible = false;
+                bitacoraToolStripMenuItem.Visible = false;
             }
         }
 
@@ -80,7 +81,7 @@ namespace Proyecto_final
             SessionManager_22MS session = SessionManager_22MS.GetInstance_22MS();
             UsuarioServicios_22MS usuario = session.Usuario_22MS;
 
-            if (usuario.Rol_22MS != "Admin")
+            if (usuario.Rol_22MS.IdRol_22MS != 1)
             {
                 MessageBox.Show("No tiene permisos para acceder");
                 return;
@@ -99,13 +100,17 @@ namespace Proyecto_final
 
         private void cambiarContraseñaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (SessionManager_22MS.GetInstance_22MS() == null)
-            {
-                MessageBox.Show("Debe iniciar sesión");
-                return;
-            }
+            FrmCambiarPassword_22MS frm = new FrmCambiarPassword_22MS();
 
-            new FrmCambiarPassword_22MS().ShowDialog();
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                cerrarSinConfirmar_22MS = true;
+
+                FrmInicioSesion_22MS login = new FrmInicioSesion_22MS();
+                login.Show();
+
+                this.Close();
+            }
         }                
 
         private void FrmMenuPrincipal_22MS_FormClosing_1(object sender, FormClosingEventArgs e)
@@ -145,7 +150,7 @@ namespace Proyecto_final
             SessionManager_22MS session = SessionManager_22MS.GetInstance_22MS();
             UsuarioServicios_22MS usuario = session.Usuario_22MS;
 
-            if (usuario.Rol_22MS != "Admin")
+            if (usuario.Rol_22MS.IdRol_22MS != 1)
             {
                 MessageBox.Show("No tiene permisos para acceder");
                 return;

@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLLBitacoraEvento_22MS.cs" />
+    <Compile Include="BLLRol_22MS.cs" />
     <Compile Include="BLLUsuario_22MS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

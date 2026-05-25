@@ -70,7 +70,24 @@ namespace Proyecto_final
                 }
                 
                 SessionManager_22MS.Login_22MS(usuario);
+                string passwordFabrica = usuario.DNI_22MS + usuario.Apellido_22MS;
+                if (usuario.Password_22MS == Crypto_22MS.Hash_22MS(passwordFabrica))
+                {
+                    MessageBox.Show("Login correcto. Debe cambiar su contraseña");
+                    FrmCambiarPassword_22MS cambiarPassword_22MS =new FrmCambiarPassword_22MS();
+                    this.Hide();
 
+                    if (cambiarPassword_22MS.ShowDialog() == DialogResult.OK)
+                    {
+                        txtContraseña_22MS.Text = "";
+                        this.Show();
+                    }
+                    else
+                    {
+                        this.Show();
+                    }
+                    return;
+                }                
                 MessageBox.Show("Login correcto");
                 bitacora.RegistrarEvento_22MS(
                     usuario.Username_22MS,

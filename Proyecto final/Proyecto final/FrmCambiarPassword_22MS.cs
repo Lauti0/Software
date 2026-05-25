@@ -40,7 +40,10 @@ namespace Proyecto_final
                 string.IsNullOrWhiteSpace(txtConfirmar.Text))
                     throw new Exception("Debe completar todos los campos");
 
-                if (txtNueva.Text != txtConfirmar.Text)
+                string hashActual = Crypto_22MS.Hash_22MS(txtActual.Text);
+                string hashNueva = Crypto_22MS.Hash_22MS(txtNueva.Text);
+                string hashConfirmar = Crypto_22MS.Hash_22MS(txtConfirmar.Text);
+                if (hashNueva != hashConfirmar)
                 {
                     bitacora.RegistrarEvento_22MS(usuario.Username_22MS, "Seguridad", "Intenta cambiar contraseña", 2);
                     throw new Exception("Las contraseñas no coinciden");
@@ -51,7 +54,7 @@ namespace Proyecto_final
                     bitacora.RegistrarEvento_22MS(usuario.Username_22MS, "Seguridad", "Intenta cambiar contraseña", 2);
                     throw new Exception("La contraseña debe tener al menos 6 caracteres");
                 }
-                if (txtActual.Text == txtNueva.Text)
+                if (hashActual == hashNueva)
                 {
                     bitacora.RegistrarEvento_22MS(usuario.Username_22MS, "Seguridad", "Intenta cambiar contraseña", 2);
                     throw new Exception("La nueva contraseña no puede ser igual a la actual");
@@ -60,22 +63,35 @@ namespace Proyecto_final
                 {
                     bitacora.RegistrarEvento_22MS(usuario.Username_22MS, "Seguridad", "Intenta cambiar contraseña", 2);
                     throw new Exception("Debe tener al menos una mayúscula y un número");
-                }                
-
+                }
+                if (hashActual != usuario.Password_22MS)
+                {
+                    bitacora.RegistrarEvento_22MS(usuario.Username_22MS, "Seguridad", "Intenta cambiar contraseña", 2);
+                    throw new Exception("Su contraseña actual es incorrecta");
+                }
                 bll.CambiarPassword_22MS(
-                    usuario.Username_22MS,
-                    txtActual.Text,
-                    txtNueva.Text
+                    usuario.Username_22MS,                    
+                    hashNueva
                 );
 
                 MessageBox.Show("Contraseña actualizada correctamente");
                 bitacora.RegistrarEvento_22MS(usuario.Username_22MS, "Seguridad", "Cambio de contraseña", 2);
+                LimpiarCampos_22MS();
+                bll.Logout_22MS();
+                MessageBox.Show("Debe iniciar sesión nuevamente");
+
+                this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void LimpiarCampos_22MS()
+        {
+            txtActual.Text = txtNueva.Text = txtConfirmar.Text = "";
         }
 
         private void FrmCambiarPassword_22MS_Load(object sender, EventArgs e)

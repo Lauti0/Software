@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BitacoraEvento_22MS.cs" />
+    <Compile Include="RolServicios_22MS.cs" />
     <Compile Include="UsuarioServicios_22MS.cs" />
     <Compile Include="SessionManager_22MS.cs" />
     <Compile Include="Crypto_22MS.cs" />

@@ -87,20 +87,11 @@ namespace BLL_22MS
 
             return usuario;
         }
-        public void CambiarPassword_22MS(string user, string passActual, string nuevaPass)
-        {
-            var usuario = dal.ObtenerUsuario_22MS(user);
-
-            string hashActual = Crypto_22MS.Hash_22MS(passActual);
-
-            if (usuario.Password_22MS != hashActual)
-                throw new Exception("Contraseña actual incorrecta");
-
-            string hashNueva = Crypto_22MS.Hash_22MS(nuevaPass);
-
-            dal.CambiarPassword_22MS(user, hashNueva);
+        public void CambiarPassword_22MS(string user, string nuevaPass)
+        {            
+            dal.CambiarPassword_22MS(user, nuevaPass);
         }
-        public void Desbloquear_22MS(string user)
+        public void Desbloquear_22MS(string user, string apellido, int dnidesb)
         {
             if (string.IsNullOrWhiteSpace(user))
                 throw new Exception("Usuario inválido");
@@ -110,29 +101,31 @@ namespace BLL_22MS
             if (!bloqueado)
                 throw new Exception("El usuario no está bloqueado");
 
-            dal.DesbloquearUsuario_22MS(user);
+            string password = Crypto_22MS.Hash_22MS(dnidesb + apellido);
+            dal.DesbloquearUsuario_22MS(user,password);
         }
-        public void InsertarUsuario_22MS(string apellido, string nombre, string dni, string rol, string email)
+        public void InsertarUsuario_22MS(string apellido, string nombre, string dni, int? idrol, string email)
         {                        
             string username = nombre + dni;
             string passwordPlano = dni + apellido;
-            string passwordHash = Crypto_22MS.Hash_22MS(passwordPlano);            
+            string passwordHash = Crypto_22MS.Hash_22MS(passwordPlano);  
+            
             if (dal.ExisteUsuario_22MS(username, int.Parse(dni)))
                 throw new Exception("El usuario ya existe");
                                  
-            dal.InsertarUsuario_22MS(username, passwordHash, int.Parse(dni), apellido, nombre, rol, email);
+            dal.InsertarUsuario_22MS(username, passwordHash, int.Parse(dni), apellido, nombre, idrol, email);
         }
-        public void ModificarUsuario_22MS(string dni, string email, string rol)
+        public void ModificarUsuario_22MS(string dni, string email, int idrol)
         {            
-            dal.ModificarUsuario_22MS(int.Parse(dni), email, rol);
+            dal.ModificarUsuario_22MS(int.Parse(dni), email, idrol);
         }
         public DataTable ObtenerUsuariosFiltrados_22MS(string dni, string apellido, string nombre, 
-            string email, string rol, string login, bool activos)
+            string email, int? idrol, string login, bool activos)
         {
             DALUsuario_22MS dal = new DALUsuario_22MS();
 
             return dal.ObtenerUsuariosFiltrados_22MS(
-                dni, apellido, nombre, email, rol, login, activos
+                dni, apellido, nombre, email, idrol, login, activos
             );
         }
 
@@ -183,5 +176,6 @@ namespace BLL_22MS
 
             return tabla.Rows[0];
         }
+        
     }
 }

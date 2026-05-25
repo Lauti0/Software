@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Acceso_22MS.cs" />
     <Compile Include="DALBitacoraEvento_22MS.cs" />
+    <Compile Include="DALRol_22MS.cs" />
     <Compile Include="DALUsuario_22MS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
