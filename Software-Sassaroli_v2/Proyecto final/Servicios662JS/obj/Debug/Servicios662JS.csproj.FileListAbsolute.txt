@@ -1,0 +1,6 @@
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\Servicios662JS\bin\Debug\Servicios662JS.dll
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\Servicios662JS\bin\Debug\Servicios662JS.pdb
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\Servicios662JS\obj\Debug\Servicios662JS.csproj.AssemblyReference.cache
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\Servicios662JS\obj\Debug\Servicios662JS.csproj.CoreCompileInputs.cache
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\Servicios662JS\obj\Debug\Servicios662JS.dll
+C:\Users\hpnot\OneDrive - UNIVERSIDAD ABIERTA INTERAMERICANA\Documents\CUARTO AÑO\Ingeniería de software\GITHUB Proyecto final\Proyecto final\Servicios662JS\obj\Debug\Servicios662JS.pdb
