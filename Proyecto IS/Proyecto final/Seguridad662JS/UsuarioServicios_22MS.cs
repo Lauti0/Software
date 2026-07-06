@@ -15,9 +15,10 @@ namespace Servicios_22MS
         public string Nombre_22MS { get; set; }
         public string Apellido_22MS { get; set; }        
         public string Email_22MS { get; set; }
-        public Rol_22MS Rol_22MS { get; set; }        
+        public string CodigoIdioma_22MS { get; set; } 
         public bool Activo_22MS { get; set; }
         public bool Bloqueado_22MS { get; set; }
+        public Rol_22MS Rol_22MS { get; set; }        
 
     }
 }

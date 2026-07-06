@@ -50,6 +50,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(218, 25);
             this.label1.TabIndex = 8;
+            this.label1.Tag = "LBL_TITULO_RESTORE";
             this.label1.Text = "Seccion de Restore";
             // 
             // btnRestore
@@ -58,6 +59,7 @@
             this.btnRestore.Name = "btnRestore";
             this.btnRestore.Size = new System.Drawing.Size(157, 51);
             this.btnRestore.TabIndex = 9;
+            this.btnRestore.Tag = "BTN_RESTORE";
             this.btnRestore.Text = "Restore";
             this.btnRestore.UseVisualStyleBackColor = true;
             this.btnRestore.Click += new System.EventHandler(this.btnRestore_Click);
@@ -71,6 +73,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvRestore);
             this.Name = "FrmRestore_22MS";
+            this.Tag = "FORM_RESTORE";
             this.Text = "FrmRestore_22MS";
             this.Load += new System.EventHandler(this.FrmRestore_22MS_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvRestore)).EndInit();

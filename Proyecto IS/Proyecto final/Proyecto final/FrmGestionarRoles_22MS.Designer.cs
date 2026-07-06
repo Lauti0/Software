@@ -61,6 +61,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(267, 25);
             this.label1.TabIndex = 0;
+            this.label1.Tag = "LBL_TITULO_ROLES";
             this.label1.Text = "Administracion de Roles";
             // 
             // dgvRoles
@@ -78,6 +79,7 @@
             this.btnCrear.Name = "btnCrear";
             this.btnCrear.Size = new System.Drawing.Size(98, 23);
             this.btnCrear.TabIndex = 2;
+            this.btnCrear.Tag = "BTN_CREAR";
             this.btnCrear.Text = "Crear";
             this.btnCrear.UseVisualStyleBackColor = true;
             this.btnCrear.Click += new System.EventHandler(this.btnCrear_Click);
@@ -88,6 +90,7 @@
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(95, 23);
             this.btnEliminar.TabIndex = 3;
+            this.btnEliminar.Tag = "BTN_ELIMINAR";
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
@@ -98,6 +101,7 @@
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(98, 23);
             this.btnModificar.TabIndex = 4;
+            this.btnModificar.Tag = "BTN_MODIFICAR";
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
@@ -108,6 +112,7 @@
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(95, 23);
             this.btnLimpiar.TabIndex = 5;
+            this.btnLimpiar.Tag = "BTN_LIMPIAR";
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
@@ -116,10 +121,11 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(88, 52);
+            this.label2.Location = new System.Drawing.Point(12, 52);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(50, 20);
             this.label2.TabIndex = 6;
+            this.label2.Tag = "LBL_ROLES";
             this.label2.Text = "Roles";
             // 
             // dgvFamilias
@@ -138,6 +144,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(67, 20);
             this.label3.TabIndex = 8;
+            this.label3.Tag = "LBL_FAMILIAS";
             this.label3.Text = "Familias";
             // 
             // label4
@@ -148,6 +155,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(74, 20);
             this.label4.TabIndex = 9;
+            this.label4.Tag = "LBL_PERMISOS";
             this.label4.Text = "Permisos";
             // 
             // btnQuitarFamilia
@@ -156,6 +164,7 @@
             this.btnQuitarFamilia.Name = "btnQuitarFamilia";
             this.btnQuitarFamilia.Size = new System.Drawing.Size(75, 23);
             this.btnQuitarFamilia.TabIndex = 10;
+            this.btnQuitarFamilia.Tag = "BTN_QUITAR";
             this.btnQuitarFamilia.Text = "Quitar";
             this.btnQuitarFamilia.UseVisualStyleBackColor = true;
             this.btnQuitarFamilia.Click += new System.EventHandler(this.btnQuitarFamilia_Click);
@@ -166,6 +175,7 @@
             this.btnAsignarFamilia.Name = "btnAsignarFamilia";
             this.btnAsignarFamilia.Size = new System.Drawing.Size(75, 23);
             this.btnAsignarFamilia.TabIndex = 11;
+            this.btnAsignarFamilia.Tag = "BTN_ASIGNAR";
             this.btnAsignarFamilia.Text = "Asignar";
             this.btnAsignarFamilia.UseVisualStyleBackColor = true;
             this.btnAsignarFamilia.Click += new System.EventHandler(this.btnAsignarFamilia_Click);
@@ -184,6 +194,7 @@
             this.btnAsignarPermiso.Name = "btnAsignarPermiso";
             this.btnAsignarPermiso.Size = new System.Drawing.Size(75, 23);
             this.btnAsignarPermiso.TabIndex = 13;
+            this.btnAsignarPermiso.Tag = "BTN_ASIGNAR";
             this.btnAsignarPermiso.Text = "Asignar";
             this.btnAsignarPermiso.UseVisualStyleBackColor = true;
             this.btnAsignarPermiso.Click += new System.EventHandler(this.btnAsignarPermiso_Click);
@@ -194,6 +205,7 @@
             this.btnQuitarPermiso.Name = "btnQuitarPermiso";
             this.btnQuitarPermiso.Size = new System.Drawing.Size(75, 23);
             this.btnQuitarPermiso.TabIndex = 14;
+            this.btnQuitarPermiso.Tag = "BTN_QUITAR";
             this.btnQuitarPermiso.Text = "Quitar";
             this.btnQuitarPermiso.UseVisualStyleBackColor = true;
             this.btnQuitarPermiso.Click += new System.EventHandler(this.btnQuitarPermiso_Click);
@@ -213,6 +225,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(106, 20);
             this.label5.TabIndex = 16;
+            this.label5.Tag = "LBL_RESUMEN_ROL";
             this.label5.Text = "Resumen Rol";
             // 
             // dgvCompleta
@@ -232,6 +245,7 @@
             this.btnFormFamilias.Name = "btnFormFamilias";
             this.btnFormFamilias.Size = new System.Drawing.Size(156, 84);
             this.btnFormFamilias.TabIndex = 18;
+            this.btnFormFamilias.Tag = "BTN_ADMIN_FAMILIAS";
             this.btnFormFamilias.Text = "Administracion de Familias";
             this.btnFormFamilias.UseVisualStyleBackColor = false;
             this.btnFormFamilias.Click += new System.EventHandler(this.btnFormFamilias_Click);
@@ -261,6 +275,7 @@
             this.Controls.Add(this.dgvRoles);
             this.Controls.Add(this.label1);
             this.Name = "FrmGestionarRoles_22MS";
+            this.Tag = "FORM_ROLES";
             this.Text = "FrmGestionarRoles_22MS";
             this.Load += new System.EventHandler(this.FrmGestionarRoles_22MS_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvRoles)).EndInit();

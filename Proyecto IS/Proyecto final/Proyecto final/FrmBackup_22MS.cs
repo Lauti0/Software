@@ -13,10 +13,11 @@ using System.Windows.Forms;
 
 namespace Proyecto_final
 {
-    public partial class FrmBackup_22MS : Form
+    public partial class FrmBackup_22MS : FrmBaseIdioma_22MS
     {
         private BLLBackupRestore_22MS bllBackupRestore_22MS = new BLLBackupRestore_22MS();
         private BLLBitacoraEvento_22MS bllBitacoraEvento_22MS = new BLLBitacoraEvento_22MS();
+        private BLLIdioma_22MS bllIdioma_22MS = new BLLIdioma_22MS();
         
 
         public FrmBackup_22MS()
@@ -47,8 +48,7 @@ namespace Proyecto_final
                     "Generación de backup de base de datos",
                     2
                 );
-
-                MessageBox.Show("Backup generado correctamente.");
+                MessageBox.Show(bllIdioma_22MS.Traducir_22MS("mnesaje_backup_creado"));
             }
             catch (Exception ex)
             {

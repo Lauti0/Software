@@ -141,10 +141,14 @@ namespace DAL_22MS
                 sqlCommand.Parameters.AddWithValue("@modulo", modulo);
             }
 
-            if (!string.IsNullOrWhiteSpace(evento) && evento != "Todos")
+            if (!string.IsNullOrWhiteSpace(evento)
+            && evento != "Todos")
             {
-                query.Append(" AND Evento_22MS = @evento");
-                sqlCommand.Parameters.AddWithValue("@evento", evento);
+                query.Append(" AND Evento_22MS LIKE @Evento");
+                sqlCommand.Parameters.AddWithValue(
+                    "@Evento",
+                    "%" + evento + "%"
+                );
             }
 
             if (!string.IsNullOrWhiteSpace(criticidad))

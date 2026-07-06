@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Proyecto_final
 {
-    public partial class FrmGestionarUsuarios_22MS : Form
+    public partial class FrmGestionarUsuarios_22MS : FrmBaseIdioma_22MS
     {
         public FrmGestionarUsuarios_22MS()
         {
@@ -18,6 +18,7 @@ namespace Proyecto_final
         }
 
         private List<Control> campos_22MS;
+        private BLLIdioma_22MS bllIdioma_22MS = new BLLIdioma_22MS();
 
         enum Modo_22MS
         {
@@ -44,29 +45,30 @@ namespace Proyecto_final
             switch (modo)
             {
                 case Modo_22MS.Consulta:
-                    lblMensaje.Text = "Modo Consulta";
+                    lblMensaje.Text =
+                        TraducirMensaje_22MS("modo_consulta");
                     break;
 
                 case Modo_22MS.Alta:
-                    lblMensaje.Text = "Modo Alta";
+                    lblMensaje.Text =
+                        TraducirMensaje_22MS("modo_alta");
                     break;
 
                 case Modo_22MS.Modificar:
-                    lblMensaje.Text = "Modo Modificar";
+                    lblMensaje.Text =
+                        TraducirMensaje_22MS("modo_modificar");
                     break;
 
                 case Modo_22MS.Desbloquear:
-                    if (dgvUsuarios_22MS.SelectedRows.Count == 0)
-                    {
-                        MessageBox.Show("Seleccione un usuario");
-                        return;
-                    }
-
-                    lblMensaje.Text = "Modo Desbloquear";
+                    lblMensaje.Text =
+                        TraducirMensaje_22MS("modo_desbloquear");
                     break;
 
                 case Modo_22MS.ActivarDesactivar:
-                    lblMensaje.Text = "Modo Activar / Desactivar";
+                    lblMensaje.Text =
+                        TraducirMensaje_22MS(
+                            "modo_activar_desactivar"
+                        );
                     break;
             }
         }
@@ -103,13 +105,16 @@ namespace Proyecto_final
 
         private void LimpiarCampos_22MS()
         {
-            txtApellido.Text = "";
-            txtNombre.Text = "";
-            txtDNI.Text = "";
-            txtEmail.Text = "";
-            txtLogin.Text = "";
+            txtApellido.Clear();
+            txtNombre.Clear();
+            txtDNI.Clear();
+            txtEmail.Clear();
+            txtLogin.Clear();
 
             cmbRol.SelectedIndex = -1;
+
+            if (cmbIdioma.DataSource != null)
+                cmbIdioma.SelectedValue = "es";
         }
 
         private void InicializarCampos_22MS()
@@ -121,6 +126,7 @@ namespace Proyecto_final
                 txtApellido,
                 txtEmail,
                 cmbRol,
+                cmbIdioma,
                 txtLogin
             };
         }
@@ -139,106 +145,208 @@ namespace Proyecto_final
         {
             try
             {
-                BLLUsuario_22MS bllUsuario = new BLLUsuario_22MS();
-                BLLBitacoraEvento_22MS bitacoraEvento = new BLLBitacoraEvento_22MS();
-                UsuarioServicios_22MS usuario = SessionManager_22MS.GetInstance_22MS().Usuario_22MS;
+                BLLUsuario_22MS bllUsuario =
+                    new BLLUsuario_22MS();
 
-                string pregunta;
-                DialogResult resultado;
+                BLLBitacoraEvento_22MS bitacoraEvento =
+                    new BLLBitacoraEvento_22MS();
+
+                SessionManager_22MS sesion =
+                    SessionManager_22MS.GetInstance_22MS();
+
+                if (sesion == null ||
+                    sesion.Usuario_22MS == null)
+                {
+                    throw new Exception(
+                        "mensaje_debe_iniciar_sesion"
+                    );
+                }
+
+                UsuarioServicios_22MS usuario =
+                    sesion.Usuario_22MS;
 
                 switch (modoActual_22MS)
                 {
                     case Modo_22MS.Consulta:
-                        int? idRol = null;
+                        {
+                            int? idRol = null;
 
-                        if (cmbRol.SelectedIndex != -1)
-                            idRol = Convert.ToInt32(cmbRol.SelectedValue);
+                            if (cmbRol.SelectedIndex != -1)
+                            {
+                                idRol = Convert.ToInt32(
+                                    cmbRol.SelectedValue
+                                );
+                            }
 
-                        DataTable tablaUsuarios = bllUsuario.ObtenerUsuariosFiltrados_22MS(
-                            txtDNI.Text,
-                            txtApellido.Text,
-                            txtNombre.Text,
-                            txtEmail.Text,
-                            idRol,
-                            txtLogin.Text,
-                            rbActivos_22MS.Checked
-                        );
+                            DataTable tablaUsuarios =
+                                bllUsuario.ObtenerUsuariosFiltrados_22MS(
+                                    txtDNI.Text,
+                                    txtApellido.Text,
+                                    txtNombre.Text,
+                                    txtEmail.Text,
+                                    idRol,
+                                    txtLogin.Text,
+                                    rbActivos_22MS.Checked
+                                );
 
-                        CargarUsuarios_22MS(tablaUsuarios);
-                        break;
+                            CargarUsuarios_22MS(tablaUsuarios);
+
+                            // Evita limpiar los filtros y volver
+                            // a cargar toda la grilla.
+                            return;
+                        }
 
                     case Modo_22MS.Alta:
-                        if (string.IsNullOrWhiteSpace(txtDNI.Text))
-                            throw new Exception("El DNI es obligatorio");
+                        {
+                            if (string.IsNullOrWhiteSpace(txtDNI.Text))
+                            {
+                                throw new Exception(
+                                    "mensaje_dni_obligatorio"
+                                );
+                            }
 
-                        if (string.IsNullOrWhiteSpace(txtApellido.Text))
-                            throw new Exception("El apellido es obligatorio");
+                            if (string.IsNullOrWhiteSpace(
+                                txtApellido.Text))
+                            {
+                                throw new Exception(
+                                    "mensaje_apellido_obligatorio"
+                                );
+                            }
 
-                        if (string.IsNullOrWhiteSpace(txtNombre.Text))
-                            throw new Exception("El nombre es obligatorio");
+                            if (string.IsNullOrWhiteSpace(
+                                txtNombre.Text))
+                            {
+                                throw new Exception(
+                                    "mensaje_nombre_obligatorio"
+                                );
+                            }
 
-                        if (string.IsNullOrWhiteSpace(txtEmail.Text))
-                            throw new Exception("El email es obligatorio");
+                            if (string.IsNullOrWhiteSpace(
+                                txtEmail.Text))
+                            {
+                                throw new Exception(
+                                    "mensaje_email_obligatorio"
+                                );
+                            }
 
-                        if (cmbRol.SelectedItem == null)
-                            throw new Exception("El rol es obligatorio");
+                            if (cmbRol.SelectedItem == null)
+                            {
+                                throw new Exception(
+                                    "mensaje_rol_obligatorio"
+                                );
+                            }
 
-                        if (!txtEmail.Text.Contains("@"))
-                            throw new Exception("Email inválido");
+                            if (cmbIdioma.SelectedItem == null)
+                            {
+                                throw new Exception(
+                                    "mensaje_idioma_obligatorio"
+                                );
+                            }
 
-                        if (txtDNI.Text.Length < 8)
-                            throw new Exception("DNI inválido");
+                            if (!txtEmail.Text.Contains("@"))
+                            {
+                                throw new Exception(
+                                    "mensaje_email_invalido"
+                                );
+                            }
 
-                        bllUsuario.InsertarUsuario_22MS(
-                            txtApellido.Text,
-                            txtNombre.Text,
-                            txtDNI.Text,
-                            Convert.ToInt32(cmbRol.SelectedValue),
-                            txtEmail.Text
-                        );
+                            if (txtDNI.Text.Length < 8)
+                            {
+                                throw new Exception(
+                                    "mensaje_dni_invalido"
+                                );
+                            }
 
-                        MessageBox.Show("Usuario creado");
+                            string codigoIdioma =
+                                cmbIdioma.SelectedValue?.ToString();
 
-                        bitacoraEvento.RegistrarEvento_22MS(
-                            usuario.Username_22MS,
-                            "Usuarios",
-                            "Alta usuario",
-                            2
-                        );
+                            bllUsuario.InsertarUsuario_22MS(
+                                txtApellido.Text,
+                                txtNombre.Text,
+                                txtDNI.Text,
+                                Convert.ToInt32(
+                                    cmbRol.SelectedValue
+                                ),
+                                txtEmail.Text,
+                                codigoIdioma
+                            );
 
-                        break;
+                            MostrarInformacion_22MS(
+                                "mensaje_usuario_creado"
+                            );
+
+                            bitacoraEvento.RegistrarEvento_22MS(
+                                usuario.Username_22MS,
+                                "Usuarios",
+                                "Alta usuario",
+                                2
+                            );
+
+                            break;
+                        }
 
                     case Modo_22MS.Modificar:
-                        if (string.IsNullOrWhiteSpace(txtDNI.Text))
-                            throw new Exception("DNI inválido");
-
-                        if (string.IsNullOrWhiteSpace(txtEmail.Text))
-                            throw new Exception("Email obligatorio");
-
-                        if (cmbRol.SelectedItem == null)
-                            throw new Exception("Rol obligatorio");
-
-                        if (!txtEmail.Text.Contains("@"))
-                            throw new Exception("Email inválido");
-
-                        pregunta = $"¿Está seguro que desea modificar al usuario {txtLogin.Text}?";
-
-                        resultado = MessageBox.Show(
-                            pregunta,
-                            "Confirmar cambios",
-                            MessageBoxButtons.YesNo,
-                            MessageBoxIcon.Question
-                        );
-
-                        if (resultado == DialogResult.Yes)
                         {
+                            if (string.IsNullOrWhiteSpace(txtDNI.Text))
+                            {
+                                throw new Exception(
+                                    "mensaje_dni_invalido"
+                                );
+                            }
+
+                            if (string.IsNullOrWhiteSpace(
+                                txtEmail.Text))
+                            {
+                                throw new Exception(
+                                    "mensaje_email_obligatorio"
+                                );
+                            }
+
+                            if (cmbRol.SelectedItem == null)
+                            {
+                                throw new Exception(
+                                    "mensaje_rol_obligatorio"
+                                );
+                            }
+
+                            if (!txtEmail.Text.Contains("@"))
+                            {
+                                throw new Exception(
+                                    "mensaje_email_invalido"
+                                );
+                            }
+
+                            string pregunta = string.Format(
+                                TraducirMensaje_22MS(
+                                    "pregunta_modificar_usuario"
+                                ),
+                                txtLogin.Text
+                            );
+
+                            DialogResult resultado =
+                                MessageBox.Show(
+                                    pregunta,
+                                    TraducirMensaje_22MS(
+                                        "titulo_confirmar_cambios"
+                                    ),
+                                    MessageBoxButtons.YesNo,
+                                    MessageBoxIcon.Question
+                                );
+
+                            if (resultado != DialogResult.Yes)
+                                return;
+
                             bllUsuario.ModificarUsuario_22MS(
                                 txtDNI.Text,
                                 txtEmail.Text,
-                                Convert.ToInt32(cmbRol.SelectedValue)
+                                Convert.ToInt32(
+                                    cmbRol.SelectedValue
+                                )
                             );
 
-                            MessageBox.Show("Usuario modificado");
+                            MostrarInformacion_22MS(
+                                "mensaje_usuario_modificado"
+                            );
 
                             bitacoraEvento.RegistrarEvento_22MS(
                                 usuario.Username_22MS,
@@ -246,35 +354,66 @@ namespace Proyecto_final
                                 "Modificar usuario",
                                 3
                             );
-                        }
-                        else
-                        {
-                            return;
-                        }
 
-                        break;
+                            break;
+                        }
 
                     case Modo_22MS.Desbloquear:
-                        DataGridViewRow filaDesbloquear = dgvUsuarios_22MS.SelectedRows[0];
-
-                        int dniDesbloquear = Convert.ToInt32(filaDesbloquear.Cells["DNI_22MS"].Value);
-                        string username = filaDesbloquear.Cells["Username_22MS"].Value.ToString();
-                        string apellido = filaDesbloquear.Cells["Apellido_22MS"].Value.ToString();
-
-                        pregunta = $"¿Está seguro que desea desbloquear al usuario {username}?";
-
-                        resultado = MessageBox.Show(
-                            pregunta,
-                            "Confirmar desbloqueo",
-                            MessageBoxButtons.YesNo,
-                            MessageBoxIcon.Question
-                        );
-
-                        if (resultado == DialogResult.Yes)
                         {
-                            bllUsuario.Desbloquear_22MS(username, apellido, dniDesbloquear);
+                            if (dgvUsuarios_22MS.SelectedRows.Count == 0)
+                            {
+                                throw new Exception(
+                                    "mensaje_seleccionar_usuario"
+                                );
+                            }
 
-                            MessageBox.Show("Usuario desbloqueado");
+                            DataGridViewRow fila =
+                                dgvUsuarios_22MS.SelectedRows[0];
+
+                            int dniDesbloquear =
+                                Convert.ToInt32(
+                                    fila.Cells["DNI_22MS"].Value
+                                );
+
+                            string username =
+                                fila.Cells["Username_22MS"]
+                                    .Value
+                                    .ToString();
+
+                            string apellido =
+                                fila.Cells["Apellido_22MS"]
+                                    .Value
+                                    .ToString();
+
+                            string pregunta = string.Format(
+                                TraducirMensaje_22MS(
+                                    "pregunta_desbloquear_usuario"
+                                ),
+                                username
+                            );
+
+                            DialogResult resultado =
+                                MessageBox.Show(
+                                    pregunta,
+                                    TraducirMensaje_22MS(
+                                        "titulo_confirmar_desbloqueo"
+                                    ),
+                                    MessageBoxButtons.YesNo,
+                                    MessageBoxIcon.Question
+                                );
+
+                            if (resultado != DialogResult.Yes)
+                                return;
+
+                            bllUsuario.Desbloquear_22MS(
+                                username,
+                                apellido,
+                                dniDesbloquear
+                            );
+
+                            MostrarInformacion_22MS(
+                                "mensaje_usuario_desbloqueado"
+                            );
 
                             bitacoraEvento.RegistrarEvento_22MS(
                                 usuario.Username_22MS,
@@ -282,51 +421,81 @@ namespace Proyecto_final
                                 "Desbloquear usuario",
                                 3
                             );
-                        }
-                        else
-                        {
-                            return;
-                        }
 
-                        break;
+                            break;
+                        }
 
                     case Modo_22MS.ActivarDesactivar:
-                        DataGridViewRow filaActivarDesactivar = dgvUsuarios_22MS.SelectedRows[0];
-
-                        int dni = Convert.ToInt32(filaActivarDesactivar.Cells["DNI_22MS"].Value);
-                        bool activo = Convert.ToBoolean(filaActivarDesactivar.Cells["Activo_22MS"].Value);
-                        string nombreUsuario = filaActivarDesactivar.Cells["Nombre_22MS"].Value.ToString();
-
-                        string accion = activo ? "desactivar" : "activar";
-
-                        pregunta = $"¿Está seguro que desea {accion} al usuario {nombreUsuario}?";
-
-                        resultado = MessageBox.Show(
-                            pregunta,
-                            "Confirmar Cambio de Estado",
-                            MessageBoxButtons.YesNo,
-                            MessageBoxIcon.Question
-                        );
-
-                        if (resultado == DialogResult.Yes)
                         {
-                            bllUsuario.CambiarEstado_22MS(dni, !activo);
+                            if (dgvUsuarios_22MS.SelectedRows.Count == 0)
+                            {
+                                throw new Exception(
+                                    "mensaje_seleccionar_usuario"
+                                );
+                            }
 
-                            MessageBox.Show(activo ? "Usuario desactivado" : "Usuario activado");
+                            DataGridViewRow fila =
+                                dgvUsuarios_22MS.SelectedRows[0];
+
+                            int dni = Convert.ToInt32(
+                                fila.Cells["DNI_22MS"].Value
+                            );
+
+                            bool activo = Convert.ToBoolean(
+                                fila.Cells["Activo_22MS"].Value
+                            );
+
+                            string nombreUsuario =
+                                fila.Cells["Nombre_22MS"]
+                                    .Value
+                                    .ToString();
+
+                            string clavePregunta = activo
+                                ? "pregunta_desactivar_usuario"
+                                : "pregunta_activar_usuario";
+
+                            string pregunta = string.Format(
+                                TraducirMensaje_22MS(
+                                    clavePregunta
+                                ),
+                                nombreUsuario
+                            );
+
+                            DialogResult resultado =
+                                MessageBox.Show(
+                                    pregunta,
+                                    TraducirMensaje_22MS(
+                                        "titulo_confirmar_cambio_estado"
+                                    ),
+                                    MessageBoxButtons.YesNo,
+                                    MessageBoxIcon.Question
+                                );
+
+                            if (resultado != DialogResult.Yes)
+                                return;
+
+                            bllUsuario.CambiarEstado_22MS(
+                                dni,
+                                !activo
+                            );
+
+                            MostrarInformacion_22MS(
+                                activo
+                                    ? "mensaje_usuario_desactivado"
+                                    : "mensaje_usuario_activado"
+                            );
 
                             bitacoraEvento.RegistrarEvento_22MS(
                                 usuario.Username_22MS,
                                 "Usuarios",
-                                activo ? "Usuario desactivado" : "Usuario activado",
+                                activo
+                                    ? "Usuario desactivado"
+                                    : "Usuario activado",
                                 3
                             );
-                        }
-                        else
-                        {
-                            return;
-                        }
 
-                        break;
+                            break;
+                        }
                 }
 
                 CambiarModo_22MS(Modo_22MS.Consulta);
@@ -335,7 +504,7 @@ namespace Proyecto_final
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MostrarError_22MS(ex);
             }
         }
 
@@ -387,6 +556,7 @@ namespace Proyecto_final
             InicializarCampos_22MS();
             CargarRoles_22MS();
             CambiarModo_22MS(Modo_22MS.Consulta);
+            CargarIdiomas_22MS();
 
             btnAplicar.PerformClick();
 
@@ -425,18 +595,33 @@ namespace Proyecto_final
         {
             if (dgvUsuarios_22MS.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Seleccione un usuario");
+                MostrarAdvertencia_22MS(
+                    "mensaje_seleccionar_usuario"
+                );
+
                 return;
             }
 
-            DataGridViewRow fila = dgvUsuarios_22MS.SelectedRows[0];
+            DataGridViewRow fila =
+                dgvUsuarios_22MS.SelectedRows[0];
 
-            txtLogin.Text = fila.Cells["Username_22MS"].Value.ToString();
-            txtDNI.Text = fila.Cells["DNI_22MS"].Value.ToString();
-            txtApellido.Text = fila.Cells["Apellido_22MS"].Value.ToString();
-            txtNombre.Text = fila.Cells["Nombre_22MS"].Value.ToString();
-            txtEmail.Text = fila.Cells["Email_22MS"].Value.ToString();
-            cmbRol.SelectedValue = fila.Cells["IdRol_22MS"].Value;
+            txtLogin.Text =
+                fila.Cells["Username_22MS"].Value.ToString();
+
+            txtDNI.Text =
+                fila.Cells["DNI_22MS"].Value.ToString();
+
+            txtApellido.Text =
+                fila.Cells["Apellido_22MS"].Value.ToString();
+
+            txtNombre.Text =
+                fila.Cells["Nombre_22MS"].Value.ToString();
+
+            txtEmail.Text =
+                fila.Cells["Email_22MS"].Value.ToString();
+
+            cmbRol.SelectedValue =
+                fila.Cells["IdRol_22MS"].Value;
 
             CambiarModo_22MS(Modo_22MS.Modificar);
         }
@@ -445,7 +630,10 @@ namespace Proyecto_final
         {
             if (dgvUsuarios_22MS.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Seleccione un usuario");
+                MostrarAdvertencia_22MS(
+                    "mensaje_seleccionar_usuario"
+                );
+
                 return;
             }
 
@@ -461,20 +649,37 @@ namespace Proyecto_final
         {
             if (dgvUsuarios_22MS.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Seleccione un usuario");
+                MostrarAdvertencia_22MS(
+                    "mensaje_seleccionar_usuario"
+                );
+
                 return;
             }
 
-            DataGridViewRow fila = dgvUsuarios_22MS.SelectedRows[0];
+            DataGridViewRow fila =
+                dgvUsuarios_22MS.SelectedRows[0];
 
-            txtLogin.Text = fila.Cells["Username_22MS"].Value.ToString();
-            txtDNI.Text = fila.Cells["DNI_22MS"].Value.ToString();
-            txtApellido.Text = fila.Cells["Apellido_22MS"].Value.ToString();
-            txtNombre.Text = fila.Cells["Nombre_22MS"].Value.ToString();
-            txtEmail.Text = fila.Cells["Email_22MS"].Value.ToString();
-            cmbRol.SelectedValue = fila.Cells["IdRol_22MS"].Value;
+            txtLogin.Text =
+                fila.Cells["Username_22MS"].Value.ToString();
 
-            CambiarModo_22MS(Modo_22MS.ActivarDesactivar);
+            txtDNI.Text =
+                fila.Cells["DNI_22MS"].Value.ToString();
+
+            txtApellido.Text =
+                fila.Cells["Apellido_22MS"].Value.ToString();
+
+            txtNombre.Text =
+                fila.Cells["Nombre_22MS"].Value.ToString();
+
+            txtEmail.Text =
+                fila.Cells["Email_22MS"].Value.ToString();
+
+            cmbRol.SelectedValue =
+                fila.Cells["IdRol_22MS"].Value;
+
+            CambiarModo_22MS(
+                Modo_22MS.ActivarDesactivar
+            );
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -514,6 +719,57 @@ namespace Proyecto_final
             bool bloqueado = Convert.ToBoolean(fila.Cells["Bloqueado_22MS"].Value);
 
             btnDesbloquear.Enabled = !esMismoUsuario && bloqueado;
+        }
+
+        private void CargarIdiomas_22MS()
+        {
+            cmbIdioma.DataSource = null;
+
+            cmbIdioma.DataSource =
+                bllIdioma_22MS.ObtenerIdiomas_22MS();
+
+            cmbIdioma.DisplayMember =
+                "Nombre_22MS";
+
+            cmbIdioma.ValueMember =
+                "Codigo_22MS";
+
+            cmbIdioma.SelectedValue = "es";
+        }
+
+        private string TraducirMensaje_22MS(string clave_22MS)
+        {
+            return bllIdioma_22MS.Traducir_22MS(clave_22MS);
+        }
+
+        private void MostrarInformacion_22MS(string claveMensaje_22MS)
+        {
+            MessageBox.Show(
+                TraducirMensaje_22MS(claveMensaje_22MS),
+                TraducirMensaje_22MS("titulo_gestion_usuarios"),
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+            );
+        }
+
+        private void MostrarAdvertencia_22MS(string claveMensaje_22MS)
+        {
+            MessageBox.Show(
+                TraducirMensaje_22MS(claveMensaje_22MS),
+                TraducirMensaje_22MS("titulo_gestion_usuarios"),
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning
+            );
+        }
+
+        private void MostrarError_22MS(Exception ex)
+        {
+            MessageBox.Show(
+                TraducirMensaje_22MS(ex.Message),
+                TraducirMensaje_22MS("titulo_error"),
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error
+            );
         }
     }
 }

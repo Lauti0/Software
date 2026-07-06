@@ -7,12 +7,13 @@ using System.Windows.Forms;
 
 namespace Proyecto_final
 {
-    public partial class FrmInicioSesion_22MS : Form
+    public partial class FrmInicioSesion_22MS : FrmBaseIdioma_22MS
     {
         private bool isPasswordHidden = true;
         private bool cerrarSinConfirmar_22MS = false;
         private bool abiertoDesdeMenu_22MS;
         private bool modoReparacionDV_22MS = false;
+        private BLLIdioma_22MS bllIdioma_22MS = new BLLIdioma_22MS();
 
 
         public FrmInicioSesion_22MS(bool abiertoDesdeMenu_22MS = false, bool modoReparacionDV = false)
@@ -30,32 +31,99 @@ namespace Proyecto_final
 
         private void btnIniciarSesion_22MS_Click(object sender, EventArgs e)
         {
-            BLLBitacoraEvento_22MS bitacoraEvento = new BLLBitacoraEvento_22MS();
+            BLLBitacoraEvento_22MS bitacoraEvento =
+        new BLLBitacoraEvento_22MS();
 
             try
             {
-                BLLUsuario_22MS bllUsuario = new BLLUsuario_22MS();
+                BLLUsuario_22MS bllUsuario =
+                    new BLLUsuario_22MS();
 
-                UsuarioServicios_22MS usuario = bllUsuario.Login_22MS(
-                    txtUsuario_22MS.Text,
-                    txtContraseña_22MS.Text
-                );
+                UsuarioServicios_22MS usuario =
+                    bllUsuario.Login_22MS(
+                        txtUsuario_22MS.Text,
+                        txtContraseña_22MS.Text
+                    );
 
-                BLLDigitoVerificador_22MS bllDigito = new BLLDigitoVerificador_22MS();
-                List<ErrorIntegridad_22MS> erroresIntegridad = bllDigito.VerificarIntegridad_22MS();
+                /*
+                 * Primero se verifica si existe una sesión.
+                 * Así un intento de ingreso rechazado no modifica
+                 * el idioma de la sesión que ya está abierta.
+                 */
+                SessionManager_22MS sesionActual =
+                    SessionManager_22MS.GetInstance_22MS();
+
+                if (sesionActual != null &&
+                    sesionActual.Usuario_22MS != null)
+                {
+                    UsuarioServicios_22MS usuarioLogueado =
+                        sesionActual.Usuario_22MS;
+
+                    if (usuarioLogueado.Username_22MS ==
+                            usuario.Username_22MS &&
+                        usuarioLogueado.Password_22MS ==
+                            usuario.Password_22MS)
+                    {
+                        MostrarMensaje_22MS(
+                            "mensaje_mismo_usuario_logueado",
+                            "titulo_inicio_sesion",
+                            MessageBoxIcon.Warning
+                        );
+
+                        bitacoraEvento.RegistrarEvento_22MS(
+                            usuario.Username_22MS,
+                            "Seguridad",
+                            "Intento loguearse con mismo usuario sin cerrar sesión",
+                            2
+                        );
+
+                        FrmMenuPrincipal_22MS menuPrincipal =
+                            new FrmMenuPrincipal_22MS();
+
+                        menuPrincipal.Show();
+
+                        cerrarSinConfirmar_22MS = true;
+                        Close();
+
+                        return;
+                    }
+
+                    MostrarMensaje_22MS(
+                        "mensaje_otro_usuario_logueado",
+                        "titulo_inicio_sesion",
+                        MessageBoxIcon.Warning
+                    );
+
+                    bitacoraEvento.RegistrarEvento_22MS(
+                        usuario.Username_22MS,
+                        "Seguridad",
+                        "Intento loguearse con otro usuario sin cerrar sesión",
+                        2
+                    );
+
+                    return;
+                }
+
+                // Aplica el idioma guardado del usuario que ingresará.
+                AplicarIdiomaGuardado_22MS(usuario);
+
+                BLLDigitoVerificador_22MS bllDigito =
+                    new BLLDigitoVerificador_22MS();
+
+                List<ErrorIntegridad_22MS> erroresIntegridad =
+                    bllDigito.VerificarIntegridad_22MS();
 
                 if (erroresIntegridad.Count > 0)
                 {
-                    bool esAdmin = usuario.Rol_22MS != null &&
-                                   usuario.Rol_22MS.NombreRol_22MS == "Admin";
+                    bool esAdmin =
+                        usuario.Rol_22MS != null &&
+                        usuario.Rol_22MS.NombreRol_22MS == "Admin";
 
                     if (!esAdmin)
                     {
-                        MessageBox.Show(
-                            "El sistema no se encuentra disponible por una inconsistencia en la base de datos.\n\n" +
-                            "Contacte a un administrador.",
-                            "Sistema no disponible",
-                            MessageBoxButtons.OK,
+                        MostrarMensaje_22MS(
+                            "mensaje_sistema_no_disponible_integridad",
+                            "titulo_sistema_no_disponible",
                             MessageBoxIcon.Error
                         );
 
@@ -69,11 +137,9 @@ namespace Proyecto_final
                         return;
                     }
 
-                    MessageBox.Show(
-                        "Se detectó una inconsistencia en la base de datos.\n\n" +
-                        "Como administrador, será redirigido al módulo de Dígito Verificador.",
-                        "Error de integridad",
-                        MessageBoxButtons.OK,
+                    MostrarMensaje_22MS(
+                        "mensaje_admin_redirigido_dv",
+                        "titulo_error_integridad",
                         MessageBoxIcon.Warning
                     );
 
@@ -86,86 +152,53 @@ namespace Proyecto_final
                         3
                     );
 
-                    FrmDigitoVerificador_22MS frmDigito = new FrmDigitoVerificador_22MS();
+                    FrmDigitoVerificador_22MS frmDigito =
+                        new FrmDigitoVerificador_22MS();
 
-                    this.Hide();
-
+                    Hide();
                     frmDigito.ShowDialog();
 
                     cerrarSinConfirmar_22MS = true;
-
-                    this.Close();
+                    Close();
 
                     return;
-                }
-
-                if (SessionManager_22MS.GetInstance_22MS() != null)
-                {
-                    UsuarioServicios_22MS usuarioLogueado = SessionManager_22MS.GetInstance_22MS().Usuario_22MS;
-
-                    if (usuarioLogueado.Username_22MS == usuario.Username_22MS &&
-                        usuarioLogueado.Password_22MS == usuario.Password_22MS)
-                    {
-                        MessageBox.Show("Ya hay una instancia de ese usuario logueada. Cierre la sesión de ese usuario para continuar");
-
-                        bitacoraEvento.RegistrarEvento_22MS(
-                            usuario.Username_22MS,
-                            "Seguridad",
-                            "Intento loguearse con mismo usuario sin cerrar sesión",
-                            2
-                        );
-
-                        FrmMenuPrincipal_22MS menuPrincipal = new FrmMenuPrincipal_22MS();
-
-                        menuPrincipal.Show();
-
-                        cerrarSinConfirmar_22MS = true;
-
-                        this.Close();
-
-                        return;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Ya hay una instancia de usuario logueada. Cierre la sesión de ese usuario para continuar");
-
-                        bitacoraEvento.RegistrarEvento_22MS(
-                            usuario.Username_22MS,
-                            "Seguridad",
-                            "Intento loguearse con otro usuario sin cerrar sesión",
-                            2
-                        );
-
-                        return;
-                    }
                 }
 
                 SessionManager_22MS.Login_22MS(usuario);
 
-                string passwordFabrica = usuario.DNI_22MS + usuario.Apellido_22MS;
+                string passwordFabrica =
+                    usuario.DNI_22MS +
+                    usuario.Apellido_22MS;
 
-                if (usuario.Password_22MS == Crypto_22MS.Hash_22MS(passwordFabrica))
+                if (usuario.Password_22MS ==
+                    Crypto_22MS.Hash_22MS(passwordFabrica))
                 {
-                    MessageBox.Show("Login correcto. Debe cambiar su contraseña");
+                    MostrarMensaje_22MS(
+                        "mensaje_login_cambiar_contrasena",
+                        "titulo_inicio_sesion",
+                        MessageBoxIcon.Information
+                    );
 
-                    FrmCambiarPassword_22MS frmCambiarPassword = new FrmCambiarPassword_22MS();
+                    FrmCambiarPassword_22MS frmCambiarPassword =
+                        new FrmCambiarPassword_22MS();
 
-                    this.Hide();
+                    Hide();
 
-                    if (frmCambiarPassword.ShowDialog() == DialogResult.OK)
+                    if (frmCambiarPassword.ShowDialog() ==
+                        DialogResult.OK)
                     {
-                        txtContraseña_22MS.Text = "";
-                        this.Show();
-                    }
-                    else
-                    {
-                        this.Show();
+                        txtContraseña_22MS.Clear();
                     }
 
+                    Show();
                     return;
                 }
 
-                MessageBox.Show("Login correcto");
+                MostrarMensaje_22MS(
+                    "mensaje_login_correcto",
+                    "titulo_inicio_sesion",
+                    MessageBoxIcon.Information
+                );
 
                 bitacoraEvento.RegistrarEvento_22MS(
                     usuario.Username_22MS,
@@ -176,17 +209,21 @@ namespace Proyecto_final
 
                 cerrarSinConfirmar_22MS = true;
 
-                FrmMenuPrincipal_22MS frmMenuPrincipal = new FrmMenuPrincipal_22MS();
+                FrmMenuPrincipal_22MS frmMenuPrincipal =
+                    new FrmMenuPrincipal_22MS();
 
-                this.Hide();
-
+                Hide();
                 frmMenuPrincipal.ShowDialog();
-
-                this.Close();
+                Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(
+                    TraducirMensaje_22MS(ex.Message),
+                    TraducirMensaje_22MS("titulo_error"),
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
             }
         }
 
@@ -194,6 +231,7 @@ namespace Proyecto_final
         {
             
         }
+
 
         private void btnOcultarContraseña_Click(object sender, EventArgs e)
         {
@@ -219,8 +257,12 @@ namespace Proyecto_final
             if (e.CloseReason == CloseReason.UserClosing)
             {
                 DialogResult resultado = MessageBox.Show(
-                    "¿Está seguro que desea salir de la aplicación?",
-                    "Confirmar salida",
+                    TraducirMensaje_22MS(
+                        "pregunta_salir_aplicacion"
+                    ),
+                    TraducirMensaje_22MS(
+                        "titulo_confirmar_salida"
+                    ),
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question
                 );
@@ -234,6 +276,79 @@ namespace Proyecto_final
                     Application.Exit();
                 }
             }
+        }
+        
+
+        private void AplicarIdiomaGuardado_22MS(UsuarioServicios_22MS usuario)
+        {
+            if (usuario == null)
+                return;
+
+            string codigoIdioma_22MS =
+                usuario.CodigoIdioma_22MS;
+
+            if (string.IsNullOrWhiteSpace(codigoIdioma_22MS))
+                codigoIdioma_22MS = "es";
+
+            Idioma_22MS idiomaUsuario_22MS;
+
+            try
+            {
+                idiomaUsuario_22MS =
+                    bllIdioma_22MS.ObtenerIdioma_22MS(
+                        codigoIdioma_22MS.Trim().ToLower()
+                    );
+            }
+            catch
+            {
+                idiomaUsuario_22MS =
+                    bllIdioma_22MS.ObtenerIdioma_22MS("es");
+            }
+
+            IdiomaManager_22MS
+                .GetInstance_22MS()
+                .CambiarIdioma_22MS(
+                    idiomaUsuario_22MS
+                );
+        }
+
+
+        private string ObtenerUsuarioActual_22MS()
+        {
+            if (SessionManager_22MS.GetInstance_22MS() != null &&
+                SessionManager_22MS.GetInstance_22MS().Usuario_22MS != null)
+            {
+                return SessionManager_22MS
+                    .GetInstance_22MS()
+                    .Usuario_22MS
+                    .Username_22MS;
+            }
+
+            return "Sistema";
+        }
+
+        private void btnCambiarIdioma_Click_1(object sender, EventArgs e)
+        {
+            FrmCambiarIdioma_22MS frmCambiarIdioma_22MS = new FrmCambiarIdioma_22MS();
+            frmCambiarIdioma_22MS.ShowDialog();
+        }
+
+        private string TraducirMensaje_22MS(string clave_22MS)
+        {
+            return bllIdioma_22MS.Traducir_22MS(clave_22MS);
+        }
+
+        private void MostrarMensaje_22MS(
+            string claveMensaje_22MS,
+            string claveTitulo_22MS,
+            MessageBoxIcon icono_22MS)
+        {
+            MessageBox.Show(
+                TraducirMensaje_22MS(claveMensaje_22MS),
+                TraducirMensaje_22MS(claveTitulo_22MS),
+                MessageBoxButtons.OK,
+                icono_22MS
+            );
         }
     }
 }

@@ -65,31 +65,49 @@ namespace BLL_22MS
             return dalFamilia_22MS.ObtenerPermisosCompletosPorFamilia_22MS(idFamilia);
         }
 
-        public void CrearFamilia_22MS(string nombreFamilia)
+        public void CrearFamilia_22MS(string nombreFamilia, List<int> idsSubfamilias, List<int> idsPermisos)
         {
             if (string.IsNullOrWhiteSpace(nombreFamilia))
                 throw new Exception("Debe ingresar un nombre para la familia.");
 
-            List<Familia_22MS> familias = dalFamilia_22MS.ObtenerFamilias_22MS();
+            if (idsSubfamilias == null)
+                idsSubfamilias = new List<int>();
 
-            bool existe = familias.Any(f =>
-                f.NombreFamilia_22MS.Equals(nombreFamilia, StringComparison.OrdinalIgnoreCase));
+            if (idsPermisos == null)
+                idsPermisos = new List<int>();
 
-            if (existe)
-                throw new Exception("Ya existe una familia con ese nombre.");
+            if (idsSubfamilias.Count == 0 && idsPermisos.Count == 0)
+            {
+                throw new Exception(
+                    "La familia debe contener al menos una subfamilia o un permiso."
+                );
+            }
 
-            int idFamiliaNueva = dalFamilia_22MS.CrearFamilia_22MS(nombreFamilia);
+            int idFamiliaNueva =
+                dalFamilia_22MS.CrearFamilia_22MS(
+                    nombreFamilia.Trim()
+                );
 
-            // Permisos básicos directos
-            dalFamilia_22MS.AgregarPermisoAFamilia_22MS(idFamiliaNueva, 43); // Login
-            dalFamilia_22MS.AgregarPermisoAFamilia_22MS(idFamiliaNueva, 44); // Logout
-            dalFamilia_22MS.AgregarPermisoAFamilia_22MS(idFamiliaNueva, 45); // Cambiar clave
-            dalFamilia_22MS.AgregarPermisoAFamilia_22MS(idFamiliaNueva, 46); // Cambiar idioma
+            foreach (int idSubfamilia in idsSubfamilias.Distinct())
+            {
+                dalFamilia_22MS.AgregarFamiliaAFamilia_22MS(
+                    idFamiliaNueva,
+                    idSubfamilia
+                );
+            }
+
+            foreach (int idPermiso in idsPermisos.Distinct())
+            {
+                dalFamilia_22MS.AgregarPermisoAFamilia_22MS(
+                    idFamiliaNueva,
+                    idPermiso
+                );
+            }
 
             bllBitacoraEvento_22MS.RegistrarEvento_22MS(
                 ObtenerUsuarioActual_22MS(),
                 "Familias",
-                "Creación de familia: " + nombreFamilia + " con permisos básicos",
+                "Creación de la familia: " + nombreFamilia,
                 2
             );
 

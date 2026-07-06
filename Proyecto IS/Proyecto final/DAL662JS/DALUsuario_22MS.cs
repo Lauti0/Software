@@ -39,6 +39,7 @@ namespace DAL_22MS
                     Nombre_22MS = fila["Nombre_22MS"].ToString(),
                     Apellido_22MS = fila["Apellido_22MS"].ToString(),
                     Email_22MS = fila["Email_22MS"].ToString(),
+                    CodigoIdioma_22MS = fila["CodigoIdioma_22MS"].ToString(),
                     Activo_22MS = Convert.ToBoolean(fila["Activo_22MS"]),
                     Bloqueado_22MS = Convert.ToBoolean(fila["Bloqueado_22MS"]),
                     Rol_22MS = new Rol_22MS
@@ -104,46 +105,83 @@ namespace DAL_22MS
             string apellido,
             string nombre,
             int? idRol,
-            string email
+            string email,
+            string codigoIdioma
         )
         {
             string query = @"
-                            INSERT INTO Usuario_22MS 
-                            (
-                                Username_22MS, 
-                                Password_22MS, 
-                                DNI_22MS, 
-                                Apellido_22MS, 
-                                Nombre_22MS, 
-                                IdRol_22MS, 
-                                Email_22MS, 
-                                Bloqueado_22MS, 
-                                Activo_22MS
-                            )
-                            VALUES 
-                            (
-                                @Username_22MS, 
-                                @Password_22MS, 
-                                @DNI_22MS, 
-                                @Apellido_22MS, 
-                                @Nombre_22MS, 
-                                @IdRol_22MS, 
-                                @Email_22MS, 
-                                0, 
-                                1
-                            )";
+                    INSERT INTO Usuario_22MS
+                    (
+                        Username_22MS,
+                        Password_22MS,
+                        DNI_22MS,
+                        Apellido_22MS,
+                        Nombre_22MS,
+                        IdRol_22MS,
+                        Email_22MS,
+                        CodigoIdioma_22MS,
+                        Bloqueado_22MS,
+                        Activo_22MS
+                    )
+                    VALUES
+                    (
+                        @Username_22MS,
+                        @Password_22MS,
+                        @DNI_22MS,
+                        @Apellido_22MS,
+                        @Nombre_22MS,
+                        @IdRol_22MS,
+                        @Email_22MS,
+                        @CodigoIdioma_22MS,
+                        0,
+                        1
+                    )";
 
             SqlCommand sqlCommand = new SqlCommand(query);
 
-            sqlCommand.Parameters.AddWithValue("@Username_22MS", username);
-            sqlCommand.Parameters.AddWithValue("@Password_22MS", passwordHash);
-            sqlCommand.Parameters.AddWithValue("@DNI_22MS", dni);
-            sqlCommand.Parameters.AddWithValue("@Apellido_22MS", apellido);
-            sqlCommand.Parameters.AddWithValue("@IdRol_22MS", idRol);
-            sqlCommand.Parameters.AddWithValue("@Email_22MS", email);
-            sqlCommand.Parameters.AddWithValue("@Nombre_22MS", nombre);
+            sqlCommand.Parameters.AddWithValue(
+                "@Username_22MS",
+                username
+            );
 
-            Acceso_22MS.GetInstance_22MS().Escribir_22MS(sqlCommand);
+            sqlCommand.Parameters.AddWithValue(
+                "@Password_22MS",
+                passwordHash
+            );
+
+            sqlCommand.Parameters.AddWithValue(
+                "@DNI_22MS",
+                dni
+            );
+
+            sqlCommand.Parameters.AddWithValue(
+                "@Apellido_22MS",
+                apellido
+            );
+
+            sqlCommand.Parameters.AddWithValue(
+                "@Nombre_22MS",
+                nombre
+            );
+
+            sqlCommand.Parameters.AddWithValue(
+                "@IdRol_22MS",
+                idRol
+            );
+
+            sqlCommand.Parameters.AddWithValue(
+                "@Email_22MS",
+                email
+            );
+
+            sqlCommand.Parameters.AddWithValue(
+                "@CodigoIdioma_22MS",
+                codigoIdioma
+            );
+
+            Acceso_22MS
+                .GetInstance_22MS()
+                .Escribir_22MS(sqlCommand);
         }
 
         public DataTable ObtenerUsuariosFiltrados_22MS(
@@ -245,6 +283,31 @@ namespace DAL_22MS
 
             Acceso_22MS.GetInstance_22MS().Escribir_22MS(sqlCommand);
         }
+
+        public void ActualizarIdiomaUsuario_22MS(int idUsuario, string codigoIdioma)
+        {
+            string query = @"
+                    UPDATE Usuario_22MS
+                    SET CodigoIdioma_22MS = @CodigoIdioma_22MS
+                    WHERE IdUsuario_22MS = @IdUsuario_22MS";
+
+            SqlCommand sqlCommand = new SqlCommand(query);
+
+            sqlCommand.Parameters.AddWithValue(
+                "@CodigoIdioma_22MS",
+                codigoIdioma
+            );
+
+            sqlCommand.Parameters.AddWithValue(
+                "@IdUsuario_22MS",
+                idUsuario
+            );
+
+            Acceso_22MS
+                .GetInstance_22MS()
+                .Escribir_22MS(sqlCommand);
+        }
+
 
         public void CambiarEstado_22MS(int dni, bool activo)
         {

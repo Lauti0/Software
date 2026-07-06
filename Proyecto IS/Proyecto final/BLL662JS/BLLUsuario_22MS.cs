@@ -9,6 +9,7 @@ namespace BLL_22MS
     public class BLLUsuario_22MS
     {
         private DALUsuario_22MS dalUsuario_22MS = new DALUsuario_22MS();
+        private BLLIdioma_22MS bllIdioma_22MS = new BLLIdioma_22MS();
 
         // 5bebc86242f338e945178b35361b13128ae41dbc1e3f3e2d1f3b076e4e031a17
         private static Dictionary<string, (int intentos, DateTime ultimoIntento)> cacheIntentos
@@ -126,23 +127,69 @@ namespace BLL_22MS
             RecalcularDigitos_22MS();
         }
 
-        public void InsertarUsuario_22MS(string apellido, string nombre, string dni, int? idRol, string email)
+        public void InsertarUsuario_22MS(string apellido, string nombre, string dni, int? idRol, string email, string codigoIdioma)
         {
+            if (string.IsNullOrWhiteSpace(apellido))
+                throw new Exception(
+                    "Debe ingresar el apellido."
+                );
+
+            if (string.IsNullOrWhiteSpace(nombre))
+                throw new Exception(
+                    "Debe ingresar el nombre."
+                );
+
+            if (!int.TryParse(dni, out int dniNumero))
+                throw new Exception(
+                    "El DNI ingresado no es válido."
+                );
+
+            if (!idRol.HasValue)
+                throw new Exception(
+                    "Debe seleccionar un rol."
+                );
+
+            if (string.IsNullOrWhiteSpace(codigoIdioma))
+                throw new Exception(
+                    "Debe seleccionar un idioma."
+                );
+
+            Idioma_22MS idioma =
+                bllIdioma_22MS.ObtenerIdioma_22MS(
+                    codigoIdioma
+                );
+
+            if (idioma == null)
+                throw new Exception(
+                    "El idioma seleccionado no es válido."
+                );
+
             string username = nombre + dni;
             string passwordPlano = dni + apellido;
-            string passwordHash = Crypto_22MS.Hash_22MS(passwordPlano);
 
-            if (dalUsuario_22MS.ExisteUsuario_22MS(username, int.Parse(dni)))
-                throw new Exception("El usuario ya existe");
+            string passwordHash =
+                Crypto_22MS.Hash_22MS(
+                    passwordPlano
+                );
+
+            if (dalUsuario_22MS.ExisteUsuario_22MS(
+                username,
+                dniNumero))
+            {
+                throw new Exception(
+                    "El usuario ya existe."
+                );
+            }
 
             dalUsuario_22MS.InsertarUsuario_22MS(
                 username,
                 passwordHash,
-                int.Parse(dni),
+                dniNumero,
                 apellido,
                 nombre,
                 idRol,
-                email
+                email,
+                codigoIdioma
             );
 
             RecalcularDigitos_22MS();
@@ -151,6 +198,36 @@ namespace BLL_22MS
         public void ModificarUsuario_22MS(string dni, string email, int idRol)
         {
             dalUsuario_22MS.ModificarUsuario_22MS(int.Parse(dni), email, idRol);
+
+            RecalcularDigitos_22MS();
+        }
+
+        public void ActualizarIdiomaUsuario_22MS(int idUsuario, string codigoIdioma)
+        {
+            if (idUsuario <= 0)
+                throw new Exception(
+                    "El usuario no es válido."
+                );
+
+            if (string.IsNullOrWhiteSpace(codigoIdioma))
+                throw new Exception(
+                    "Debe seleccionar un idioma."
+                );
+
+            Idioma_22MS idioma =
+                bllIdioma_22MS.ObtenerIdioma_22MS(
+                    codigoIdioma
+                );
+
+            if (idioma == null)
+                throw new Exception(
+                    "El idioma seleccionado no es válido."
+                );
+
+            dalUsuario_22MS.ActualizarIdiomaUsuario_22MS(
+                idUsuario,
+                codigoIdioma
+            );
 
             RecalcularDigitos_22MS();
         }

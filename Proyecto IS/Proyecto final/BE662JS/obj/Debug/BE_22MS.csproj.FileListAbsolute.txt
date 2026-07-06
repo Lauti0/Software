@@ -49,3 +49,16 @@ C:\Users\LautiAdmin\OneDrive\Desktop\Software-Sassaroli_v2\Proyecto final\BE662J
 C:\Users\LautiAdmin\OneDrive\Desktop\Software-Sassaroli_v2\Proyecto final\BE662JS\obj\Debug\BE_22MS.csproj.Up2Date
 C:\Users\LautiAdmin\OneDrive\Desktop\Software-Sassaroli_v2\Proyecto final\BE662JS\obj\Debug\BE_22MS.dll
 C:\Users\LautiAdmin\OneDrive\Desktop\Software-Sassaroli_v2\Proyecto final\BE662JS\obj\Debug\BE_22MS.pdb
+C:\Users\LautiAdmin\Proyecto IS\Proyecto final\BE662JS\bin\Debug\BE_22MS.dll
+C:\Users\LautiAdmin\Proyecto IS\Proyecto final\BE662JS\bin\Debug\BE_22MS.pdb
+C:\Users\LautiAdmin\Proyecto IS\Proyecto final\BE662JS\bin\Debug\BouncyCastle.Cryptography.dll
+C:\Users\LautiAdmin\Proyecto IS\Proyecto final\BE662JS\bin\Debug\itextsharp.dll
+C:\Users\LautiAdmin\Proyecto IS\Proyecto final\BE662JS\bin\Debug\Newtonsoft.Json.dll
+C:\Users\LautiAdmin\Proyecto IS\Proyecto final\BE662JS\bin\Debug\BouncyCastle.Cryptography.xml
+C:\Users\LautiAdmin\Proyecto IS\Proyecto final\BE662JS\bin\Debug\itextsharp.xml
+C:\Users\LautiAdmin\Proyecto IS\Proyecto final\BE662JS\bin\Debug\Newtonsoft.Json.xml
+C:\Users\LautiAdmin\Proyecto IS\Proyecto final\BE662JS\obj\Debug\BE_22MS.csproj.AssemblyReference.cache
+C:\Users\LautiAdmin\Proyecto IS\Proyecto final\BE662JS\obj\Debug\BE_22MS.csproj.CoreCompileInputs.cache
+C:\Users\LautiAdmin\Proyecto IS\Proyecto final\BE662JS\obj\Debug\BE_22MS.csproj.Up2Date
+C:\Users\LautiAdmin\Proyecto IS\Proyecto final\BE662JS\obj\Debug\BE_22MS.dll
+C:\Users\LautiAdmin\Proyecto IS\Proyecto final\BE662JS\obj\Debug\BE_22MS.pdb

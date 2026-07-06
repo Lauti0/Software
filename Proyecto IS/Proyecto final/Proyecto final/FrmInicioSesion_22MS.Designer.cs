@@ -34,80 +34,99 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnIniciarSesion_22MS = new System.Windows.Forms.Button();
             this.btnOcultarContraseña = new System.Windows.Forms.Button();
+            this.btnCambiarIdioma = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtUsuario_22MS
             // 
-            this.txtUsuario_22MS.Location = new System.Drawing.Point(323, 135);
-            this.txtUsuario_22MS.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtUsuario_22MS.Location = new System.Drawing.Point(242, 110);
+            this.txtUsuario_22MS.Margin = new System.Windows.Forms.Padding(2);
             this.txtUsuario_22MS.Name = "txtUsuario_22MS";
-            this.txtUsuario_22MS.Size = new System.Drawing.Size(264, 22);
+            this.txtUsuario_22MS.Size = new System.Drawing.Size(199, 20);
             this.txtUsuario_22MS.TabIndex = 0;
             // 
             // txtContraseña_22MS
             // 
-            this.txtContraseña_22MS.Location = new System.Drawing.Point(323, 206);
-            this.txtContraseña_22MS.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtContraseña_22MS.Location = new System.Drawing.Point(242, 167);
+            this.txtContraseña_22MS.Margin = new System.Windows.Forms.Padding(2);
             this.txtContraseña_22MS.Name = "txtContraseña_22MS";
-            this.txtContraseña_22MS.Size = new System.Drawing.Size(264, 22);
+            this.txtContraseña_22MS.Size = new System.Drawing.Size(199, 20);
             this.txtContraseña_22MS.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(96, 129);
+            this.label1.Location = new System.Drawing.Point(72, 105);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(220, 29);
+            this.label1.Size = new System.Drawing.Size(173, 24);
             this.label1.TabIndex = 2;
+            this.label1.Tag = "LBL_USERNAME";
             this.label1.Text = "Nombre de usuario";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(96, 199);
+            this.label2.Location = new System.Drawing.Point(72, 162);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(136, 29);
+            this.label2.Size = new System.Drawing.Size(106, 24);
             this.label2.TabIndex = 3;
+            this.label2.Tag = "LBL_PASSWORD";
             this.label2.Text = "Contraseña";
             // 
             // btnIniciarSesion_22MS
             // 
             this.btnIniciarSesion_22MS.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnIniciarSesion_22MS.Location = new System.Drawing.Point(323, 281);
-            this.btnIniciarSesion_22MS.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnIniciarSesion_22MS.Location = new System.Drawing.Point(242, 228);
+            this.btnIniciarSesion_22MS.Margin = new System.Windows.Forms.Padding(2);
             this.btnIniciarSesion_22MS.Name = "btnIniciarSesion_22MS";
-            this.btnIniciarSesion_22MS.Size = new System.Drawing.Size(264, 41);
+            this.btnIniciarSesion_22MS.Size = new System.Drawing.Size(198, 33);
             this.btnIniciarSesion_22MS.TabIndex = 4;
+            this.btnIniciarSesion_22MS.Tag = "BTN_LOGIN";
             this.btnIniciarSesion_22MS.Text = "Iniciar sesion";
             this.btnIniciarSesion_22MS.UseVisualStyleBackColor = true;
             this.btnIniciarSesion_22MS.Click += new System.EventHandler(this.btnIniciarSesion_22MS_Click);
             // 
             // btnOcultarContraseña
             // 
-            this.btnOcultarContraseña.Location = new System.Drawing.Point(621, 206);
-            this.btnOcultarContraseña.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnOcultarContraseña.Location = new System.Drawing.Point(466, 167);
+            this.btnOcultarContraseña.Margin = new System.Windows.Forms.Padding(2);
             this.btnOcultarContraseña.Name = "btnOcultarContraseña";
-            this.btnOcultarContraseña.Size = new System.Drawing.Size(59, 22);
+            this.btnOcultarContraseña.Size = new System.Drawing.Size(44, 18);
             this.btnOcultarContraseña.TabIndex = 6;
             this.btnOcultarContraseña.Text = "button1";
             this.btnOcultarContraseña.UseVisualStyleBackColor = true;
             this.btnOcultarContraseña.Click += new System.EventHandler(this.btnOcultarContraseña_Click);
             // 
+            // btnCambiarIdioma
+            // 
+            this.btnCambiarIdioma.Location = new System.Drawing.Point(12, 12);
+            this.btnCambiarIdioma.Name = "btnCambiarIdioma";
+            this.btnCambiarIdioma.Size = new System.Drawing.Size(107, 23);
+            this.btnCambiarIdioma.TabIndex = 7;
+            this.btnCambiarIdioma.Tag = "BTN_IDIOMA";
+            this.btnCambiarIdioma.Text = "Cambiar Idioma";
+            this.btnCambiarIdioma.UseVisualStyleBackColor = true;
+            this.btnCambiarIdioma.Click += new System.EventHandler(this.btnCambiarIdioma_Click_1);
+            // 
             // FrmInicioSesion_22MS
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(600, 366);
+            this.Controls.Add(this.btnCambiarIdioma);
             this.Controls.Add(this.btnOcultarContraseña);
             this.Controls.Add(this.btnIniciarSesion_22MS);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtContraseña_22MS);
             this.Controls.Add(this.txtUsuario_22MS);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FrmInicioSesion_22MS";
+            this.Tag = "FORM_LOGIN";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmInicioSesion_22MS_FormClosing);
             this.Load += new System.EventHandler(this.FrmInicioSesion_22MS_Load);
@@ -124,6 +143,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnIniciarSesion_22MS;
         private System.Windows.Forms.Button btnOcultarContraseña;
+        private System.Windows.Forms.Button btnCambiarIdioma;
     }
 }
 

@@ -57,36 +57,47 @@ namespace BLL_22MS
             return dalRol_22MS.ObtenerRolFamiliaPermiso_22MS(idRol);
         }
 
-        public void CrearRol_22MS(string nombreRol)
+        public void CrearRol_22MS(string nombreRol, List<int> idsFamilias, List<int> idsPermisos)
         {
             if (string.IsNullOrWhiteSpace(nombreRol))
                 throw new Exception("Debe ingresar un nombre para el rol.");
 
-            List<Rol_22MS> roles = dalRol_22MS.ObtenerRoles_22MS();
+            if (idsFamilias == null)
+                idsFamilias = new List<int>();
 
-            bool existe = roles.Any(r =>
-                r.NombreRol_22MS.Equals(nombreRol, StringComparison.OrdinalIgnoreCase));
+            if (idsPermisos == null)
+                idsPermisos = new List<int>();
 
-            if (existe)
-                throw new Exception("Ya existe un rol con ese nombre.");
+            if (idsFamilias.Count == 0 && idsPermisos.Count == 0)
+            {
+                throw new Exception(
+                    "El rol debe contener al menos una familia o un permiso."
+                );
+            }
 
-            int idRolNuevo = dalRol_22MS.CrearRol_22MS(nombreRol);
+            int idRolNuevo =
+                dalRol_22MS.CrearRol_22MS(nombreRol.Trim());
 
-            // Permisos básicos por defecto
-            // 43 Login
-            // 44 Logout
-            // 45 Cambiar clave
-            // 46 Cambiar idioma
+            foreach (int idFamilia in idsFamilias.Distinct())
+            {
+                dalRol_22MS.AgregarFamiliaARol_22MS(
+                    idRolNuevo,
+                    idFamilia
+                );
+            }
 
-            dalRol_22MS.AgregarPermisoARol_22MS(idRolNuevo, 43);
-            dalRol_22MS.AgregarPermisoARol_22MS(idRolNuevo, 44);
-            dalRol_22MS.AgregarPermisoARol_22MS(idRolNuevo, 45);
-            dalRol_22MS.AgregarPermisoARol_22MS(idRolNuevo, 46);
+            foreach (int idPermiso in idsPermisos.Distinct())
+            {
+                dalRol_22MS.AgregarPermisoARol_22MS(
+                    idRolNuevo,
+                    idPermiso
+                );
+            }
 
             bllBitacoraEvento_22MS.RegistrarEvento_22MS(
                 ObtenerUsuarioActual_22MS(),
-                "Roles",
-                "Creación de rol: " + nombreRol,
+                "Perfiles",
+                "Creación del rol: " + nombreRol,
                 2
             );
 

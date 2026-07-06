@@ -16,9 +16,31 @@ namespace Proyecto_final
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            
+            InicializarIdioma_22MS();
             Application.Run(new FrmInicioSesion_22MS());
             
         }
+
+        private static void InicializarIdioma_22MS()
+        {
+            try
+            {
+                BLLIdioma_22MS bllIdioma_22MS =
+                    new BLLIdioma_22MS();
+
+                Idioma_22MS idiomaEspañol_22MS =
+                    bllIdioma_22MS.ObtenerIdioma_22MS("es");
+
+                IdiomaManager_22MS
+                    .GetInstance_22MS()
+                    .CambiarIdioma_22MS(idiomaEspañol_22MS);
+            }
+            catch
+            {
+
+            }
+        }
+
+
     }
 }

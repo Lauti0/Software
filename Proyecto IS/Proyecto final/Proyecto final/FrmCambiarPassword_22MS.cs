@@ -6,109 +6,139 @@ using System.Windows.Forms;
 
 namespace Proyecto_final
 {
-    public partial class FrmCambiarPassword_22MS : Form
+    public partial class FrmCambiarPassword_22MS : FrmBaseIdioma_22MS
     {
+        private readonly BLLIdioma_22MS bllIdioma_22MS =
+            new BLLIdioma_22MS();
+
         public FrmCambiarPassword_22MS()
         {
             InitializeComponent();
-            this.StartPosition = FormStartPosition.CenterScreen;
+            StartPosition = FormStartPosition.CenterScreen;
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             try
             {
-                if (SessionManager_22MS.GetInstance_22MS() == null)
+                SessionManager_22MS sesion_22MS =
+                    SessionManager_22MS.GetInstance_22MS();
+
+                if (sesion_22MS == null ||
+                    sesion_22MS.Usuario_22MS == null)
                 {
-                    MessageBox.Show("Debe iniciar sesión");
-                    return;
+                    throw new Exception(
+                        "mensaje_debe_iniciar_sesion"
+                    );
                 }
 
-                UsuarioServicios_22MS usuario = SessionManager_22MS.GetInstance_22MS().Usuario_22MS;
+                UsuarioServicios_22MS usuario_22MS =
+                    sesion_22MS.Usuario_22MS;
 
-                BLLUsuario_22MS bllUsuario = new BLLUsuario_22MS();
-                BLLBitacoraEvento_22MS bitacoraEvento = new BLLBitacoraEvento_22MS();
+                BLLUsuario_22MS bllUsuario_22MS =
+                    new BLLUsuario_22MS();
+
+                BLLBitacoraEvento_22MS bitacoraEvento_22MS =
+                    new BLLBitacoraEvento_22MS();
 
                 if (string.IsNullOrWhiteSpace(txtActual.Text) ||
                     string.IsNullOrWhiteSpace(txtNueva.Text) ||
                     string.IsNullOrWhiteSpace(txtConfirmar.Text))
                 {
-                    throw new Exception("Debe completar todos los campos");
+                    throw new Exception(
+                        "mensaje_completar_campos"
+                    );
                 }
 
-                string hashActual = Crypto_22MS.Hash_22MS(txtActual.Text);
-                string hashNueva = Crypto_22MS.Hash_22MS(txtNueva.Text);
-                string hashConfirmar = Crypto_22MS.Hash_22MS(txtConfirmar.Text);
+                string hashActual_22MS =
+                    Crypto_22MS.Hash_22MS(txtActual.Text);
 
-                if (hashNueva != hashConfirmar)
+                string hashNueva_22MS =
+                    Crypto_22MS.Hash_22MS(txtNueva.Text);
+
+                string hashConfirmar_22MS =
+                    Crypto_22MS.Hash_22MS(txtConfirmar.Text);
+
+                if (hashNueva_22MS != hashConfirmar_22MS)
                 {
-                    bitacoraEvento.RegistrarEvento_22MS(
-                        usuario.Username_22MS,
-                        "Seguridad",
-                        "Intenta cambiar contraseña",
-                        2
+                    RegistrarIntentoFallido_22MS(
+                        bitacoraEvento_22MS,
+                        usuario_22MS
                     );
 
-                    throw new Exception("Las contraseñas no coinciden");
+                    throw new Exception(
+                        "mensaje_contrasenas_no_coinciden"
+                    );
                 }
 
                 if (txtNueva.Text.Length < 6)
                 {
-                    bitacoraEvento.RegistrarEvento_22MS(
-                        usuario.Username_22MS,
-                        "Seguridad",
-                        "Intenta cambiar contraseña",
-                        2
+                    RegistrarIntentoFallido_22MS(
+                        bitacoraEvento_22MS,
+                        usuario_22MS
                     );
 
-                    throw new Exception("La contraseña debe tener al menos 6 caracteres");
+                    throw new Exception(
+                        "mensaje_contrasena_minimo_caracteres"
+                    );
                 }
 
-                if (hashActual == hashNueva)
+                if (hashActual_22MS == hashNueva_22MS)
                 {
-                    bitacoraEvento.RegistrarEvento_22MS(
-                        usuario.Username_22MS,
-                        "Seguridad",
-                        "Intenta cambiar contraseña",
-                        2
+                    RegistrarIntentoFallido_22MS(
+                        bitacoraEvento_22MS,
+                        usuario_22MS
                     );
 
-                    throw new Exception("La nueva contraseña no puede ser igual a la actual");
+                    throw new Exception(
+                        "mensaje_contrasena_igual_actual"
+                    );
                 }
 
-                if (!txtNueva.Text.Any(char.IsUpper) || !txtNueva.Text.Any(char.IsDigit))
+                if (!txtNueva.Text.Any(char.IsUpper) ||
+                    !txtNueva.Text.Any(char.IsDigit))
                 {
-                    bitacoraEvento.RegistrarEvento_22MS(
-                        usuario.Username_22MS,
-                        "Seguridad",
-                        "Intenta cambiar contraseña",
-                        2
+                    RegistrarIntentoFallido_22MS(
+                        bitacoraEvento_22MS,
+                        usuario_22MS
                     );
 
-                    throw new Exception("Debe tener al menos una mayúscula y un número");
+                    throw new Exception(
+                        "mensaje_contrasena_mayuscula_numero"
+                    );
                 }
 
-                if (hashActual != usuario.Password_22MS)
+                if (hashActual_22MS !=
+                    usuario_22MS.Password_22MS)
                 {
-                    bitacoraEvento.RegistrarEvento_22MS(
-                        usuario.Username_22MS,
-                        "Seguridad",
-                        "Intenta cambiar contraseña",
-                        2
+                    RegistrarIntentoFallido_22MS(
+                        bitacoraEvento_22MS,
+                        usuario_22MS
                     );
 
-                    throw new Exception("Su contraseña actual es incorrecta");
+                    throw new Exception(
+                        "mensaje_contrasena_actual_incorrecta"
+                    );
                 }
 
-                bllUsuario.CambiarPassword_22MS(
-                    usuario.Username_22MS,
-                    hashNueva
+                bllUsuario_22MS.CambiarPassword_22MS(
+                    usuario_22MS.Username_22MS,
+                    hashNueva_22MS
                 );
 
-                MessageBox.Show("Contraseña actualizada correctamente");
+                MessageBox.Show(
+                    bllIdioma_22MS.Traducir_22MS(
+                        "mensaje_contrasena_actualizada"
+                    ),
+                    bllIdioma_22MS.Traducir_22MS(
+                        "titulo_cambiar_contrasena"
+                    ),
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
 
-                bitacoraEvento.RegistrarEvento_22MS(
-                    usuario.Username_22MS,
+                bitacoraEvento_22MS.RegistrarEvento_22MS(
+                    usuario_22MS.Username_22MS,
                     "Seguridad",
                     "Cambio de contraseña",
                     2
@@ -116,27 +146,59 @@ namespace Proyecto_final
 
                 LimpiarCampos_22MS();
 
-                bllUsuario.Logout_22MS();
+                bllUsuario_22MS.Logout_22MS();
 
-                MessageBox.Show("Debe iniciar sesión nuevamente");
+                MessageBox.Show(
+                    bllIdioma_22MS.Traducir_22MS(
+                        "mensaje_iniciar_sesion_nuevamente"
+                    ),
+                    bllIdioma_22MS.Traducir_22MS(
+                        "titulo_cambiar_contrasena"
+                    ),
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
 
-                this.DialogResult = DialogResult.OK;
-                this.Close();
+                DialogResult = DialogResult.OK;
+                Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(
+                    bllIdioma_22MS.Traducir_22MS(
+                        ex.Message
+                    ),
+                    bllIdioma_22MS.Traducir_22MS(
+                        "titulo_error"
+                    ),
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
             }
+        }
+
+        private void RegistrarIntentoFallido_22MS(
+            BLLBitacoraEvento_22MS bitacoraEvento_22MS,
+            UsuarioServicios_22MS usuario_22MS)
+        {
+            bitacoraEvento_22MS.RegistrarEvento_22MS(
+                usuario_22MS.Username_22MS,
+                "Seguridad",
+                "Intenta cambiar contraseña",
+                2
+            );
         }
 
         private void LimpiarCampos_22MS()
         {
-            txtActual.Text = "";
-            txtNueva.Text = "";
-            txtConfirmar.Text = "";
+            txtActual.Clear();
+            txtNueva.Clear();
+            txtConfirmar.Clear();
         }
 
-        private void FrmCambiarPassword_22MS_Load(object sender, EventArgs e)
+        private void FrmCambiarPassword_22MS_Load(
+            object sender,
+            EventArgs e)
         {
         }
     }

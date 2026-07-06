@@ -37,6 +37,9 @@
     <Reference Include="itextsharp, Version=5.5.13.5, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>..\packages\iTextSharp.5.5.13.5\lib\net461\itextsharp.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -50,6 +53,7 @@
     <Compile Include="BLLBackupRestore_22MS.cs" />
     <Compile Include="BLLBitacoraEvento_22MS.cs" />
     <Compile Include="BLLDigitoVerificador_22MS.cs" />
+    <Compile Include="BLLIdioma_22MS.cs" />
     <Compile Include="BLLPermiso_22MS.cs" />
     <Compile Include="BLLRol_22MS.cs" />
     <Compile Include="BLLUsuario_22MS.cs" />

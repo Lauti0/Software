@@ -1,30 +1,32 @@
 ﻿using BLL_22MS;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Proyecto_final
 {
-    public partial class FrmRestore_22MS : Form
+    public partial class FrmRestore_22MS : FrmBaseIdioma_22MS
     {
-        private BLLBackupRestore_22MS bllBackupRestore_22MS = new BLLBackupRestore_22MS();
+        private readonly BLLBackupRestore_22MS bllBackupRestore_22MS =
+            new BLLBackupRestore_22MS();
 
+        private readonly BLLIdioma_22MS bllIdioma_22MS =
+            new BLLIdioma_22MS();
 
         public FrmRestore_22MS()
         {
             InitializeComponent();
         }
 
+        private string Traducir_22MS(string clave_22MS)
+        {
+            return bllIdioma_22MS.Traducir_22MS(clave_22MS);
+        }
+
         private void CargarBackups_22MS()
         {
             dgvRestore.DataSource = null;
-            dgvRestore.DataSource = bllBackupRestore_22MS.ObtenerBackups_22MS();
+            dgvRestore.DataSource =
+                bllBackupRestore_22MS.ObtenerBackups_22MS();
 
             if (dgvRestore.Columns["RutaBackup_22MS"] != null)
                 dgvRestore.Columns["RutaBackup_22MS"].Visible = false;
@@ -37,9 +39,14 @@ namespace Proyecto_final
         {
             dgvRestore.ReadOnly = true;
             dgvRestore.AllowUserToAddRows = false;
-            dgvRestore.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            dgvRestore.SelectionMode =
+                DataGridViewSelectionMode.FullRowSelect;
+
             dgvRestore.MultiSelect = false;
-            dgvRestore.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            dgvRestore.AutoSizeColumnsMode =
+                DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         private void btnRestore_Click(object sender, EventArgs e)
@@ -48,16 +55,33 @@ namespace Proyecto_final
             {
                 if (dgvRestore.CurrentRow == null)
                 {
-                    MessageBox.Show("Debe seleccionar un backup.");
+                    MessageBox.Show(
+                        Traducir_22MS(
+                            "mensaje_seleccionar_backup"
+                        ),
+                        Traducir_22MS(
+                            "titulo_restaurar_backup"
+                        ),
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+
                     return;
                 }
 
-                string rutaBackup = dgvRestore.CurrentRow.Cells["RutaBackup_22MS"].Value.ToString();
+                string rutaBackup =
+                    dgvRestore.CurrentRow
+                        .Cells["RutaBackup_22MS"]
+                        .Value
+                        .ToString();
 
                 DialogResult respuesta = MessageBox.Show(
-                    "Se restaurará la base de datos desde el backup seleccionado.\n\n" +
-                    "Esta acción reemplazará el estado actual de la base. ¿Desea continuar?",
-                    "Confirmar restore",
+                    Traducir_22MS(
+                        "mensaje_confirmar_restore"
+                    ),
+                    Traducir_22MS(
+                        "titulo_confirmar_restore"
+                    ),
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Warning
                 );
@@ -65,22 +89,39 @@ namespace Proyecto_final
                 if (respuesta != DialogResult.Yes)
                     return;
 
-                bllBackupRestore_22MS.RestaurarBackup_22MS(rutaBackup);
+                bllBackupRestore_22MS
+                    .RestaurarBackup_22MS(rutaBackup);
 
-                MessageBox.Show("Backup restaurado correctamente. El sistema se cerrará.");
+                MessageBox.Show(
+                    Traducir_22MS(
+                        "mensaje_restore_correcto"
+                    ),
+                    Traducir_22MS(
+                        "titulo_restaurar_backup"
+                    ),
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
 
                 Application.Exit();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(
+                    Traducir_22MS(ex.Message),
+                    Traducir_22MS("titulo_error"),
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
             }
         }
 
-        private void FrmRestore_22MS_Load(object sender, EventArgs e)
+        private void FrmRestore_22MS_Load(
+            object sender,
+            EventArgs e)
         {
-            CargarBackups_22MS();
             ConfigurarGrilla_22MS();
+            CargarBackups_22MS();
         }
     }
 }

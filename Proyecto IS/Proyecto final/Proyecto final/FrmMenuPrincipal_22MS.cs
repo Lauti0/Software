@@ -5,63 +5,90 @@ using System.Windows.Forms;
 
 namespace Proyecto_final
 {
-    public partial class FrmMenuPrincipal_22MS : Form
+    public partial class FrmMenuPrincipal_22MS : FrmBaseIdioma_22MS
     {
         private bool cerrarSinConfirmar_22MS = false;
+        private readonly BLLIdioma_22MS bllIdioma_22MS = new BLLIdioma_22MS();
 
         public FrmMenuPrincipal_22MS()
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
+           
         }
 
         private void FrmPrincipal_22MS_Load(object sender, EventArgs e)
         {
-            if (SessionManager_22MS.GetInstance_22MS() == null)
+            UsuarioServicios_22MS usuario_22MS = ObtenerUsuarioSesion_22MS();
+
+            if (usuario_22MS == null)
             {
-                MessageBox.Show("Debe iniciar sesión");
+                MostrarAdvertencia_22MS(
+                    "mensaje_debe_iniciar_sesion"
+                );
 
                 new FrmInicioSesion_22MS(true).Show();
 
-                this.Close();
-
+                Close();
                 return;
             }
 
-            UsuarioServicios_22MS usuario = SessionManager_22MS.GetInstance_22MS().Usuario_22MS;
-
-            if (usuario.Rol_22MS.IdRol_22MS != 1)
+            if (usuario_22MS.Rol_22MS.IdRol_22MS != 1)
             {
                 gestionarUsuarioToolStripMenuItem.Visible = false;
                 bitacoraToolStripMenuItem.Visible = false;
+            }
+
+            if (usuario_22MS.Rol_22MS.IdRol_22MS == 2)
+            {
+                adminToolStripMenuItem.Visible = false;
             }
         }
 
         private void cerrarSesiónToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DialogResult resultado = MessageBox.Show(
-                "¿Está seguro que desea cerrar sesión?",
-                "Confirmar",
-                MessageBoxButtons.YesNo
-            );
+        TraducirMensaje_22MS(
+            "pregunta_cerrar_sesion"
+        ),
+        TraducirMensaje_22MS(
+            "titulo_confirmar_cierre_sesion"
+        ),
+        MessageBoxButtons.YesNo,
+        MessageBoxIcon.Question
+    );
 
-            if (resultado == DialogResult.No)
+            if (resultado != DialogResult.Yes)
                 return;
 
             try
             {
-                UsuarioServicios_22MS usuario = SessionManager_22MS.GetInstance_22MS().Usuario_22MS;
+                UsuarioServicios_22MS usuario_22MS =
+                    ObtenerUsuarioSesion_22MS();
 
-                BLLUsuario_22MS bllUsuario = new BLLUsuario_22MS();
+                if (usuario_22MS == null)
+                {
+                    MostrarAdvertencia_22MS(
+                        "mensaje_debe_iniciar_sesion"
+                    );
 
-                bllUsuario.Logout_22MS();
+                    return;
+                }
 
-                MessageBox.Show("Sesión cerrada");
+                BLLUsuario_22MS bllUsuario_22MS =
+                    new BLLUsuario_22MS();
 
-                BLLBitacoraEvento_22MS bitacoraEvento = new BLLBitacoraEvento_22MS();
+                bllUsuario_22MS.Logout_22MS();
 
-                bitacoraEvento.RegistrarEvento_22MS(
-                    usuario.Username_22MS,
+                MostrarInformacion_22MS(
+                    "mensaje_sesion_cerrada"
+                );
+
+                BLLBitacoraEvento_22MS bitacoraEvento_22MS =
+                    new BLLBitacoraEvento_22MS();
+
+                bitacoraEvento_22MS.RegistrarEvento_22MS(
+                    usuario_22MS.Username_22MS,
                     "Seguridad",
                     "Logout",
                     1
@@ -71,28 +98,18 @@ namespace Proyecto_final
 
                 cerrarSinConfirmar_22MS = true;
 
-                this.Close();
+                Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MostrarError_22MS(ex);
             }
         }
 
         private void gestionarUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (SessionManager_22MS.GetInstance_22MS() == null)
+            if (!ValidarAdministrador_22MS(out UsuarioServicios_22MS usuario_22MS))
             {
-                MessageBox.Show("Debe iniciar sesión");
-                return;
-            }
-
-            SessionManager_22MS sessionManager = SessionManager_22MS.GetInstance_22MS();
-            UsuarioServicios_22MS usuario = sessionManager.Usuario_22MS;
-
-            if (usuario.Rol_22MS.IdRol_22MS != 1)
-            {
-                MessageBox.Show("No tiene permisos para acceder");
                 return;
             }
 
@@ -130,8 +147,12 @@ namespace Proyecto_final
             if (e.CloseReason == CloseReason.UserClosing)
             {
                 DialogResult resultado = MessageBox.Show(
-                    "¿Está seguro de que desea salir de la aplicación?",
-                    "Confirmar salida",
+                    TraducirMensaje_22MS(
+                        "pregunta_salir_aplicacion"
+                    ),
+                    TraducirMensaje_22MS(
+                        "titulo_confirmar_salida"
+                    ),
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question
                 );
@@ -139,30 +160,20 @@ namespace Proyecto_final
                 if (resultado == DialogResult.No)
                 {
                     e.Cancel = true;
+                    return;
                 }
-                else
-                {
-                    BLLUsuario_22MS bllUsuario = new BLLUsuario_22MS();
 
-                    bllUsuario.Logout_22MS();
-                }
+                BLLUsuario_22MS bllUsuario_22MS =
+                    new BLLUsuario_22MS();
+
+                bllUsuario_22MS.Logout_22MS();
             }
         }
 
         private void bitacoraToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (SessionManager_22MS.GetInstance_22MS() == null)
+            if (!ValidarAdministrador_22MS(out UsuarioServicios_22MS usuario_22MS))
             {
-                MessageBox.Show("Debe iniciar sesión");
-                return;
-            }
-
-            SessionManager_22MS sessionManager = SessionManager_22MS.GetInstance_22MS();
-            UsuarioServicios_22MS usuario = sessionManager.Usuario_22MS;
-
-            if (usuario.Rol_22MS.IdRol_22MS != 1)
-            {
-                MessageBox.Show("No tiene permisos para acceder");
                 return;
             }
 
@@ -171,18 +182,8 @@ namespace Proyecto_final
 
         private void rolesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (SessionManager_22MS.GetInstance_22MS() == null)
+            if (!ValidarAdministrador_22MS(out UsuarioServicios_22MS usuario_22MS))
             {
-                MessageBox.Show("Debe iniciar sesión");
-                return;
-            }
-
-            SessionManager_22MS sessionManager = SessionManager_22MS.GetInstance_22MS();
-            UsuarioServicios_22MS usuario = sessionManager.Usuario_22MS;
-
-            if (usuario.Rol_22MS.IdRol_22MS != 1)
-            {
-                MessageBox.Show("No tiene permisos para acceder");
                 return;
             }
 
@@ -205,6 +206,87 @@ namespace Proyecto_final
         {
             FrmRestore_22MS frmRestore = new FrmRestore_22MS();
             frmRestore.ShowDialog();
+        }
+
+        private void cambiarIdiomaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmCambiarIdioma_22MS frmCambiarIdioma_22MS = new FrmCambiarIdioma_22MS();
+            frmCambiarIdioma_22MS.ShowDialog();
+        }
+
+        private void FrmMenuPrincipal_22MS_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            
+        }
+
+        private string TraducirMensaje_22MS(string clave_22MS)
+        {
+            return bllIdioma_22MS.Traducir_22MS(clave_22MS);
+        }
+
+        private void MostrarAdvertencia_22MS(string claveMensaje_22MS)
+        {
+            MessageBox.Show(
+                TraducirMensaje_22MS(claveMensaje_22MS),
+                TraducirMensaje_22MS("titulo_menu_principal"),
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning
+            );
+        }
+
+        private void MostrarInformacion_22MS(string claveMensaje_22MS)
+        {
+            MessageBox.Show(
+                TraducirMensaje_22MS(claveMensaje_22MS),
+                TraducirMensaje_22MS("titulo_menu_principal"),
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+            );
+        }
+
+        private void MostrarError_22MS(Exception ex)
+        {
+            MessageBox.Show(
+                TraducirMensaje_22MS(ex.Message),
+                TraducirMensaje_22MS("titulo_error"),
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error
+            );
+        }
+
+        private UsuarioServicios_22MS ObtenerUsuarioSesion_22MS()
+        {
+            SessionManager_22MS sesion_22MS =
+                SessionManager_22MS.GetInstance_22MS();
+
+            return sesion_22MS?.Usuario_22MS;
+        }
+
+        private bool ValidarAdministrador_22MS(
+            out UsuarioServicios_22MS usuario_22MS)
+        {
+            usuario_22MS = ObtenerUsuarioSesion_22MS();
+
+            if (usuario_22MS == null)
+            {
+                MostrarAdvertencia_22MS(
+                    "mensaje_debe_iniciar_sesion"
+                );
+
+                return false;
+            }
+
+            if (usuario_22MS.Rol_22MS == null ||
+                usuario_22MS.Rol_22MS.IdRol_22MS != 1)
+            {
+                MostrarAdvertencia_22MS(
+                    "mensaje_sin_permisos"
+                );
+
+                return false;
+            }
+
+            return true;
         }
     }
 }

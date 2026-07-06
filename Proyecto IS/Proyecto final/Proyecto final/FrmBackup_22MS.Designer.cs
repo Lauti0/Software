@@ -41,6 +41,7 @@
             this.btnGenerarBackup.Name = "btnGenerarBackup";
             this.btnGenerarBackup.Size = new System.Drawing.Size(157, 51);
             this.btnGenerarBackup.TabIndex = 3;
+            this.btnGenerarBackup.Tag = "BACKUP_BTN_GENERACION";
             this.btnGenerarBackup.Text = "Generar Backup";
             this.btnGenerarBackup.UseVisualStyleBackColor = true;
             this.btnGenerarBackup.Click += new System.EventHandler(this.btnGenerarBackup_Click);
@@ -53,6 +54,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(226, 25);
             this.label1.TabIndex = 7;
+            this.label1.Tag = "LBL_TITULO_BACKUP";
             this.label1.Text = "Seccion de Backups";
             // 
             // txtRutaBackup
@@ -68,6 +70,7 @@
             this.btnSeleccionarRuta.Name = "btnSeleccionarRuta";
             this.btnSeleccionarRuta.Size = new System.Drawing.Size(157, 51);
             this.btnSeleccionarRuta.TabIndex = 9;
+            this.btnSeleccionarRuta.Tag = "BACKUP_BTN_RUTA";
             this.btnSeleccionarRuta.Text = "Seleccionar Ruta";
             this.btnSeleccionarRuta.UseVisualStyleBackColor = true;
             this.btnSeleccionarRuta.Click += new System.EventHandler(this.btnSeleccionarRuta_Click);
@@ -79,6 +82,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(215, 13);
             this.label2.TabIndex = 10;
+            this.label2.Tag = "BACKUP_LABEL";
             this.label2.Text = "Seleccione una ruta para guardar el backup";
             // 
             // FrmBackup_22MS
@@ -92,6 +96,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnGenerarBackup);
             this.Name = "FrmBackup_22MS";
+            this.Tag = "FORM_BACKUP";
             this.Text = "FrmBackup_22MS";
             this.Load += new System.EventHandler(this.FrmBackup_22MS_Load);
             this.ResumeLayout(false);

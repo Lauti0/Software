@@ -43,6 +43,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(395, 25);
             this.label1.TabIndex = 1;
+            this.label1.Tag = "LBL_TITULO_DV";
             this.label1.Text = "Administracion del Digito Verificador";
             // 
             // btnRecalcularDV
@@ -51,6 +52,7 @@
             this.btnRecalcularDV.Name = "btnRecalcularDV";
             this.btnRecalcularDV.Size = new System.Drawing.Size(157, 51);
             this.btnRecalcularDV.TabIndex = 3;
+            this.btnRecalcularDV.Tag = "BTN_RECALCULAR_DIGITOS";
             this.btnRecalcularDV.Text = "Recalcular Digitos";
             this.btnRecalcularDV.UseVisualStyleBackColor = true;
             this.btnRecalcularDV.Click += new System.EventHandler(this.btnRecalcularDV_Click);
@@ -63,6 +65,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(178, 20);
             this.label2.TabIndex = 4;
+            this.label2.Tag = "LBL_ERRORES_ENCONTRADOS";
             this.label2.Text = "Errores encontrados:";
             // 
             // dgvErrores
@@ -83,8 +86,8 @@
             this.Controls.Add(this.btnRecalcularDV);
             this.Controls.Add(this.label1);
             this.Name = "FrmDigitoVerificador_22MS";
+            this.Tag = "FORM_DV";
             this.Text = "FrmDigitoVerificador_22MS";
-            this.Load += new System.EventHandler(this.FrmDigitoVerificador_22MS_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.dgvErrores)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

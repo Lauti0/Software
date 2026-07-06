@@ -9,11 +9,12 @@ using System.Windows.Forms;
 
 namespace Proyecto_final
 {
-    public partial class FrmGestionarRoles_22MS : Form
+    public partial class FrmGestionarRoles_22MS : FrmBaseIdioma_22MS
     {
         private BLLRol_22MS bllRol_22MS = new BLLRol_22MS();
         private BLLFamilia_22MS bllFamilia_22MS = new BLLFamilia_22MS();
         private BLLPermiso_22MS bllPermiso_22MS = new BLLPermiso_22MS();
+        private readonly BLLIdioma_22MS bllIdioma_22MS = new BLLIdioma_22MS();
 
         public FrmGestionarRoles_22MS()
         {
@@ -23,9 +24,11 @@ namespace Proyecto_final
         private void FrmGestionarRoles_22MS_Load(object sender, EventArgs e)
         {
             ConfigurarGrillas_22MS();
+
             CargarRoles_22MS();
             CargarFamilias_22MS();
             CargarPermisos_22MS();
+
             LimpiarSeleccion_22MS();
         }
 
@@ -42,8 +45,8 @@ namespace Proyecto_final
             dgvCompleta.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
             dgvRoles.MultiSelect = false;
-            dgvFamilias.MultiSelect = false;
-            dgvPermisos.MultiSelect = false;
+            dgvFamilias.MultiSelect = true;
+            dgvPermisos.MultiSelect = true;
             dgvCompleta.MultiSelect = false;
 
             dgvRoles.ReadOnly = true;
@@ -129,7 +132,7 @@ namespace Proyecto_final
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MostrarError_22MS(ex);
             }
         }
 
@@ -219,9 +222,47 @@ namespace Proyecto_final
         {
             try
             {
-                bllRol_22MS.CrearRol_22MS(txtNombreRol.Text.Trim());
+                string nombreRol_22MS =
+                    txtNombreRol.Text.Trim();
 
-                MessageBox.Show("Rol creado correctamente.");
+                List<int> idsFamilias_22MS =
+                    ObtenerIdsSeleccionados_22MS(
+                        dgvFamilias,
+                        "IdFamilia_22MS"
+                    );
+
+                List<int> idsPermisos_22MS =
+                    ObtenerIdsSeleccionados_22MS(
+                        dgvPermisos,
+                        "IdPermiso_22MS"
+                    );
+
+                if (idsFamilias_22MS.Count == 0 &&
+                    idsPermisos_22MS.Count == 0)
+                {
+                    MessageBox.Show(
+                        Traducir_22MS(
+                            "mensaje_seleccionar_familia_o_permiso"
+                        ),
+                        Traducir_22MS(
+                            "titulo_gestion_roles"
+                        ),
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+
+                    return;
+                }
+
+                bllRol_22MS.CrearRol_22MS(
+                    nombreRol_22MS,
+                    idsFamilias_22MS,
+                    idsPermisos_22MS
+                );
+
+                MostrarInformacion_22MS(
+                    "mensaje_rol_creado"
+                );
 
                 CargarRoles_22MS();
                 CargarFamilias_22MS();
@@ -230,8 +271,9 @@ namespace Proyecto_final
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MostrarError_22MS(ex);
             }
+
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -239,22 +281,37 @@ namespace Proyecto_final
             try
             {
                 if (dgvRoles.CurrentRow == null)
-                    throw new Exception("Debe seleccionar un rol.");
+                {
+                    throw new Exception(
+                        "mensaje_seleccionar_rol"
+                    );
+                }
 
-                int idRol = Convert.ToInt32(dgvRoles.CurrentRow.Cells["IdRol_22MS"].Value);
+                int idRol = Convert.ToInt32(
+                    dgvRoles.CurrentRow
+                        .Cells["IdRol_22MS"]
+                        .Value
+                );
 
                 DialogResult respuesta = MessageBox.Show(
-                    "¿Seguro que desea eliminar este rol?",
-                    "Confirmar eliminación",
+                    Traducir_22MS(
+                        "mensaje_confirmar_eliminar_rol"
+                    ),
+                    Traducir_22MS(
+                        "titulo_confirmar_eliminacion"
+                    ),
                     MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning);
+                    MessageBoxIcon.Warning
+                );
 
                 if (respuesta != DialogResult.Yes)
                     return;
 
                 bllRol_22MS.EliminarRol_22MS(idRol);
 
-                MessageBox.Show("Rol eliminado correctamente.");
+                MostrarInformacion_22MS(
+                    "mensaje_rol_eliminado"
+                );
 
                 CargarRoles_22MS();
                 CargarFamilias_22MS();
@@ -263,7 +320,7 @@ namespace Proyecto_final
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MostrarError_22MS(ex);
             }
         }
 
@@ -272,13 +329,26 @@ namespace Proyecto_final
             try
             {
                 if (dgvRoles.CurrentRow == null)
-                    throw new Exception("Debe seleccionar un rol.");
+                {
+                    throw new Exception(
+                        "mensaje_seleccionar_rol"
+                    );
+                }
 
-                int idRol = Convert.ToInt32(dgvRoles.CurrentRow.Cells["IdRol_22MS"].Value);
+                int idRol = Convert.ToInt32(
+                    dgvRoles.CurrentRow
+                        .Cells["IdRol_22MS"]
+                        .Value
+                );
 
-                bllRol_22MS.ModificarRol_22MS(idRol, txtNombreRol.Text.Trim());
+                bllRol_22MS.ModificarRol_22MS(
+                    idRol,
+                    txtNombreRol.Text.Trim()
+                );
 
-                MessageBox.Show("Rol modificado correctamente.");
+                MostrarInformacion_22MS(
+                    "mensaje_rol_modificado"
+                );
 
                 CargarRoles_22MS();
                 CargarFamilias_22MS();
@@ -287,7 +357,7 @@ namespace Proyecto_final
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MostrarError_22MS(ex);
             }
         }
 
@@ -301,25 +371,47 @@ namespace Proyecto_final
             try
             {
                 if (dgvRoles.CurrentRow == null)
-                    throw new Exception("Debe seleccionar un rol.");
+                {
+                    throw new Exception(
+                        "mensaje_seleccionar_rol"
+                    );
+                }
 
                 if (dgvFamilias.CurrentRow == null)
-                    throw new Exception("Debe seleccionar una familia.");
+                {
+                    throw new Exception(
+                        "mensaje_seleccionar_familia"
+                    );
+                }
 
-                int idRol = Convert.ToInt32(dgvRoles.CurrentRow.Cells["IdRol_22MS"].Value);
-                int idFamilia = Convert.ToInt32(dgvFamilias.CurrentRow.Cells["IdFamilia_22MS"].Value);
+                int idRol = Convert.ToInt32(
+                    dgvRoles.CurrentRow
+                        .Cells["IdRol_22MS"]
+                        .Value
+                );
 
-                bllRol_22MS.AgregarFamiliaARol_22MS(idRol, idFamilia);
+                int idFamilia = Convert.ToInt32(
+                    dgvFamilias.CurrentRow
+                        .Cells["IdFamilia_22MS"]
+                        .Value
+                );
 
-                MessageBox.Show("Familia asignada correctamente.");
+                bllRol_22MS.AgregarFamiliaARol_22MS(
+                    idRol,
+                    idFamilia
+                );
 
                 PintarFamiliasAsignadas_22MS(idRol);
                 PintarPermisosAsignados_22MS(idRol);
                 CargarResumenRol_22MS(idRol);
+
+                MostrarInformacion_22MS(
+                    "mensaje_familia_asignada"
+                );
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MostrarError_22MS(ex);
             }
         }
 
@@ -328,25 +420,47 @@ namespace Proyecto_final
             try
             {
                 if (dgvRoles.CurrentRow == null)
-                    throw new Exception("Debe seleccionar un rol.");
+                {
+                    throw new Exception(
+                        "mensaje_seleccionar_rol"
+                    );
+                }
 
                 if (dgvFamilias.CurrentRow == null)
-                    throw new Exception("Debe seleccionar una familia.");
+                {
+                    throw new Exception(
+                        "mensaje_seleccionar_familia"
+                    );
+                }
 
-                int idRol = Convert.ToInt32(dgvRoles.CurrentRow.Cells["IdRol_22MS"].Value);
-                int idFamilia = Convert.ToInt32(dgvFamilias.CurrentRow.Cells["IdFamilia_22MS"].Value);
+                int idRol = Convert.ToInt32(
+                    dgvRoles.CurrentRow
+                        .Cells["IdRol_22MS"]
+                        .Value
+                );
 
-                bllRol_22MS.EliminarFamiliaDeRol_22MS(idRol, idFamilia);
+                int idFamilia = Convert.ToInt32(
+                    dgvFamilias.CurrentRow
+                        .Cells["IdFamilia_22MS"]
+                        .Value
+                );
+
+                bllRol_22MS.EliminarFamiliaDeRol_22MS(
+                    idRol,
+                    idFamilia
+                );
 
                 PintarFamiliasAsignadas_22MS(idRol);
                 PintarPermisosAsignados_22MS(idRol);
                 CargarResumenRol_22MS(idRol);
 
-                MessageBox.Show("Familia quitada correctamente.");
+                MostrarInformacion_22MS(
+                    "mensaje_familia_quitada"
+                );
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MostrarError_22MS(ex);
             }
         }
 
@@ -355,24 +469,46 @@ namespace Proyecto_final
             try
             {
                 if (dgvRoles.CurrentRow == null)
-                    throw new Exception("Debe seleccionar un rol.");
+                {
+                    throw new Exception(
+                        "mensaje_seleccionar_rol"
+                    );
+                }
 
                 if (dgvPermisos.CurrentRow == null)
-                    throw new Exception("Debe seleccionar un permiso.");
+                {
+                    throw new Exception(
+                        "mensaje_seleccionar_permiso"
+                    );
+                }
 
-                int idRol = Convert.ToInt32(dgvRoles.CurrentRow.Cells["IdRol_22MS"].Value);
-                int idPermiso = Convert.ToInt32(dgvPermisos.CurrentRow.Cells["IdPermiso_22MS"].Value);
+                int idRol = Convert.ToInt32(
+                    dgvRoles.CurrentRow
+                        .Cells["IdRol_22MS"]
+                        .Value
+                );
 
-                bllRol_22MS.AgregarPermisoARol_22MS(idRol, idPermiso);
+                int idPermiso = Convert.ToInt32(
+                    dgvPermisos.CurrentRow
+                        .Cells["IdPermiso_22MS"]
+                        .Value
+                );
+
+                bllRol_22MS.AgregarPermisoARol_22MS(
+                    idRol,
+                    idPermiso
+                );
 
                 PintarPermisosAsignados_22MS(idRol);
                 CargarResumenRol_22MS(idRol);
 
-                MessageBox.Show("Permiso asignado correctamente.");
+                MostrarInformacion_22MS(
+                    "mensaje_permiso_asignado"
+                );
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MostrarError_22MS(ex);
             }
         }
 
@@ -381,36 +517,82 @@ namespace Proyecto_final
             try
             {
                 if (dgvRoles.CurrentRow == null)
-                    throw new Exception("Debe seleccionar un rol.");
+                {
+                    throw new Exception(
+                        "mensaje_seleccionar_rol"
+                    );
+                }
 
                 if (dgvPermisos.CurrentRow == null)
-                    throw new Exception("Debe seleccionar un permiso.");
+                {
+                    throw new Exception(
+                        "mensaje_seleccionar_permiso"
+                    );
+                }
 
-                int idRol = Convert.ToInt32(dgvRoles.CurrentRow.Cells["IdRol_22MS"].Value);
-                int idPermiso = Convert.ToInt32(dgvPermisos.CurrentRow.Cells["IdPermiso_22MS"].Value);
+                int idRol = Convert.ToInt32(
+                    dgvRoles.CurrentRow
+                        .Cells["IdRol_22MS"]
+                        .Value
+                );
 
-                List<Permiso_22MS> permisosDirectos = bllRol_22MS.ObtenerPermisosDirectosPorRol_22MS(idRol);
-                List<Permiso_22MS> permisosTotales = bllRol_22MS.ObtenerPermisosPorRol_22MS(idRol);
+                int idPermiso = Convert.ToInt32(
+                    dgvPermisos.CurrentRow
+                        .Cells["IdPermiso_22MS"]
+                        .Value
+                );
 
-                bool esDirecto = permisosDirectos.Any(permiso => permiso.IdPermiso_22MS == idPermiso);
-                bool estaEnElRol = permisosTotales.Any(permiso => permiso.IdPermiso_22MS == idPermiso);
+                List<Permiso_22MS> permisosDirectos =
+                    bllRol_22MS
+                        .ObtenerPermisosDirectosPorRol_22MS(
+                            idRol
+                        );
+
+                List<Permiso_22MS> permisosTotales =
+                    bllRol_22MS
+                        .ObtenerPermisosPorRol_22MS(
+                            idRol
+                        );
+
+                bool esDirecto = permisosDirectos.Any(
+                    permiso =>
+                        permiso.IdPermiso_22MS == idPermiso
+                );
+
+                bool estaEnElRol = permisosTotales.Any(
+                    permiso =>
+                        permiso.IdPermiso_22MS == idPermiso
+                );
 
                 if (!estaEnElRol)
-                    throw new Exception("El rol no tiene asignado ese permiso.");
+                {
+                    throw new Exception(
+                        "mensaje_rol_no_tiene_permiso"
+                    );
+                }
 
                 if (!esDirecto)
-                    throw new Exception("No se puede eliminar un permiso de una familia desde Admin de Rol.");
+                {
+                    throw new Exception(
+                        "mensaje_no_quitar_permiso_heredado"
+                    );
+                }
 
-                bllRol_22MS.QuitarPermisoDeRol_22MS(idRol, idPermiso);
+                bllRol_22MS.QuitarPermisoDeRol_22MS(
+                    idRol,
+                    idPermiso
+                );
 
                 PintarPermisosAsignados_22MS(idRol);
                 CargarResumenRol_22MS(idRol);
 
-                MessageBox.Show("Permiso quitado correctamente.");
+                MostrarInformacion_22MS(
+                    "mensaje_permiso_quitado"
+                );
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MostrarError_22MS(ex);
             }
         }
 
@@ -418,6 +600,57 @@ namespace Proyecto_final
         {
             new FrmGestionarFamilias_22MS().Show();
             this.Close();
+        }
+
+        private List<int> ObtenerIdsSeleccionados_22MS(DataGridView grilla, string nombreColumnaId)
+        {
+            List<int> ids_22MS = new List<int>();
+
+            foreach (DataGridViewRow fila_22MS in grilla.SelectedRows)
+            {
+                if (fila_22MS.IsNewRow)
+                    continue;
+
+                object valor_22MS =
+                    fila_22MS.Cells[nombreColumnaId].Value;
+
+                if (valor_22MS != null &&
+                    valor_22MS != DBNull.Value)
+                {
+                    ids_22MS.Add(
+                        Convert.ToInt32(valor_22MS)
+                    );
+                }
+            }
+
+            return ids_22MS
+                .Distinct()
+                .ToList();
+        }
+
+        private string Traducir_22MS(string clave_22MS)
+        {
+            return bllIdioma_22MS.Traducir_22MS(clave_22MS);
+        }
+
+        private void MostrarInformacion_22MS(string claveMensaje_22MS)
+        {
+            MessageBox.Show(
+                Traducir_22MS(claveMensaje_22MS),
+                Traducir_22MS("titulo_gestion_roles"),
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+            );
+        }
+
+        private void MostrarError_22MS(Exception ex)
+        {
+            MessageBox.Show(
+                Traducir_22MS(ex.Message),
+                Traducir_22MS("titulo_error"),
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error
+            );
         }
     }
 }

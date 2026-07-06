@@ -9,10 +9,11 @@ using Servicios_22MS;
 
 namespace Proyecto_final
 {
-    public partial class FrmGestionarFamilias_22MS : Form
+    public partial class FrmGestionarFamilias_22MS : FrmBaseIdioma_22MS
     {
         private BLLFamilia_22MS bllFamilia_22MS = new BLLFamilia_22MS();
         private BLLPermiso_22MS bllPermiso_22MS = new BLLPermiso_22MS();
+        private readonly BLLIdioma_22MS bllIdioma_22MS = new BLLIdioma_22MS();
 
         public FrmGestionarFamilias_22MS()
         {
@@ -47,8 +48,8 @@ namespace Proyecto_final
             dgvCompleta.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
             dgvFamilias.MultiSelect = false;
-            dgvSubFamilias.MultiSelect = false;
-            dgvPermisos.MultiSelect = false;
+            dgvSubFamilias.MultiSelect = true;
+            dgvPermisos.MultiSelect = true;
             dgvCompleta.MultiSelect = false;
 
             dgvFamilias.ReadOnly = true;
@@ -136,7 +137,7 @@ namespace Proyecto_final
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MostrarError_22MS(ex);
             }
         }
 
@@ -217,64 +218,47 @@ namespace Proyecto_final
         {
             try
             {
-                bllFamilia_22MS.CrearFamilia_22MS(txtNombreFamilia.Text.Trim());
+                string nombreFamilia_22MS =
+                    txtNombreFamilia.Text.Trim();
 
-                MessageBox.Show("Familia creada correctamente.");
+                List<int> idsSubfamilias_22MS =
+                    ObtenerIdsSeleccionados_22MS(
+                        dgvSubFamilias,
+                        "IdFamilia_22MS"
+                    );
 
-                CargarFamilias_22MS();
-                CargarSubFamilias_22MS();
-                LimpiarSeleccion_22MS();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
+                List<int> idsPermisos_22MS =
+                    ObtenerIdsSeleccionados_22MS(
+                        dgvPermisos,
+                        "IdPermiso_22MS"
+                    );
 
-        private void btnModificar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (dgvFamilias.CurrentRow == null)
-                    throw new Exception("Debe seleccionar una familia.");
+                if (idsSubfamilias_22MS.Count == 0 &&
+                    idsPermisos_22MS.Count == 0)
+                {
+                    MessageBox.Show(
+                        Traducir_22MS(
+                            "mensaje_seleccionar_subfamilia_o_permiso"
+                        ),
+                        Traducir_22MS(
+                            "titulo_gestion_familias"
+                        ),
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
 
-                int idFamilia = Convert.ToInt32(dgvFamilias.CurrentRow.Cells["IdFamilia_22MS"].Value);
-
-                bllFamilia_22MS.ModificarFamilia_22MS(idFamilia, txtNombreFamilia.Text.Trim());
-
-                MessageBox.Show("Familia modificada correctamente.");
-
-                CargarFamilias_22MS();
-                CargarSubFamilias_22MS();
-                LimpiarSeleccion_22MS();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void btnEliminar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (dgvFamilias.CurrentRow == null)
-                    throw new Exception("Debe seleccionar una familia.");
-
-                int idFamilia = Convert.ToInt32(dgvFamilias.CurrentRow.Cells["IdFamilia_22MS"].Value);
-
-                DialogResult respuesta = MessageBox.Show(
-                    "¿Seguro que desea eliminar esta familia?",
-                    "Confirmar eliminación",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning);
-
-                if (respuesta != DialogResult.Yes)
                     return;
+                }
 
-                bllFamilia_22MS.EliminarFamilia_22MS(idFamilia);
+                bllFamilia_22MS.CrearFamilia_22MS(
+                    nombreFamilia_22MS,
+                    idsSubfamilias_22MS,
+                    idsPermisos_22MS
+                );
 
-                MessageBox.Show("Familia eliminada correctamente.");
+                MostrarInformacion_22MS(
+                    "mensaje_familia_creada"
+                );
 
                 CargarFamilias_22MS();
                 CargarSubFamilias_22MS();
@@ -283,7 +267,93 @@ namespace Proyecto_final
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MostrarError_22MS(ex);
+            }
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgvFamilias.CurrentRow == null)
+                {
+                    throw new Exception(
+                        "mensaje_seleccionar_familia"
+                    );
+                }
+
+                int idFamilia = Convert.ToInt32(
+                    dgvFamilias.CurrentRow
+                        .Cells["IdFamilia_22MS"]
+                        .Value
+                );
+
+                bllFamilia_22MS.ModificarFamilia_22MS(
+                    idFamilia,
+                    txtNombreFamilia.Text.Trim()
+                );
+
+                MostrarInformacion_22MS(
+                    "mensaje_familia_modificada"
+                );
+
+                CargarFamilias_22MS();
+                CargarSubFamilias_22MS();
+                LimpiarSeleccion_22MS();
+            }
+            catch (Exception ex)
+            {
+                MostrarError_22MS(ex);
+            }
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgvFamilias.CurrentRow == null)
+                {
+                    throw new Exception(
+                        "mensaje_seleccionar_familia"
+                    );
+                }
+
+                int idFamilia = Convert.ToInt32(
+                    dgvFamilias.CurrentRow
+                        .Cells["IdFamilia_22MS"]
+                        .Value
+                );
+
+                DialogResult respuesta = MessageBox.Show(
+                    Traducir_22MS(
+                        "mensaje_confirmar_eliminar_familia"
+                    ),
+                    Traducir_22MS(
+                        "titulo_confirmar_eliminacion"
+                    ),
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning
+                );
+
+                if (respuesta != DialogResult.Yes)
+                    return;
+
+                bllFamilia_22MS.EliminarFamilia_22MS(
+                    idFamilia
+                );
+
+                MostrarInformacion_22MS(
+                    "mensaje_familia_eliminada"
+                );
+
+                CargarFamilias_22MS();
+                CargarSubFamilias_22MS();
+                CargarPermisos_22MS();
+                LimpiarSeleccion_22MS();
+            }
+            catch (Exception ex)
+            {
+                MostrarError_22MS(ex);
             }
         }
 
@@ -297,24 +367,46 @@ namespace Proyecto_final
             try
             {
                 if (dgvFamilias.CurrentRow == null)
-                    throw new Exception("Debe seleccionar una familia.");
+                {
+                    throw new Exception(
+                        "mensaje_seleccionar_familia"
+                    );
+                }
 
                 if (dgvPermisos.CurrentRow == null)
-                    throw new Exception("Debe seleccionar un permiso.");
+                {
+                    throw new Exception(
+                        "mensaje_seleccionar_permiso"
+                    );
+                }
 
-                int idFamilia = Convert.ToInt32(dgvFamilias.CurrentRow.Cells["IdFamilia_22MS"].Value);
-                int idPermiso = Convert.ToInt32(dgvPermisos.CurrentRow.Cells["IdPermiso_22MS"].Value);
+                int idFamilia = Convert.ToInt32(
+                    dgvFamilias.CurrentRow
+                        .Cells["IdFamilia_22MS"]
+                        .Value
+                );
 
-                bllFamilia_22MS.AgregarPermisoAFamilia_22MS(idFamilia, idPermiso);
+                int idPermiso = Convert.ToInt32(
+                    dgvPermisos.CurrentRow
+                        .Cells["IdPermiso_22MS"]
+                        .Value
+                );
+
+                bllFamilia_22MS.AgregarPermisoAFamilia_22MS(
+                    idFamilia,
+                    idPermiso
+                );
 
                 PintarPermisosFamilia_22MS(idFamilia);
                 CargarResumenFamilia_22MS(idFamilia);
 
-                MessageBox.Show("Permiso asignado correctamente.");
+                MostrarInformacion_22MS(
+                    "mensaje_permiso_asignado"
+                );
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MostrarError_22MS(ex);
             }
         }
 
@@ -323,24 +415,46 @@ namespace Proyecto_final
             try
             {
                 if (dgvFamilias.CurrentRow == null)
-                    throw new Exception("Debe seleccionar una familia.");
+                {
+                    throw new Exception(
+                        "mensaje_seleccionar_familia"
+                    );
+                }
 
                 if (dgvPermisos.CurrentRow == null)
-                    throw new Exception("Debe seleccionar un permiso.");
+                {
+                    throw new Exception(
+                        "mensaje_seleccionar_permiso"
+                    );
+                }
 
-                int idFamilia = Convert.ToInt32(dgvFamilias.CurrentRow.Cells["IdFamilia_22MS"].Value);
-                int idPermiso = Convert.ToInt32(dgvPermisos.CurrentRow.Cells["IdPermiso_22MS"].Value);
+                int idFamilia = Convert.ToInt32(
+                    dgvFamilias.CurrentRow
+                        .Cells["IdFamilia_22MS"]
+                        .Value
+                );
 
-                bllFamilia_22MS.EliminarPermisoDeFamilia_22MS(idFamilia, idPermiso);
+                int idPermiso = Convert.ToInt32(
+                    dgvPermisos.CurrentRow
+                        .Cells["IdPermiso_22MS"]
+                        .Value
+                );
+
+                bllFamilia_22MS.EliminarPermisoDeFamilia_22MS(
+                    idFamilia,
+                    idPermiso
+                );
 
                 PintarPermisosFamilia_22MS(idFamilia);
                 CargarResumenFamilia_22MS(idFamilia);
 
-                MessageBox.Show("Permiso quitado correctamente.");
+                MostrarInformacion_22MS(
+                    "mensaje_permiso_quitado"
+                );
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MostrarError_22MS(ex);
             }
         }
 
@@ -349,25 +463,47 @@ namespace Proyecto_final
             try
             {
                 if (dgvFamilias.CurrentRow == null)
-                    throw new Exception("Debe seleccionar la familia padre.");
+                {
+                    throw new Exception(
+                        "mensaje_seleccionar_familia_padre"
+                    );
+                }
 
                 if (dgvSubFamilias.CurrentRow == null)
-                    throw new Exception("Debe seleccionar la familia hija.");
+                {
+                    throw new Exception(
+                        "mensaje_seleccionar_familia_hija"
+                    );
+                }
 
-                int idFamiliaPadre = Convert.ToInt32(dgvFamilias.CurrentRow.Cells["IdFamilia_22MS"].Value);
-                int idFamiliaHija = Convert.ToInt32(dgvSubFamilias.CurrentRow.Cells["IdFamilia_22MS"].Value);
+                int idFamiliaPadre = Convert.ToInt32(
+                    dgvFamilias.CurrentRow
+                        .Cells["IdFamilia_22MS"]
+                        .Value
+                );
 
-                bllFamilia_22MS.AgregarFamiliaAFamilia_22MS(idFamiliaPadre, idFamiliaHija);
+                int idFamiliaHija = Convert.ToInt32(
+                    dgvSubFamilias.CurrentRow
+                        .Cells["IdFamilia_22MS"]
+                        .Value
+                );
+
+                bllFamilia_22MS.AgregarFamiliaAFamilia_22MS(
+                    idFamiliaPadre,
+                    idFamiliaHija
+                );
 
                 PintarSubFamilias_22MS(idFamiliaPadre);
                 PintarPermisosFamilia_22MS(idFamiliaPadre);
                 CargarResumenFamilia_22MS(idFamiliaPadre);
 
-                MessageBox.Show("Familia asignada correctamente.");
+                MostrarInformacion_22MS(
+                    "mensaje_familia_asignada"
+                );
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MostrarError_22MS(ex);
             }
         }
 
@@ -376,26 +512,116 @@ namespace Proyecto_final
             try
             {
                 if (dgvFamilias.CurrentRow == null)
-                    throw new Exception("Debe seleccionar la familia padre.");
+                {
+                    throw new Exception(
+                        "mensaje_seleccionar_familia_padre"
+                    );
+                }
 
                 if (dgvSubFamilias.CurrentRow == null)
-                    throw new Exception("Debe seleccionar la familia hija.");
+                {
+                    throw new Exception(
+                        "mensaje_seleccionar_familia_hija"
+                    );
+                }
 
-                int idFamiliaPadre = Convert.ToInt32(dgvFamilias.CurrentRow.Cells["IdFamilia_22MS"].Value);
-                int idFamiliaHija = Convert.ToInt32(dgvSubFamilias.CurrentRow.Cells["IdFamilia_22MS"].Value);
+                int idFamiliaPadre = Convert.ToInt32(
+                    dgvFamilias.CurrentRow
+                        .Cells["IdFamilia_22MS"]
+                        .Value
+                );
 
-                bllFamilia_22MS.QuitarFamiliaDeFamilia_22MS(idFamiliaPadre, idFamiliaHija);
+                int idFamiliaHija = Convert.ToInt32(
+                    dgvSubFamilias.CurrentRow
+                        .Cells["IdFamilia_22MS"]
+                        .Value
+                );
+
+                bllFamilia_22MS.QuitarFamiliaDeFamilia_22MS(
+                    idFamiliaPadre,
+                    idFamiliaHija
+                );
 
                 PintarSubFamilias_22MS(idFamiliaPadre);
                 PintarPermisosFamilia_22MS(idFamiliaPadre);
                 CargarResumenFamilia_22MS(idFamiliaPadre);
 
-                MessageBox.Show("Familia quitada correctamente.");
+                MostrarInformacion_22MS(
+                    "mensaje_familia_quitada"
+                );
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MostrarError_22MS(ex);
             }
+        }
+
+        private void ConfigurarSeleccionCreacion_22MS()
+        {
+            dgvSubFamilias.SelectionMode =
+                DataGridViewSelectionMode.FullRowSelect;
+
+            dgvSubFamilias.MultiSelect = true;
+            dgvSubFamilias.ReadOnly = true;
+            dgvSubFamilias.AllowUserToAddRows = false;
+
+            dgvPermisos.SelectionMode =
+                DataGridViewSelectionMode.FullRowSelect;
+
+            dgvPermisos.MultiSelect = true;
+            dgvPermisos.ReadOnly = true;
+            dgvPermisos.AllowUserToAddRows = false;
+        }
+
+        private List<int> ObtenerIdsSeleccionados_22MS(DataGridView grilla, string nombreColumnaId)
+        {
+            List<int> ids_22MS = new List<int>();
+
+            foreach (DataGridViewRow fila_22MS in grilla.SelectedRows)
+            {
+                if (fila_22MS.IsNewRow)
+                    continue;
+
+                object valor_22MS =
+                    fila_22MS.Cells[nombreColumnaId].Value;
+
+                if (valor_22MS != null &&
+                    valor_22MS != DBNull.Value)
+                {
+                    ids_22MS.Add(
+                        Convert.ToInt32(valor_22MS)
+                    );
+                }
+            }
+
+            return ids_22MS
+                .Distinct()
+                .ToList();
+        }
+
+        private string Traducir_22MS(string clave_22MS)
+        {
+            return bllIdioma_22MS.Traducir_22MS(clave_22MS);
+        }
+
+        private void MostrarInformacion_22MS(string claveMensaje_22MS)
+        {
+            MessageBox.Show(
+                Traducir_22MS(claveMensaje_22MS),
+                Traducir_22MS("titulo_gestion_familias"),
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+            );
+        }
+
+        private void MostrarError_22MS(Exception ex)
+        {
+            MessageBox.Show(
+                Traducir_22MS(ex.Message),
+                Traducir_22MS("titulo_error"),
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error
+            );
         }
     }
 }

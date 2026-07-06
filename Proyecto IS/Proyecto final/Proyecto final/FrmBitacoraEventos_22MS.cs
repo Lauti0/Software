@@ -5,15 +5,18 @@ using System.Windows.Forms;
 using BLL_22MS;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
+using Servicios_22MS;
 
 namespace Proyecto_final
 {
-    public partial class FrmBitacoraEventos_22MS : Form
+    public partial class FrmBitacoraEventos_22MS : FrmBaseIdioma_22MS
     {
+        private BLLIdioma_22MS bllIdioma_22MS = new BLLIdioma_22MS();
         public FrmBitacoraEventos_22MS()
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
+             
         }
 
         private void FrmBitacoraEventos_22MS_Load(object sender, EventArgs e)
@@ -33,6 +36,8 @@ namespace Proyecto_final
             CargarGrilla_22MS();
         }
 
+        
+
         private void CargarUsuarios()
         {
             BLLUsuario_22MS bllUsuario = new BLLUsuario_22MS();
@@ -45,6 +50,8 @@ namespace Proyecto_final
 
         private void CargarEventos()
         {
+            cmbEvento_22MS.Items.Clear();
+
             cmbEvento_22MS.Items.Add("Todos");
             cmbEvento_22MS.Items.Add("Login");
             cmbEvento_22MS.Items.Add("Logout");
@@ -55,6 +62,11 @@ namespace Proyecto_final
             cmbEvento_22MS.Items.Add("Cambio de contraseña");
             cmbEvento_22MS.Items.Add("Usuario desactivado");
             cmbEvento_22MS.Items.Add("Usuario activado");
+            cmbEvento_22MS.Items.Add("Creación de idioma");
+            cmbEvento_22MS.Items.Add("Modificación de idioma");
+            cmbEvento_22MS.Items.Add("Creación de etiqueta");
+            cmbEvento_22MS.Items.Add("Modificación de traducción");
+            cmbEvento_22MS.Items.Add("Cambio de idioma");
 
             cmbEvento_22MS.SelectedIndex = 0;
         }
@@ -70,10 +82,13 @@ namespace Proyecto_final
 
         private void CargarModulos()
         {
+            cmbModulo_22MS.Items.Clear();
+
             cmbModulo_22MS.Items.Add("Usuarios");
             cmbModulo_22MS.Items.Add("Ventas");
             cmbModulo_22MS.Items.Add("Compras");
             cmbModulo_22MS.Items.Add("Seguridad");
+            cmbModulo_22MS.Items.Add("Idiomas");
         }
 
         private void btnAplicar_Click(object sender, EventArgs e)
@@ -170,8 +185,8 @@ namespace Proyecto_final
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     ExportarPDF_22MS(saveFileDialog.FileName);
-
-                    MessageBox.Show("PDF generado correctamente");
+                    MessageBox.Show(bllIdioma_22MS.Traducir_22MS("mensaje_pdf_generado"));
+                   
                 }
             }
             catch (Exception ex)
